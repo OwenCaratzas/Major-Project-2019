@@ -14,7 +14,8 @@ public class Sentry : MonoBehaviour
     int lastTarget;
     
     public float fovAngle = 110f;
-    Vector3 direction;
+    //Vector3 direction;
+    private SphereCollider col;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class Sentry : MonoBehaviour
 
         currentTarget = targetList[0];
         lastTarget = 0;
+        col = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
@@ -61,9 +63,30 @@ public class Sentry : MonoBehaviour
     }
     void FieldOfView()
     {
-        RaycastHit hit;
+       //RaycastHit hit;
         
         //direction = other.transform.position
-        float angle = Vector3.Angle(direction, transform.forward);
+        //float angle = Vector3.Angle(direction, transform.forward);
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Vector3 direction = other.transform.position - transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);
+
+            if (angle < fovAngle * 0.5f)
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.position/* + transform.up*/, direction.normalized, out hit, col.radius))
+                {
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        Debug.Log("FOUND THE PLAYER");
+                    }
+                }
+            }
+        }
     }
 }
