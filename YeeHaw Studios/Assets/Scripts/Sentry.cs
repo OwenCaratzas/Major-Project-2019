@@ -12,6 +12,10 @@ public class Sentry : MonoBehaviour
     public Transform[] targetList;
     public Transform currentTarget;
     int lastTarget;
+    
+    public float fovAngle = 110f;
+    Vector3 direction;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,12 @@ public class Sentry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //agent.transform.LookAt(agent.steeringTarget);
+        agent.updateRotation = true;
+        
+        
+
         if (Vector3.Distance(destination, currentTarget.position) > 1.0f)
         {
             //destination = target.position;
@@ -48,5 +58,12 @@ public class Sentry : MonoBehaviour
         }
         //if (Vector3.Distance(destination, target.position) > 1.0f)
          
+    }
+    void FieldOfView()
+    {
+        RaycastHit hit;
+        
+        //direction = other.transform.position
+        float angle = Vector3.Angle(direction, transform.forward);
     }
 }

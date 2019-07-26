@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float horizontal;
     public float vertical;
 
-    public float mouseSensitivity = 100/*0.5f*/;
+    private float mouseSensitivity = 5.0f/*0.5f*/;
 
     float playerTranslation;
 
