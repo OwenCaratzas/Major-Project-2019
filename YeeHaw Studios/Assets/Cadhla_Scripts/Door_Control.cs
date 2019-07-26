@@ -12,15 +12,13 @@ public class Door_Control : MonoBehaviour
     public Transform startMarker;
     public Transform endMarker;
 
-    public float speed = 0.005f;
-
-    private float startTime;
-    public float journeyLength;
+    public float speed = 1.0f;
 
     public int numButtons = 2;
     public GameObject[] buttonArr;
     public GameObject button;
-    public Button_Check[] buttonDownCheck;
+
+    private Button_Check[] buttonDownCheck;
     public bool[] buttonCheck;
 
     public int numberOfTrueBooleans = 0;
@@ -30,6 +28,7 @@ public class Door_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         buttonArr = new GameObject[numButtons];
         for (int i = 0; i < numButtons; i++)
         {
@@ -41,31 +40,11 @@ public class Door_Control : MonoBehaviour
         numberOfTrueBooleansNeeded = numButtons;
 
         doorTimer = 20.0f;
-
-        startTime = Time.time;
-
-        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        buttonArr = GameObject.FindGameObjectsWithTag("Button");
-
-        buttonDownCheck = new Button_Check[buttonArr.Length];
-
-        for (int i = 0; i < buttonArr.Length; i++)
-        {
-            buttonDownCheck[i] = buttonArr[i].GetComponent<Button_Check>();
-        }
-
-        buttonCheck = new bool[buttonDownCheck.Length];
-        
-        for (int i = 0; i<buttonDownCheck.Length; i++)
-        {
-            buttonCheck[i] = buttonDownCheck[i].buttonDown;
-        }
-
 
         if (numberOfTrueBooleans == 1)
         {
@@ -80,14 +59,35 @@ public class Door_Control : MonoBehaviour
 
         if (numberOfTrueBooleans == numberOfTrueBooleansNeeded)
         {
-            // Distance moved = time * speed.
-            float distCovered = (Time.time - startTime) * speed;
-
-            // Fraction of journey completed = current distance divided by total distance.
-            float fracJourney = distCovered / journeyLength;
 
             // Set our position as a fraction of the distance between the markers.
-            transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+            transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);
         }
+
+        buttonArr = GameObject.FindGameObjectsWithTag("Button");
+
+        buttonDownCheck = new Button_Check[buttonArr.Length];
+
+        for (int i = 0; i < buttonArr.Length; i++)
+        {
+            buttonDownCheck[i] = buttonArr[i].GetComponent<Button_Check>();
+        }
+
+        buttonCheck = new bool[buttonDownCheck.Length];
+
+        for (int i = 0; i < buttonDownCheck.Length; i++)
+        {
+            buttonCheck[i] = buttonDownCheck[i].buttonDown;
+            if (buttonDownCheck[i].buttonDown == true)
+            {
+                //numberOfTrueBooleans++;
+            }
+        }
+    }
+
+    void AddToButtonBool()
+    {
+
+
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1817814442339388638}
   - component: {fileID: 1817814442339388639}
   - component: {fileID: 1817814442339388632}
-  - component: {fileID: 1252611916111353980}
+  - component: {fileID: 8162049400516529344}
   m_Layer: 0
   m_Name: Button
   m_TagString: Button
@@ -92,7 +92,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1252611916111353980
+--- !u!114 &8162049400516529344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,9 @@ MonoBehaviour:
   buttonDown: 0
   startMarker: {fileID: 6114465002903006522}
   endMarker: {fileID: 636898050973240202}
-  speed: 0.015
+  buttonLocation: {fileID: 1817814442339388634}
+  speed: 0.1
+  journeyLength: 0
 --- !u!1 &1817814442563317141
 GameObject:
   m_ObjectHideFlags: 0
