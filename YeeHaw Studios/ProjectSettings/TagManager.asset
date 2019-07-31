@@ -8,6 +8,7 @@ TagManager:
   - Breaker
   - Pylon
   - ButtonPosition
+  - ButtonHolder
   layers:
   - Default
   - TransparentFX

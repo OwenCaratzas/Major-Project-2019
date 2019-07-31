@@ -26,7 +26,7 @@ public class Door_Control : MonoBehaviour
     public bool[] buttonCheck;
 
     public int numberOfTrueBooleans = 0;
-    public int numberOfTrueBooleansNeeded;
+    public int maxTrueBooleansNeeded;
 
 
     // Start is called before the first frame update
@@ -47,18 +47,18 @@ public class Door_Control : MonoBehaviour
             go.GetComponentInChildren<Button_Check>().buttonBool = gameObject.GetComponent<Door_Control>();
         }
 
-        numberOfTrueBooleansNeeded = numButtons;
+        maxTrueBooleansNeeded = numButtons;
 
         doorTimer = 20.0f;
 
-        buttonArr = GameObject.FindGameObjectsWithTag("Button");
+        buttonArr = GameObject.FindGameObjectsWithTag("ButtonHolder");
 
         //find individual scripts
         buttonDownCheck = new Button_Check[buttonArr.Length];
 
         for (int i = 0; i < buttonArr.Length; i++)
         {
-            buttonDownCheck[i] = buttonArr[i].GetComponent<Button_Check>();
+            buttonDownCheck[i] = buttonArr[i].GetComponentInChildren<Button_Check>();
         }
 
         //set up bool array
@@ -88,7 +88,7 @@ public class Door_Control : MonoBehaviour
         }
 
         //check when to move door
-        if (numberOfTrueBooleans == numberOfTrueBooleansNeeded)
+        if (numberOfTrueBooleans == maxTrueBooleansNeeded)
         {
 
            // Set our position as a fraction of the distance between the markers.
@@ -99,13 +99,6 @@ public class Door_Control : MonoBehaviour
 
         public void AddToButtonBool()
         {
-            for (int i = 0; i < buttonDownCheck.Length; i++)
-            {
-                buttonCheck[i] = buttonDownCheck[i].buttonDown;
-                if (buttonDownCheck[i].buttonDown == true)
-                {
-                    numberOfTrueBooleans++;
-                }
+            numberOfTrueBooleans++;
         }
-    }
 }

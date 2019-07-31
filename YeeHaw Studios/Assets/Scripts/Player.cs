@@ -39,8 +39,7 @@ public class Player : MonoBehaviour
         // Make it move 10 meters per second instead of 10 meters per frame...
         translationX *= Time.deltaTime;
         translationZ *= Time.deltaTime;
-        Debug.Log("X: " + translationX);
-        Debug.Log("z: " + translationZ);
+
         // Move translation along the object's z-axis
         transform.Translate(translationX, 0, translationZ);
         //rb.MovePosition(new Vector3(translationX, 0, translationZ));
