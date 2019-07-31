@@ -17,8 +17,6 @@ public class Sentry : MonoBehaviour
     //Vector3 direction;
     private SphereCollider col;
 
-    private bool foundPlayer = false;
-    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -38,23 +36,18 @@ public class Sentry : MonoBehaviour
 
         //agent.transform.LookAt(agent.steeringTarget);
         agent.updateRotation = true;
-
-
+        
+        
 
         if (Vector3.Distance(destination, currentTarget.position) > 1.0f)
         {
-            if (foundPlayer)
-            {
-                currentTarget = player.transform;
-            }
-
-            destination = currentTarget.position;
             //destination = target.position;
+            destination = currentTarget.position;
             agent.destination = destination;
         }
-        else if (!agent.pathPending && agent.remainingDistance < 0.5f && !foundPlayer)
+        else if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
-            if (currentTarget != targetList[targetList.Length - 1])
+            if (currentTarget != targetList[targetList.Length-1])
             {
                 lastTarget++;
                 currentTarget = targetList[lastTarget];
@@ -65,7 +58,6 @@ public class Sentry : MonoBehaviour
                 currentTarget = targetList[lastTarget];
             }
         }
-        
         //if (Vector3.Distance(destination, target.position) > 1.0f)
          
     }
@@ -92,11 +84,7 @@ public class Sentry : MonoBehaviour
                     if (hit.collider.gameObject.tag == "Player")
                     {
                         Debug.Log("FOUND THE PLAYER");
-                        foundPlayer = true;
-                        player = hit.collider.gameObject;
                     }
-                    else
-                        foundPlayer = false;
                 }
             }
         }
