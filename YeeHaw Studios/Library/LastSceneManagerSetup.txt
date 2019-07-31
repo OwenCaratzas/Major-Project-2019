@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Cadhla_TechnicalScene.unity
-  isLoaded: 1
-  isActive: 1
