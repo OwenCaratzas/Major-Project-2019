@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5827110835934452973}
   - component: {fileID: 5827110835934452972}
   - component: {fileID: 5827110835934452975}
+  - component: {fileID: 1354098747}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827110835934452974}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.61, y: 1, z: -15.381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -128,6 +129,24 @@ MonoBehaviour:
   rotationSpeed: 100
   horizontal: 0
   vertical: 0
+--- !u!114 &1354098747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827110835934452974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263acfeec808ca840bccb10852729064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  itemActive: 0
+  itemReady: 0
+  lightningBolt: {fileID: 5072125736037885555, guid: 79a37adcfa6c1b9499da3536c6e5f575,
+    type: 3}
+  Player: {fileID: 0}
 --- !u!1 &5827110837508577897
 GameObject:
   m_ObjectHideFlags: 0
