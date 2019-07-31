@@ -18,6 +18,9 @@ public class Door_Control : MonoBehaviour
     public GameObject[] buttonArr;
     public GameObject button;
 
+    public Transform[] buttonPositions;
+    public GameObject[] buttonPositionTransform;
+
     private Button_Check[] buttonDownCheck;
     public bool[] buttonCheck;
 
@@ -28,44 +31,26 @@ public class Door_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        buttonPositionTransform = GameObject.FindGameObjectsWithTag("ButtonPosition");
+        buttonPositions = new Transform[numButtons];
 
         buttonArr = new GameObject[numButtons];
+
         for (int i = 0; i < numButtons; i++)
         {
-            GameObject go = Instantiate(button, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
-            go.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+            buttonPositions[i] = buttonPositionTransform[i].transform;
+            GameObject go = Instantiate(button, buttonPositions[i].transform.position, buttonPositions[i].transform.rotation) as GameObject;
+            go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             buttonArr[i] = go;
         }
 
         numberOfTrueBooleansNeeded = numButtons;
 
         doorTimer = 20.0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (numberOfTrueBooleans == 1)
-        {
-            doorTimer -= (1.0f*Time.deltaTime);
-        }
-
-        if (doorTimer == 0)
-        {
-            doorTimer = 20;
-
-        }
-
-        if (numberOfTrueBooleans == numberOfTrueBooleansNeeded)
-        {
-
-            // Set our position as a fraction of the distance between the markers.
-            transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);
-        }
 
         buttonArr = GameObject.FindGameObjectsWithTag("Button");
 
+        //find individual scripts
         buttonDownCheck = new Button_Check[buttonArr.Length];
 
         for (int i = 0; i < buttonArr.Length; i++)
@@ -73,21 +58,51 @@ public class Door_Control : MonoBehaviour
             buttonDownCheck[i] = buttonArr[i].GetComponent<Button_Check>();
         }
 
+        //set up bool array
         buttonCheck = new bool[buttonDownCheck.Length];
-
-        for (int i = 0; i < buttonDownCheck.Length; i++)
-        {
-            buttonCheck[i] = buttonDownCheck[i].buttonDown;
-            if (buttonDownCheck[i].buttonDown == true)
-            {
-                //numberOfTrueBooleans++;
-            }
-        }
     }
 
-    void AddToButtonBool()
+    // Update is called once per frame
+    void Update()
     {
 
+        //check when to start timer
+        if (numberOfTrueBooleans == 1)
+        {
+            doorTimer -= (1.0f * Time.deltaTime);
+        }
 
+        //check if timer has ended
+        if (doorTimer <= 0)
+        {
+            doorTimer = 20;
+            numberOfTrueBooleans = 0;
+            for (int i = 0; i < buttonDownCheck.Length; i++)
+            {
+                buttonCheck[i] = buttonDownCheck[i].buttonDown = false;
+
+            }
+        }
+
+        //check when to move door
+        if (numberOfTrueBooleans == numberOfTrueBooleansNeeded)
+        {
+
+           // Set our position as a fraction of the distance between the markers.
+           transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);
+        }
+
+    }
+
+        void AddToButtonBool()
+        {
+            for (int i = 0; i < buttonDownCheck.Length; i++)
+            {
+                buttonCheck[i] = buttonDownCheck[i].buttonDown;
+                if (buttonDownCheck[i].buttonDown == true)
+                {
+                    numberOfTrueBooleans++;
+                }
+        }
     }
 }

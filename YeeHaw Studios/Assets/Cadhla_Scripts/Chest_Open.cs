@@ -10,6 +10,8 @@ public class Chest_Open : MonoBehaviour
 
     private Pylon_Control[] chargeBuild;
     public bool[] chargeCheck;
+
+    public bool chestFull = true;
    
     // Start is called before the first frame update
     void Start()
@@ -18,12 +20,12 @@ public class Chest_Open : MonoBehaviour
 
         chestPylons = new GameObject[numPylons];
 
-        chargeCheck = new bool[chargeBuild.Length];
+        //chargeCheck = new bool[chargeBuild.Length];
 
         for (int i = 0; i < numPylons; i++)
         {
             chestPylons[i] = Pylon[i].gameObject;
-            chargeBuild[i] = Pylon[i].GetComponent<Pylon_Control>();
+            //chargeBuild[i] = Pylon[i].GetComponent<Pylon_Control>();
 
             //if (chargeCheck[i].pylonDeactivated == true)
             //{
@@ -36,8 +38,12 @@ public class Chest_Open : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void CollectMoney()
     {
-        
+        if (chestFull == true)
+        {
+            chestFull = false;
+            ScoreTextScript.coinAmount += 100;
+        }
     }
 }
