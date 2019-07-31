@@ -49,6 +49,13 @@ public class Player : MonoBehaviour
         {
             player.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //RaycastHit hit;
+
+            //if(Physics.Raycast())
+        }
     }
 
     void Rotation()
