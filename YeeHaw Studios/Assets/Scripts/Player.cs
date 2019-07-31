@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     GameObject player;
 
+    private SphereCollider col;
+
     private void Start()
     {
         player = gameObject;
@@ -48,6 +50,15 @@ public class Player : MonoBehaviour
         else
         {
             player.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, col.radius))
+            {
+                //if it was a button, activate it's script
+            }
         }
     }
 
