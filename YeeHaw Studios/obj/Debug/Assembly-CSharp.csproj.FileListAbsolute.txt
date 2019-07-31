@@ -1,0 +1,3 @@
+C:\Users\s181541\Documents\GitHub\Major-Project-2019\YeeHaw Studios\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\s181541\Documents\GitHub\Major-Project-2019\YeeHaw Studios\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\s181541\Documents\GitHub\Major-Project-2019\YeeHaw Studios\obj\Debug\Assembly-CSharp.dll

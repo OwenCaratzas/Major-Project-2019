@@ -63,8 +63,10 @@ public class Button_Check : MonoBehaviour
 
     }
 
-    void ClickedOn()
+    public void ClickedOn()
     {
-    
+        buttonDown = true;
+        buttonBool.AddToButtonBool();
+        Debug.Log("IT WORKED");
     }
 }

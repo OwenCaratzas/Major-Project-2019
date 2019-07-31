@@ -21,6 +21,7 @@ public class Door_Control : MonoBehaviour
     public Transform[] buttonPositions;
     public GameObject[] buttonPositionTransform;
 
+    [SerializeField]
     private Button_Check[] buttonDownCheck;
     public bool[] buttonCheck;
 
@@ -42,6 +43,8 @@ public class Door_Control : MonoBehaviour
             GameObject go = Instantiate(button, buttonPositions[i].transform.position, buttonPositions[i].transform.rotation) as GameObject;
             go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             buttonArr[i] = go;
+            //=============================================================================================
+            go.GetComponentInChildren<Button_Check>().buttonBool = gameObject.GetComponent<Door_Control>();
         }
 
         numberOfTrueBooleansNeeded = numButtons;
@@ -94,7 +97,7 @@ public class Door_Control : MonoBehaviour
 
     }
 
-        void AddToButtonBool()
+        public void AddToButtonBool()
         {
             for (int i = 0; i < buttonDownCheck.Length; i++)
             {

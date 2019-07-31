@@ -24,6 +24,9 @@ public class Sentry : MonoBehaviour
 
     Vector3 lastKnownPlayerPos;
 
+    public Material passive;
+    public Material alerted;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +42,79 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
-        
+        agent.updateRotation = true;
+
+        if (foundPlayer)
+        {
+            Chase();
+        }
+        else if (!foundPlayer)
+        {
+            Patrol();
+        }
+    }
+
+    void Chase()
+    {
+        agent.destination = player.transform.position;
+    }
+
+    void Patrol()
+    {
+        if (Vector3.Distance(destination, currentTarget.position) > 1.0f)
+        {
+            //destination = target.position;
+            destination = currentTarget.position;
+            agent.destination = destination;
+        }
+        else if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            if (currentTarget != targetList[targetList.Length - 1])
+            {
+                lastTarget++;
+                currentTarget = targetList[lastTarget];
+            }
+            else
+            {
+                lastTarget = 0;
+                currentTarget = targetList[lastTarget];
+            }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Vector3 direction = other.transform.position - transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);
+
+            if (angle < fovAngle * 0.5f)
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.position/* + transform.up*/, direction.normalized, out hit, col.radius))
+                {
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        Debug.Log("FOUND THE PLAYER");
+                        foundPlayer = true;
+                        player = hit.collider.gameObject;
+                        GetComponent<Renderer>().material = alerted;
+                    }
+                    else
+                    {
+                        foundPlayer = false;
+                        GetComponent<Renderer>().material = passive;
+                    }
+                }
+                else
+                {
+                    foundPlayer = false;
+                    GetComponent<Renderer>().material = passive;
+                }
+            }
+        }
     }
 
     //// Update is called once per frame

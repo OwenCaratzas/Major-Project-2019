@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     float playerTranslation;
 
     GameObject player;
+    public Rigidbody rb;
 
     private SphereCollider col;
 
@@ -24,20 +25,25 @@ public class Player : MonoBehaviour
     {
         player = gameObject;
         Cursor.lockState = CursorLockMode.Locked;
+
+        col = GetComponent<SphereCollider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float translationZ = Input.GetAxis("Vertical") * speed;
         float translationX = Input.GetAxis("Horizontal") * speed;
+        float translationZ = Input.GetAxis("Vertical") * speed;
 
         // Make it move 10 meters per second instead of 10 meters per frame...
-        translationZ *= Time.deltaTime;
         translationX *= Time.deltaTime;
-
+        translationZ *= Time.deltaTime;
+        Debug.Log("X: " + translationX);
+        Debug.Log("z: " + translationZ);
         // Move translation along the object's z-axis
         transform.Translate(translationX, 0, translationZ);
+        //rb.MovePosition(new Vector3(translationX, 0, translationZ));
 
         // Rotate around our y-axis
         //transform.Rotate(0, rotation, 0);
@@ -55,9 +61,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, col.radius))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 5))
             {
                 //if it was a button, activate it's script
+                if (hit.transform.tag == "Button")
+                {
+                    Debug.Log("Button clicked");
+                    //hit.transform.gameObject.GetComponent<Button_Check>().ClickedOn();
+                    hit.transform.gameObject.SendMessage("ClickedOn");
+                }
             }
         }
     }
