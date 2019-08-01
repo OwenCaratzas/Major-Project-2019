@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
 
     float playerTranslation;
 
+    [SerializeField]
+    private float interactRange = 5;
+
     GameObject player;
     public Rigidbody rb;
 
@@ -48,6 +51,13 @@ public class Player : MonoBehaviour
         //transform.Rotate(0, rotation, 0);
         Rotation();
 
+        if (gameObject.GetComponent<Item_Use>().itemActive)
+            interactRange = 10;
+        else
+            interactRange = 5;
+
+
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             player.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
@@ -60,7 +70,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 5))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactRange))
             {
                 //if it was a button, activate it's script
                 if (hit.transform.tag == "Button")
@@ -69,6 +79,13 @@ public class Player : MonoBehaviour
                     //hit.transform.gameObject.GetComponent<Button_Check>().ClickedOn();
                     hit.transform.gameObject.SendMessage("ClickedOn");
                 }
+                else if (hit.transform.tag == "Chest")
+                {
+                    Debug.Log("Chest clicked");
+                    hit.transform.gameObject.SendMessage("CollectMoney");
+                }
+
+                gameObject.GetComponent<Item_Use>().Lightning();
             }
         }
     }

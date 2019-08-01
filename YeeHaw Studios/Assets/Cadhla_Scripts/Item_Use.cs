@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Item_Use : MonoBehaviour
 {
     Text text;
-    public Image image;
+    public GameObject image;
     public static int equipmentLimit;
 
     public bool itemActive = false;
@@ -20,7 +20,6 @@ public class Item_Use : MonoBehaviour
     {
         equipmentLimit = 10;
         text = GameObject.FindGameObjectWithTag("Equipment").GetComponent<Text>();
-
     }
 
     // Update is called once per frame
@@ -36,6 +35,7 @@ public class Item_Use : MonoBehaviour
                 {
                     itemActive = true;
                     itemReady = true;
+
                     image.GetComponent<Image>().color = new Color32(1, 250, 255, 250);
                 }
 
@@ -53,15 +53,25 @@ public class Item_Use : MonoBehaviour
             image.GetComponent<Image>().color = new Color32(255, 255, 255, 250);
         }
 
+        //this line called by extended range click on
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (itemReady == true)
-            {
-                itemActive = false;
-                itemReady = false;
-                GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
-                equipmentLimit --;
-            }
+            Lightning();
         }
     }
+
+    public void Lightning()
+    {
+        if (itemReady == true)
+        {
+            itemActive = false;
+            itemReady = false;
+
+           //Quaternion lightningRotation = //Player.transform.rotation * gameObject.transform.rotation;
+            GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation/*lightningRotation*/);
+            //GameObject go = Instantiate()
+            equipmentLimit--;
+        }
+    }
+
 }

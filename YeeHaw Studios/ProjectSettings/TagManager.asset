@@ -9,6 +9,8 @@ TagManager:
   - Pylon
   - ButtonPosition
   - Equipment
+  - ButtonHolder
+  - Chest
   layers:
   - Default
   - TransparentFX
