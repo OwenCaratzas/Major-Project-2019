@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Item_Use : MonoBehaviour
 {
+    [SerializeField]
     Text text;
     public GameObject image;
     public static int equipmentLimit;
@@ -13,7 +14,7 @@ public class Item_Use : MonoBehaviour
     public bool itemReady = false;
 
     public GameObject lightningBolt;
-    public GameObject Player;
+    public GameObject cameraOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class Item_Use : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        //Player = GameObject.FindGameObjectWithTag("Player");
         text.text = equipmentLimit.ToString();
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -67,9 +68,9 @@ public class Item_Use : MonoBehaviour
             itemActive = false;
             itemReady = false;
 
-           //Quaternion lightningRotation = //Player.transform.rotation * gameObject.transform.rotation;
-            GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation/*lightningRotation*/);
-            //GameObject go = Instantiate()
+            Quaternion lightningRotation = new Quaternion(cameraOffset.transform.rotation.x, gameObject.transform.rotation.y, cameraOffset.transform.rotation.z, cameraOffset.transform.rotation.w);
+            GameObject go = Instantiate(lightningBolt, cameraOffset.transform.position, lightningRotation);
+            Destroy(go, 2.5f);
             equipmentLimit--;
         }
     }

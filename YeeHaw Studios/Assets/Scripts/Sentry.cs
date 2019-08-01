@@ -18,9 +18,9 @@ public class Sentry : MonoBehaviour
     //Vector3 direction;
     private SphereCollider col;
 
-    bool foundPlayer = false;
+    public bool foundPlayer = false;
 
-    GameObject player = null;
+    public GameObject player = null;
 
     Vector3 lastKnownPlayerPos;
 

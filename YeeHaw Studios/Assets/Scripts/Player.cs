@@ -33,9 +33,11 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
+        //if(Input.GetKey(KeyCode.W))
+        //    rb.AddForce(transform.forward * 50);
+
         float translationX = Input.GetAxis("Horizontal") * speed;
         float translationZ = Input.GetAxis("Vertical") * speed;
 
@@ -45,11 +47,37 @@ public class Player : MonoBehaviour
 
         // Move translation along the object's z-axis
         transform.Translate(translationX, 0, translationZ);
+
         //rb.MovePosition(new Vector3(translationX, 0, translationZ));
 
         // Rotate around our y-axis
         //transform.Rotate(0, rotation, 0);
         Rotation();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //=============================================================================
+
+        //float translationX = Input.GetAxis("Horizontal") * speed;
+        //float translationZ = Input.GetAxis("Vertical") * speed;
+
+        //// Make it move 10 meters per second instead of 10 meters per frame...
+        //translationX *= Time.deltaTime;
+        //translationZ *= Time.deltaTime;
+
+        //// Move translation along the object's z-axis
+        //transform.Translate(translationX, 0, translationZ);
+        
+        ////rb.MovePosition(new Vector3(translationX, 0, translationZ));
+
+        //// Rotate around our y-axis
+        ////transform.Rotate(0, rotation, 0);
+        //Rotation();
+
+
+        //==============================================================================
 
         if (gameObject.GetComponent<Item_Use>().itemActive)
             interactRange = 10;
