@@ -55,13 +55,24 @@ public class Item_Use : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (itemReady == true)
-            {
-                itemActive = false;
-                itemReady = false;
-                GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
-                equipmentLimit --;
-            }
+            //if (itemReady == true)
+            //{
+            //    itemActive = false;
+            //    itemReady = false;
+            //    GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
+            //    equipmentLimit --;
+            //}
+        }
+    }
+
+    public void Lightning()
+    {
+        if (itemReady == true)
+        {
+            itemActive = false;
+            itemReady = false;
+            GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
+            equipmentLimit--;
         }
     }
 }
