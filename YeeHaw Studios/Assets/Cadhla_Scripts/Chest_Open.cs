@@ -18,13 +18,13 @@ public class Chest_Open : MonoBehaviour
     {
         Pylon = GameObject.FindGameObjectsWithTag("Pylon");
 
-        chestPylons = new GameObject[numPylons];
+        //chestPylons = new GameObject[numPylons];
 
         //chargeCheck = new bool[chargeBuild.Length];
 
         for (int i = 0; i < numPylons; i++)
         {
-            chestPylons[i] = Pylon[i].gameObject;
+            //chestPylons[i] = Pylon[i].gameObject;
             //chargeBuild[i] = Pylon[i].GetComponent<Pylon_Control>();
 
             //if (chargeCheck[i].pylonDeactivated == true)

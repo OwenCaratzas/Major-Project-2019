@@ -18,9 +18,9 @@ public class Sentry : MonoBehaviour
     //Vector3 direction;
     private SphereCollider col;
 
-    public bool foundPlayer = false;
+    bool foundPlayer = false;
 
-    public GameObject player = null;
+    GameObject player = null;
 
     Vector3 lastKnownPlayerPos;
 
@@ -54,7 +54,7 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    void Chase()
+    public void Chase()
     {
         agent.destination = player.transform.position;
     }

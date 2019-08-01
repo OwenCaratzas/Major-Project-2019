@@ -83,6 +83,7 @@ public class Door_Control : MonoBehaviour
             for (int i = 0; i < buttonDownCheck.Length; i++)
             {
                 buttonCheck[i] = buttonDownCheck[i].buttonDown = false;
+
             }
         }
 

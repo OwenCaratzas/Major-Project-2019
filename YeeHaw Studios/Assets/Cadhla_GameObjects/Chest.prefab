@@ -425,7 +425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestPylons: []
   numPylons: 4
-  chargeBuild: []
+  chargeCheck: 
+  chestFull: 1
 --- !u!1 &8267117881077463873
 GameObject:
   m_ObjectHideFlags: 0
