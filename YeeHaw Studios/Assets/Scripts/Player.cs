@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     private SphereCollider col;
 
+    private Shader objectShader;
+
     private void Start()
     {
         player = gameObject;
@@ -58,6 +60,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit outlineHit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, interactRange))
+        {
+            //objectShader = outlineHit.transform.gameObject.GetComponent<Shader>
+            //if(outlineHit.transform.)
+        }
+
         //=============================================================================
 
         //float translationX = Input.GetAxis("Horizontal") * speed;
@@ -86,16 +95,16 @@ public class Player : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            player.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-            speed = 1.5f;
-        }
-        else
-        {
-            player.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
-            speed = 3.0f;
-        }
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    player.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+        //    speed = 1.5f;
+        //}
+        //else
+        //{
+        //    player.transform.position = new Vector3(player.transform.position.x, 0.5f, player.transform.position.z);
+        //    speed = 3.0f;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {

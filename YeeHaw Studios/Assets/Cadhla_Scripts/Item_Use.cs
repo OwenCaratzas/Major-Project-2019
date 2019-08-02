@@ -62,6 +62,7 @@ public class Item_Use : MonoBehaviour
             //    GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
             //    equipmentLimit --;
             //}
+            Lightning();
         }
     }
 
