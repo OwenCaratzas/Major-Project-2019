@@ -47,10 +47,12 @@ public class Sentry : MonoBehaviour
         if (foundPlayer)
         {
             Chase();
+            agent.speed = 3.0f;
         }
         else if (!foundPlayer)
         {
             Patrol();
+            agent.speed = 1.0f;
         }
     }
 

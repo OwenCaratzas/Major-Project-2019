@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public Camera playerCamera;
 
-    public float speed = 10.0f;
+    public float speed = 5.0f;
     public float rotationSpeed = 100.0f;
 
     public float horizontal;
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     float playerTranslation;
 
     [SerializeField]
-    private float interactRange = 5;
+    private float interactRange = 3;
 
     GameObject player;
     public Rigidbody rb;
@@ -89,10 +89,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             player.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            speed = 1.5f;
         }
         else
         {
             player.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
+            speed = 3.0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
