@@ -140,6 +140,9 @@ MonoBehaviour:
   fovAngle: 110
   passive: {fileID: 2100000, guid: db6bff68fa278774d825c853526b598e, type: 2}
   alerted: {fileID: 2100000, guid: 9b243c707bda5d748a69ea2080647280, type: 2}
+  radius: 0
+  height: 0
+  face: {fileID: 0}
 --- !u!135 &2897634799356387861
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ TagManager:
   - ButtonHolder
   - Chest
   - Escape
+  - Guard
+  - TestObject
   layers:
   - Default
   - TransparentFX

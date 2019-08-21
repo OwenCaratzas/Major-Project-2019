@@ -4,56 +4,96 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Public Variables
+
+    // the camera mounted onto the player
     public Camera playerCamera;
 
-    public float speed = 5.0f;
-    public float rotationSpeed = 100.0f;
+    // normal movement speed
+    public float walkSpeed;
 
-    public float horizontal;
-    public float vertical;
+    // when crouching, movement speed is dropped lower
+    public float crouchSpeed;
 
-    private float mouseSensitivity = 5.0f/*0.5f*/;
+    // force applied on the y axis to push the player up to simulate a jump. 50.0f is pretty good for an ok jump
+    public float jumpForce = 50.0f;
+    
+    #endregion
 
-    float playerTranslation;
+    #region Private Variables
 
+    // speed modifier for movement
+    private float _speed;
+
+    // how fast the character rotates
+    private float _rotationSpeed = 10.0f;
+
+    // horizontal and vertical mouse inputs
+    private float _mouseX;
+    private float _mouseY;
+
+    // movement inputs after the speed modifier is applied
+    private float _translationX;
+    private float _translationZ;
+
+    // mouse speed modifier
+    private float _mouseSensitivity = 5.0f/*0.5f*/;
+
+    // how far the player can interact with interactable objects. It get's serialized so we can see the value change without having that public
     [SerializeField]
     private float interactRange = 3;
 
-    GameObject player;
-    public Rigidbody rb;
+    // rigidbody attached to the player's gameobject
+    private Rigidbody _rb;
 
-    private SphereCollider col;
+    // player's sphere collider, for audio range
+    private SphereCollider _col;
 
-    private Shader objectShader;
+    #endregion
+    
+    //private Shader _objectShader;
 
     private void Start()
     {
-        player = gameObject;
+        // lock cursor to the middle of the screen
         Cursor.lockState = CursorLockMode.Locked;
+        // make the cursor invisible
+        Cursor.visible = false;
 
-        col = GetComponent<SphereCollider>();
-        rb = GetComponent<Rigidbody>();
+        // set default values / references
+        _col = GetComponent<SphereCollider>();
+        _rb = GetComponent<Rigidbody>();
+        _speed = walkSpeed;
     }
+
 
     private void FixedUpdate()
     {
-        //if(Input.GetKey(KeyCode.W))
-        //    rb.AddForce(transform.forward * 50);
+        // update the inputs and multiply by the speed modifier
+        _translationX = Input.GetAxis("Horizontal") * _speed;
+        _translationZ = Input.GetAxis("Vertical") * _speed;
 
-        float translationX = Input.GetAxis("Horizontal") * speed;
-        float translationZ = Input.GetAxis("Vertical") * speed;
+        // apply the inputs to the character and move them
+        _rb.MovePosition(transform.position  + (transform.right * _translationX) + (transform.forward * _translationZ));
 
-        // Make it move 10 meters per second instead of 10 meters per frame...
-        translationX *= Time.deltaTime;
-        translationZ *= Time.deltaTime;
+        // push the rigidbody directly up the y axis by multiplying it by the jumpForce
+        if (Input.GetKeyDown("space"))
+            _rb.AddForce(transform.up * jumpForce);
 
-        // Move translation along the object's z-axis
-        transform.Translate(translationX, 0, translationZ);
+        // are we crouching or not?
 
-        //rb.MovePosition(new Vector3(translationX, 0, translationZ));
-
-        // Rotate around our y-axis
-        //transform.Rotate(0, rotation, 0);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // crouch movement
+            _speed = crouchSpeed;
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Debug.Log("Let go of shift");
+            // normal movement
+            _speed = walkSpeed;
+        }
+        // apply rotations
         Rotation();
     }
 
@@ -67,44 +107,11 @@ public class Player : MonoBehaviour
             //if(outlineHit.transform.)
         }
 
-        //=============================================================================
-
-        //float translationX = Input.GetAxis("Horizontal") * speed;
-        //float translationZ = Input.GetAxis("Vertical") * speed;
-
-        //// Make it move 10 meters per second instead of 10 meters per frame...
-        //translationX *= Time.deltaTime;
-        //translationZ *= Time.deltaTime;
-
-        //// Move translation along the object's z-axis
-        //transform.Translate(translationX, 0, translationZ);
-
-        ////rb.MovePosition(new Vector3(translationX, 0, translationZ));
-
-        //// Rotate around our y-axis
-        ////transform.Rotate(0, rotation, 0);
-        //Rotation();
-
-
-        //==============================================================================
-
         if (gameObject.GetComponent<Item_Use>().itemActive)
             interactRange = 10;
         else
             interactRange = 5;
 
-
-
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    player.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-        //    speed = 1.5f;
-        //}
-        //else
-        //{
-        //    player.transform.position = new Vector3(player.transform.position.x, 0.5f, player.transform.position.z);
-        //    speed = 3.0f;
-        //}
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -123,19 +130,35 @@ public class Player : MonoBehaviour
                     Debug.Log("Chest clicked");
                     hit.transform.gameObject.SendMessage("CollectMoney");
                 }
+                else if (hit.transform.tag == "TestObject")
+                {
+                    hit.rigidbody.AddForce(transform.forward * 1000);
+                }
 
                 gameObject.GetComponent<Item_Use>().Lightning();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
     }
 
     void Rotation()
     {
-        horizontal = Input.GetAxis("Mouse X") * mouseSensitivity;
-        vertical -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        vertical = Mathf.Clamp(vertical, -80, 80);
+        _mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
+        _mouseY -= Input.GetAxis("Mouse Y") * _mouseSensitivity;
+        _mouseY = Mathf.Clamp(_mouseY, -80, 80);
 
-        transform.Rotate(0, horizontal, 0);
-        playerCamera.transform.localRotation = Quaternion.Euler(vertical, 0, 0);
+        _rb.MoveRotation(_rb.rotation * Quaternion.Euler(new Vector3(0, _mouseX, 0)));
+        
+        playerCamera.transform.localRotation = Quaternion.Euler(_mouseY, 0, 0);
+    }
+
+    public float Speed
+    {
+        get { return _speed; }
     }
 }

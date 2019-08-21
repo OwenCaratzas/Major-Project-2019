@@ -20,8 +20,12 @@ public class Pressure_Plate : MonoBehaviour
         Debug.Log("Collide");
         if (collision.gameObject.tag == "Player")
         {
-            if (playerSpeed.speed > 5)
+            playerSpeed = collision.gameObject.GetComponent<Player>();
+
+            if (playerSpeed.Speed == playerSpeed.walkSpeed)
             {
+                if(alertGuard.PlayerTarget == null)
+                    alertGuard.PlayerTarget = collision.gameObject;
 
                 alertGuard.Chase();
             }
