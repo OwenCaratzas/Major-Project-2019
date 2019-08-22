@@ -32,6 +32,7 @@ public class CollisionSound : MonoBehaviour
 
                 
                 Sentry guardScript = hitColliders[i].GetComponent<Sentry>();
+                guardScript.audioTarget = transform;
                 guardScript.SendMessage("HeardSound");
             }
         }

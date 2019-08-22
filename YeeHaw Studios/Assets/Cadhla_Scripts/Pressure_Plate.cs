@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pressure_Plate : MonoBehaviour
 {
-    public Player playerSpeed;
+    public Player player;
 
     public Sentry alertGuard;
     GameObject pressurePosition;
@@ -20,14 +20,14 @@ public class Pressure_Plate : MonoBehaviour
         Debug.Log("Collide");
         if (collision.gameObject.tag == "Player")
         {
-            playerSpeed = collision.gameObject.GetComponent<Player>();
+            player = collision.gameObject.GetComponent<Player>();
 
-            if (playerSpeed.Speed == playerSpeed.walkSpeed)
+            if (player.Speed == player.walkSpeed)
             {
                 if(alertGuard.PlayerTarget == null)
                     alertGuard.PlayerTarget = collision.gameObject;
 
-                alertGuard.Chase();
+                alertGuard.Chase(player.transform);
             }
         }
     }

@@ -17,7 +17,21 @@ public class Player : MonoBehaviour
 
     // force applied on the y axis to push the player up to simulate a jump. 50.0f is pretty good for an ok jump
     public float jumpForce = 50.0f;
-    
+
+    // controls what radius the audio collider will be on either walking or crouching
+    public float walkAudioRadius;
+    public float crouchAudioRadius;
+
+    // keep track of whether the player is moving or not
+    public bool isMoving;
+
+    // the rate in which the player is becoming suspicious
+    public float suspicionRate;
+
+    // suspicionRate will change between these depending on if the player is walking or crouching
+    public float walkSuspicionRate;
+    public float crouchSuspicionRate;
+
     #endregion
 
     #region Private Variables
@@ -49,6 +63,13 @@ public class Player : MonoBehaviour
     // player's sphere collider, for audio range
     private SphereCollider _col;
 
+    // keep track of what time of movement the player is doing
+    private string _movementType;
+
+
+    private bool _wasCrouching;
+
+    private bool _crouching;
     #endregion
     
     //private Shader _objectShader;
@@ -82,17 +103,74 @@ public class Player : MonoBehaviour
 
         // are we crouching or not?
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        _crouching = Input.GetKey(KeyCode.LeftShift);
+        if (_wasCrouching)
         {
-            // crouch movement
-            _speed = crouchSpeed;
+            if (!_crouching)
+            {
+                //GetComponent<CapsuleCollider>().height = 2;
+
+                Vector3 scale = GetComponent<Collider>().transform.localScale;
+                scale.y *= 2.0f;
+                GetComponent<Collider>().transform.localScale = scale;
+
+                _movementType = "Walk";
+                Debug.Log("Let go of shift");
+                // normal movement
+                _speed = walkSpeed;
+            }
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else
         {
-            Debug.Log("Let go of shift");
-            // normal movement
-            _speed = walkSpeed;
+            if (_crouching)
+            {
+                //GetComponent<CapsuleCollider>().height = 1;
+
+                Vector3 scale = GetComponent<Collider>().transform.localScale;
+                scale.y *= 0.5f;
+                GetComponent<Collider>().transform.localScale = scale;
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, -transform.up, out hit, 3.0f))
+                {
+                    scale = hit.point;
+                    //scale = transform.position;
+                    scale.x = transform.position.x;
+                    scale.y += 0.1f;
+                    scale.z = transform.position.z;
+                    transform.position = scale;
+                }
+                
+
+                //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
+                _movementType = "Crouch";
+                // crouch movement
+                _speed = crouchSpeed;
+            }
         }
+        _wasCrouching = _crouching;
+
+
+
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    GetComponent<CapsuleCollider>().height = 1;
+        //    //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
+        //    _movementType = "Crouch";
+        //    // crouch movement
+        //    _speed = crouchSpeed;
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.LeftShift))
+        //{
+        //    GetComponent<CapsuleCollider>().height = 2;
+        //    _movementType = "Walk";
+        //    Debug.Log("Let go of shift");
+        //    // normal movement
+        //    _speed = walkSpeed;
+        //}
+
+
         // apply rotations
         Rotation();
     }
@@ -100,6 +178,38 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Is the player currently moving?
+        if (_translationX != 0 || _translationZ != 0)
+        {
+            isMoving = true;
+            //      Turn on the SphereCollider
+            _col.enabled = true;
+            //      Do a switch statement for the collider and suspicion rates to change between walking and crouching states
+            //      This switch can also change the speed here, and the crouch logic can maybe also go here
+            switch (_movementType)
+            {
+                case "Walk":
+                    suspicionRate = walkSuspicionRate;
+                    _col.radius = walkAudioRadius;
+                    break;
+
+                case "Crouch":
+                    suspicionRate = crouchSuspicionRate;
+                    _col.radius = crouchAudioRadius;
+                    break;
+
+                default:
+                    suspicionRate = walkSuspicionRate;
+                    _col.radius = walkAudioRadius;
+                    break;
+            }
+        }
+        else
+        {
+            isMoving = false;
+            _col.enabled = false;
+        }
+
         RaycastHit outlineHit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, interactRange))
         {
@@ -143,7 +253,6 @@ public class Player : MonoBehaviour
         {
             Application.Quit();
         }
-
     }
 
     void Rotation()

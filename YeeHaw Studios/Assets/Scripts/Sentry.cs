@@ -5,92 +5,107 @@ using UnityEngine.AI;
 
 public class Sentry : MonoBehaviour
 {
-
-    float _detectionAmount = 0.0f;
-    float _maxDetection = 100.0f;
-
+    #region Public Variables
     public Transform target;
-    private Vector3 _destination;
-    NavMeshAgent agent;
-    private Vector3[] playerLocations;
     public Transform[] targetList;
     public Transform currentTarget;
-    int lastTarget;
+    public Transform audioTarget;
+
     public GameObject visionDetectionOrigin;
-    BuildMesh meshScript;
+    public GameObject face;
 
     public float fovAngle = 110f;
-    //Vector3 direction;
-    private SphereCollider col;
-
-    bool foundPlayer = false;
-
-    GameObject player = null;
-
-    Vector3 lastKnownPlayerPos;
-
-    public Material passive;
-    public Material alerted;
-
-    private float _maxRange = 150.0f;
-    private float _maxAngle = 45.0f;
-
     // might have to be vector3's
     public float radius;
     public float height;
 
+    public Material passive;
+    public Material alerted;
+
     public Vector3 radiusVert;
     public Vector3 distanceVert;
+    #endregion
 
-    private Vector3 noAngle;
+    #region Private Variables
+    private float _detectionAmount = 0.0f;
+    private float _maxDetection = 100.0f;
+    private float _maxRange = 150.0f;
+    private float _maxAngle = 45.0f;
 
-    public GameObject face;
+    private Vector3 _lastKnownPlayerPos;
+    private Vector3 _noAngle;
+    private Vector3 _destination;
+    private Vector3[] _playerLocations;
+    //Vector3 direction;
+
+    private int _lastTarget;
+
+    private bool _foundPlayer = false;
+
+    private NavMeshAgent _agent;
+
+    private BuildMesh _meshScript;
+
+    private SphereCollider _col;
+
+    private GameObject _player;
+
+    private bool increaseDetection;
+    #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
-        meshScript = GetComponentInChildren<BuildMesh>();
-        agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
-        _destination = agent.destination;
+        _meshScript = GetComponentInChildren<BuildMesh>();
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.autoBraking = false;
+        _destination = _agent.destination;
 
         currentTarget = targetList[0];
-        lastTarget = 0;
-        col = GetComponent<SphereCollider>();
-        agent.updateRotation = true;
+        _lastTarget = 0;
+        _col = GetComponent<SphereCollider>();
+        _agent.updateRotation = true;
         radius = 45.0f;
+        _player = null;
     }
 
     private void Update()
     {
-        ViewCone();
+        //ViewCone();
 
-        Debug.Log("detection amount: " + _detectionAmount);
+        if (!increaseDetection)
+        {
+            _detectionAmount--;
+            if (_detectionAmount < 0)
+                _detectionAmount = 0;
+        }
+
+        //Debug.Log("detection amount: " + _detectionAmount);
         if (_detectionAmount >= _maxDetection)
         {
-            foundPlayer = true;
+            _foundPlayer = true;
         }
-        else if (_detectionAmount <= 0)
+        else if (_detectionAmount < _maxDetection)
         {
-            foundPlayer = false;
+            _foundPlayer = false;
         }
 
-        if (foundPlayer)
+        if (_foundPlayer)
         {
-            Chase();
-            agent.speed = 3.0f;
+            Chase(_player.transform);
+            _agent.speed = 3.0f;
         }
-        else if (!foundPlayer)
+        else if (!_foundPlayer)
         {
             Patrol();
-            agent.speed = 1.0f;
+            _agent.speed = 1.0f;
         }
     }
 
-    public void Chase()
+    public void Chase(Transform targetPosition)
     {
-        agent.destination = player.transform.position;
+        _agent.destination = targetPosition.position;
     }
 
     void Patrol()
@@ -99,19 +114,19 @@ public class Sentry : MonoBehaviour
         {
             //destination = target.position;
             _destination = currentTarget.position;
-            agent.destination = _destination;
+            _agent.destination = _destination;
         }
-        else if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        else if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
             if (currentTarget != targetList[targetList.Length - 1])
             {
-                lastTarget++;
-                currentTarget = targetList[lastTarget];
+                _lastTarget++;
+                currentTarget = targetList[_lastTarget];
             }
             else
             {
-                lastTarget = 0;
-                currentTarget = targetList[lastTarget];
+                _lastTarget = 0;
+                currentTarget = targetList[_lastTarget];
             }
         }
     }
@@ -151,6 +166,7 @@ public class Sentry : MonoBehaviour
     //    }
     //}
 
+    /*
     private void ViewCone()
     {
         noAngle = transform.forward * 10;
@@ -207,12 +223,13 @@ public class Sentry : MonoBehaviour
         }
         
     }
+    */
 
     void SeePlayer(RaycastHit hit)
     {
         if (hit.transform.tag == "Player")
         {
-            player = hit.collider.gameObject;
+            _player = hit.collider.gameObject;
             _detectionAmount++;
         }
         else
@@ -227,11 +244,86 @@ public class Sentry : MonoBehaviour
     void HeardSound()
     {
         Debug.Log("The guard heard that");
+        Chase(audioTarget);
     }
 
     public GameObject PlayerTarget
     {
-        get { return player; }
-        set { player = value; }
+        get { return _player; }
+        set { _player = value; }
     }
+
+    public float DetectionAmount
+    {
+        get { return _detectionAmount; }
+    }
+
+    public float MaxDetectionAmount
+    {
+        get { return _maxDetection; }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            GameObject player = other.gameObject;
+
+            //if(player == null)
+                _player = player;
+
+            Player playerScript = player.GetComponent<Player>();
+            if (playerScript.isMoving)
+            {
+                increaseDetection = true;
+                _detectionAmount += playerScript.suspicionRate;
+
+                if (_detectionAmount > _maxDetection)
+                    _detectionAmount = _maxDetection;
+
+                // increase suspicion based on the current suspicion rate
+            }
+            else
+            {
+                increaseDetection = false;
+                //_detectionAmount--;
+                //if (_detectionAmount < 0)
+                //    _detectionAmount = 0;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            increaseDetection = false;
+            //_detectionAmount--;
+            //if (_detectionAmount < 0)
+            //    _detectionAmount = 0;
+        }
+    }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.transform.tag == "Player")
+    //    {
+    //        GameObject player = collision.gameObject;
+    //        Player playerScript = player.GetComponent<Player>();
+    //        if (playerScript.isMoving)
+    //        {
+    //            _detectionAmount += playerScript.suspicionRate;
+    //            if (_detectionAmount > _maxDetection)
+    //                _detectionAmount = _maxDetection;
+
+    //            // increase suspicion based on the current suspicion rate
+    //        }
+    //        else
+    //        {
+    //            _detectionAmount--;
+    //            if (_detectionAmount < 0)
+    //                _detectionAmount = 0;
+    //        }
+    //    }
+    //}
 }
