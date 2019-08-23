@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     private Rigidbody _rb;
 
     // player's sphere collider, for audio range
-    private SphereCollider _col;
+    public SphereCollider _col;
 
     // keep track of what time of movement the player is doing
     private string _movementType;
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         // set default values / references
-        _col = GetComponent<SphereCollider>();
+        //_col = GetComponent<SphereCollider>();
         _rb = GetComponent<Rigidbody>();
         _speed = walkSpeed;
     }
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
         {
             isMoving = true;
             //      Turn on the SphereCollider
-            _col.enabled = true;
+            //_col.enabled = true;
             //      Do a switch statement for the collider and suspicion rates to change between walking and crouching states
             //      This switch can also change the speed here, and the crouch logic can maybe also go here
             switch (_movementType)
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
         else
         {
             isMoving = false;
-            _col.enabled = false;
+            //_col.enabled = false;
         }
 
         RaycastHit outlineHit;

@@ -76,7 +76,7 @@ public class Sentry : MonoBehaviour
 
         if (!increaseDetection)
         {
-            _detectionAmount--;
+            _detectionAmount -= _maxDetection * 0.005f;
             if (_detectionAmount < 0)
                 _detectionAmount = 0;
         }
@@ -265,65 +265,44 @@ public class Sentry : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.tag == "Player")
+        // if the trigger collider belonging to the player enters and stays within the AI's trigger collider
+        if (other.transform.parent.tag == "Player")
         {
-            GameObject player = other.gameObject;
+            // the parent of the collider is the player, so set _player to that gameobject
+            GameObject player = other.transform.parent.gameObject;
+            _player = player;
 
-            //if(player == null)
-                _player = player;
+            // get the playerScript from the player
+            Player playerScript = _player.GetComponent<Player>();
 
-            Player playerScript = player.GetComponent<Player>();
+            // if the player is currently moving
             if (playerScript.isMoving)
             {
+                // set this bool to true so that the detection doesn't yet decrease
                 increaseDetection = true;
+                //start increasing by the modifier dependant on what pose the player is in
                 _detectionAmount += playerScript.suspicionRate;
 
+                // make sure the detection amount can't be higher than the max
                 if (_detectionAmount > _maxDetection)
                     _detectionAmount = _maxDetection;
-
-                // increase suspicion based on the current suspicion rate
             }
-            else
+            // otherwise if the player ISN'T moving
+            else if (!playerScript.isMoving)
             {
+                // set this to true so that the AI knows to start decreasing awareness
                 increaseDetection = false;
-                //_detectionAmount--;
-                //if (_detectionAmount < 0)
-                //    _detectionAmount = 0;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "Player")
+        // if the trigger collider belonging to the player leaves the AI's trigger collider
+        if (other.transform.parent.tag == "Player")
         {
+            // the AI should no longer be able to hear the player, start decreasing the detection amount
             increaseDetection = false;
-            //_detectionAmount--;
-            //if (_detectionAmount < 0)
-            //    _detectionAmount = 0;
         }
     }
-
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.transform.tag == "Player")
-    //    {
-    //        GameObject player = collision.gameObject;
-    //        Player playerScript = player.GetComponent<Player>();
-    //        if (playerScript.isMoving)
-    //        {
-    //            _detectionAmount += playerScript.suspicionRate;
-    //            if (_detectionAmount > _maxDetection)
-    //                _detectionAmount = _maxDetection;
-
-    //            // increase suspicion based on the current suspicion rate
-    //        }
-    //        else
-    //        {
-    //            _detectionAmount--;
-    //            if (_detectionAmount < 0)
-    //                _detectionAmount = 0;
-    //        }
-    //    }
-    //}
 }
