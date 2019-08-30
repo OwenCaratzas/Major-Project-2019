@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5960527045296971885}
+  - component: {fileID: 4218288479887317380}
   m_Layer: 0
   m_Name: SuitcaseStack
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4218288479887317380
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507950454368511862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0300221, y: 0.7346115, z: 1.476707}
+  m_Center: {x: -0.015011072, y: 0.35062313, z: 0.0016049147}
 --- !u!1001 &4804198638347556503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,10 +53,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5960527045296971885}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9f77b6858c36211488779a89074e22bd, type: 3}
-      propertyPath: m_Name
-      value: SM_Suitcase2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9f77b6858c36211488779a89074e22bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -87,6 +97,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9f77b6858c36211488779a89074e22bd, type: 3}
+      propertyPath: m_Name
+      value: SM_Suitcase2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f77b6858c36211488779a89074e22bd, type: 3}
 --- !u!4 &4804198638347160599 stripped
@@ -102,10 +116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5960527045296971885}
     m_Modifications:
-    - target: {fileID: 100000, guid: 92c72cc9fe347ee4ca2ec0fd20772260, type: 3}
-      propertyPath: m_Name
-      value: SM_Suitcase1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 92c72cc9fe347ee4ca2ec0fd20772260, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -149,6 +159,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 92c72cc9fe347ee4ca2ec0fd20772260, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 92c72cc9fe347ee4ca2ec0fd20772260, type: 3}
+      propertyPath: m_Name
+      value: SM_Suitcase1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92c72cc9fe347ee4ca2ec0fd20772260, type: 3}

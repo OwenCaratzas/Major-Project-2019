@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
             //if(outlineHit.transform.)
         }
 
-        if (gameObject.GetComponent<Item_Use>().itemActive)
+        if (gameObject.GetComponent<Item_Use>().itemReady)
             interactRange = 10;
         else
             interactRange = 5;
