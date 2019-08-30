@@ -10,6 +10,6 @@ public class DetectionSlider : MonoBehaviour
     private void Update()
     {
         slider.value = (guard.DetectionAmount / guard.MaxDetectionAmount);
-        Debug.Log(slider.value);
+        //Debug.Log(slider.value);
     }
 }

@@ -10,8 +10,13 @@ public class BuildMesh : MonoBehaviour
     Mesh mesh;
 
     public Vector3[] vertices;
+    public List<Vector3> vertList;
     public int[] triangles;
 
+    public float size;
+    public float distance;
+
+    
     private float _xMultiplier = 5.0f;
     private float _yMultiplier = 5.0f;
     private float _zMultiplier = 10.0f;
@@ -31,6 +36,8 @@ public class BuildMesh : MonoBehaviour
     {
         mesh.Clear();
 
+        CreateCone2();
+
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
@@ -39,7 +46,7 @@ public class BuildMesh : MonoBehaviour
 
     private void Update()
     {
-        //UpdateMesh();
+        UpdateMesh();
         //Debug.DrawRay(transform.position, new Vector3(-1 * _xMultiplier, 0, 1 * _zMultiplier), Color.blue);
     }
 
@@ -98,29 +105,50 @@ public class BuildMesh : MonoBehaviour
                 //new Vector3(aiScript.transform.position.x, aiScript.transform.position.y, aiScript.transform.position.z),
                 //// top vertice of the circle
                 //new Vector3(aiScript.transform.position.x, aiScript.radius, aiScript.height),
-                
+
                 // ^^^^^^ keep working on this if it works
 
-            // vert 0
+            //// vert 0
+            //new Vector3(0, 0, 0),
+            //// vert 1
+            //new Vector3(0, 1 * _yMultiplier, 1 * _zMultiplier),
+            //// vert 2
+            //new Vector3(0.75f * _xMultiplier, 0.75f * _yMultiplier, 1 * _zMultiplier),
+            //// vert 3
+            //new Vector3(1 * _xMultiplier, 0, 1 * _zMultiplier),
+            //// vert 4
+            //new Vector3(0.75f * _xMultiplier, -0.75f * _yMultiplier, 1 * _zMultiplier),
+            //// vert 5
+            //new Vector3(0, -1 * _yMultiplier, 1 * _zMultiplier),
+            //// vert 6
+            //new Vector3(-0.75f * _xMultiplier, -0.75f * _yMultiplier, 1 * _zMultiplier),
+            //// vert 7
+            //new Vector3(-1 * _xMultiplier, 0, 1 * _zMultiplier),
+            //// vert 8
+            //new Vector3(-0.75f * _xMultiplier, 0.75f * _yMultiplier, 1 * _zMultiplier),
+            //// vert 9
+            //new Vector3(0, 0, 1 * _zMultiplier)
+
+                // vert 0
             new Vector3(0, 0, 0),
             // vert 1
-            new Vector3(0, 1 * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(0, 1 * size, 1 * distance),
             // vert 2
-            new Vector3(0.75f * _xMultiplier, 0.75f * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(0.75f * size, 0.75f * size, 1 * distance),
             // vert 3
-            new Vector3(1 * _xMultiplier, 0, 1 * _zMultiplier),
+            new Vector3(1 * size, 0, 1 * distance),
             // vert 4
-            new Vector3(0.75f * _xMultiplier, -0.75f * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(0.75f * size, -0.75f * size, 1 * distance),
             // vert 5
-            new Vector3(0, -1 * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(0, -1 * size, 1 * distance),
             // vert 6
-            new Vector3(-0.75f * _xMultiplier, -0.75f * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(-0.75f * size, -0.75f * size, 1 * distance),
             // vert 7
-            new Vector3(-1 * _xMultiplier, 0, 1 * _zMultiplier),
+            new Vector3(-1 * size, 0, 1 * distance),
             // vert 8
-            new Vector3(-0.75f * _xMultiplier, 0.75f * _yMultiplier, 1 * _zMultiplier),
+            new Vector3(-0.75f * size, 0.75f * size, 1 * distance),
             // vert 9
-            new Vector3(0, 0, 1 * _zMultiplier)
+            new Vector3(0, 0, 1 * distance)
 
             };
 
@@ -146,19 +174,11 @@ public class BuildMesh : MonoBehaviour
                 9, 7, 6,
                 9, 8, 7,
                 9, 1, 8
-                
+
                 //,
-                //// inside
-                //
-                // // peak end
-                //0, 2, 1,
-                //0, 3, 2,
-                //0, 4, 3,
-                //0, 5, 4,
-                //0, 6, 5,
-                //0, 7, 6,
-                //0, 8, 7,
-                //0, 1, 8,
+                // inside
+                
+               
                 //// flat end
                 //9, 1, 2,
                 //9, 2, 3,
@@ -167,7 +187,16 @@ public class BuildMesh : MonoBehaviour
                 //9, 5, 6,
                 //9, 6, 7,
                 //9, 7, 8,
-                //9, 8, 1
+                //9, 8, 1,
+                //  // peak end
+                //0, 2, 1,
+                //0, 3, 2,
+                //0, 4, 3,
+                //0, 5, 4,
+                //0, 6, 5,
+                //0, 7, 6,
+                //0, 8, 7,
+                //0, 1, 8
             };
     }
 }

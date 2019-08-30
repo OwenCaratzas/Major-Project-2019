@@ -72,8 +72,10 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
+        // Update where the viewcone raycasts should be shot from
         //ViewCone();
 
+        // decrease detection if the player is not being detected
         if (!increaseDetection)
         {
             _detectionAmount -= _maxDetection * 0.005f;
@@ -166,78 +168,90 @@ public class Sentry : MonoBehaviour
     //    }
     //}
 
-    /*
-    private void ViewCone()
-    {
-        noAngle = transform.forward * 10;
-        Quaternion rightAngle = Quaternion.AngleAxis(meshScript.vertices[3].x * 4, new Vector3(0, 1, 0));
-        Quaternion leftAngle = Quaternion.AngleAxis(meshScript.vertices[7].x * 4, new Vector3(0, 1, 0));
-        Quaternion downAngle = Quaternion.AngleAxis(meshScript.vertices[1].y * 4, new Vector3(1, 0, 0));
-        Quaternion topAngle = Quaternion.AngleAxis(meshScript.vertices[5].y * 4, new Vector3(1, 0, 0));
 
-        Vector3 newAngle1 = rightAngle * noAngle;
-        Vector3 newAngle2 = leftAngle * noAngle;
-        Vector3 newAngle3 = downAngle * noAngle;
-        Vector3 newAngle4 = topAngle * noAngle;
+    //private void ViewCone()
+    //{
+    //    // get the forward direction and multiply by how long you want the raycasts to be
+    //    _noAngle = transform.forward * 10;
 
-        //float radius = 3;
-        //float height = _maxRange;
-        float surface_area;
-        float volume;
-        surface_area = Mathf.PI * radius * (radius * Mathf.Sqrt(radius * radius + height * height));
-        volume = (1.0f / 3) * Mathf.PI * radius * radius * height;
-        //Debug.Log("Surface Area of cone is : " + surface_area);
-        //Debug.Log("Volume of Cone is : " + volume);
+    //    // each of these are the calculated angles from the (North East South West) corners of the generated mesh 
+    //    Quaternion rightAngle = Quaternion.AngleAxis(_meshScript.vertices[3].x * 4, Vector3.up);
+    //    Quaternion leftAngle = Quaternion.AngleAxis(_meshScript.vertices[7].x * 4, Vector3.up);
+    //    Quaternion downAngle = Quaternion.AngleAxis(_meshScript.vertices[5].y * 4, Vector3.right);
+    //    Quaternion topAngle = Quaternion.AngleAxis(_meshScript.vertices[1].y * 4, Vector3.right);
 
-        //Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z + _maxRange)), new Color(0.5f, 0.0f, 0.5f), 1.0f);
-        Debug.DrawRay(visionDetectionOrigin.transform.position, newAngle1, Color.yellow);
-        Debug.DrawRay(visionDetectionOrigin.transform.position, newAngle2, Color.yellow);
-        Debug.DrawRay(visionDetectionOrigin.transform.position, newAngle3, Color.yellow);
-        Debug.DrawRay(visionDetectionOrigin.transform.position, newAngle4, Color.yellow);
+    //    // The angle is then multiplied by the forward direction so that it points in front of the AI
+    //    Vector3 newRightAngle = rightAngle * _noAngle;
+    //    Vector3 newLeftAngle = leftAngle * _noAngle;
+    //    Vector3 newBottomAngle = downAngle * _noAngle;
+    //    Vector3 newTopAngle = topAngle * _noAngle;
 
-        Debug.DrawRay(visionDetectionOrigin.transform.position, noAngle, Color.yellow);
+    //    //Debug.Log("Right raycast angle/direction: " +newRightAngle);
+    //    //Debug.Log("Left raycast angle/direction: " + newLeftAngle);
+    //    //Debug.Log("Bottom raycast angle/direction: " + newBottomAngle);
+    //    Debug.Log("Top raycast x: " + newTopAngle.x);
+    //    Debug.Log("Top raycast y: " + newTopAngle.y);
+
+    //    float radius = 3;
+    //    float height = _maxRange;
+    //    float surface_area;
+    //    float volume;
+    //    surface_area = Mathf.PI * radius * (radius * Mathf.Sqrt(radius * radius + height * height));
+    //    volume = (1.0f / 3) * Mathf.PI * radius * radius * height;
+    //    //Debug.Log("Surface Area of cone is : " + surface_area);
+    //    //Debug.Log("Volume of Cone is : " + volume);
+
+    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newRightAngle, Color.yellow);
+    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newLeftAngle, Color.yellow);
+    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newBottomAngle, Color.green);
+    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newTopAngle, Color.green);
+
+    //    Debug.DrawRay(visionDetectionOrigin.transform.position, _noAngle, Color.yellow);
 
 
 
-        RaycastHit hit;
+    //    RaycastHit hit;
 
-        if (Physics.Raycast(visionDetectionOrigin.transform.position, newAngle1, out hit, _maxRange))
-        {
-            SeePlayer(hit);
-        }
-        else if (Physics.Raycast(visionDetectionOrigin.transform.position, newAngle2, out hit, _maxRange))
-        {
-            SeePlayer(hit);
-        }
-        else if (Physics.Raycast(visionDetectionOrigin.transform.position, newAngle3, out hit, _maxRange))
-        {
-            SeePlayer(hit);
-        }
-        else if (Physics.Raycast(visionDetectionOrigin.transform.position, newAngle4, out hit, _maxRange))
-        {
-            SeePlayer(hit);
-        }
-        else if (Physics.Raycast(visionDetectionOrigin.transform.position, noAngle, out hit, _maxRange))
-        {
-            SeePlayer(hit);
-        }
-        
-    }
-    */
+    //    if (Physics.Raycast(visionDetectionOrigin.transform.position, newRightAngle, out hit, _maxRange))
+    //    {
+    //        SeePlayer(hit);
+    //    }
+    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newLeftAngle, out hit, _maxRange))
+    //    {
+    //        SeePlayer(hit);
+    //    }
+    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newBottomAngle, out hit, _maxRange))
+    //    {
+    //        SeePlayer(hit);
+    //    }
+    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newTopAngle, out hit, _maxRange))
+    //    {
+    //        SeePlayer(hit);
+    //    }
+    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, _noAngle, out hit, _maxRange))
+    //    {
+    //        SeePlayer(hit);
+    //    }
+
+    //}
+
 
     void SeePlayer(RaycastHit hit)
     {
-        if (hit.transform.tag == "Player")
+        if (hit.collider.tag == "Player")
         {
+            increaseDetection = true;
             _player = hit.collider.gameObject;
-            _detectionAmount++;
+            //_detectionAmoun++;
+            _detectionAmount += _maxDetection * 0.5f;
         }
         else
         {
-            _detectionAmount--;
+            increaseDetection = false;
+            //_detectionAmount--;
 
-            if (_detectionAmount <= 0)
-                _detectionAmount = 0;
+            //if (_detectionAmount <= 0)
+            //    _detectionAmount = 0;
         }
     }
 
@@ -266,43 +280,58 @@ public class Sentry : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // if the trigger collider belonging to the player enters and stays within the AI's trigger collider
-        if (other.transform.parent.tag == "Player")
+        if (other.transform.parent == null)
         {
-            // the parent of the collider is the player, so set _player to that gameobject
-            GameObject player = other.transform.parent.gameObject;
-            _player = player;
-
-            // get the playerScript from the player
-            Player playerScript = _player.GetComponent<Player>();
-
-            // if the player is currently moving
-            if (playerScript.isMoving)
+            return;
+        }
+        else
+        {
+            if (other.transform.parent.tag == "Player")
             {
-                // set this bool to true so that the detection doesn't yet decrease
-                increaseDetection = true;
-                //start increasing by the modifier dependant on what pose the player is in
-                _detectionAmount += playerScript.suspicionRate;
+                //Debug.Log(other.transform.parent.tag);
+                // the parent of the collider is the player, so set _player to that gameobject
+                GameObject player = other.transform.parent.gameObject;
+                _player = player;
 
-                // make sure the detection amount can't be higher than the max
-                if (_detectionAmount > _maxDetection)
-                    _detectionAmount = _maxDetection;
-            }
-            // otherwise if the player ISN'T moving
-            else if (!playerScript.isMoving)
-            {
-                // set this to true so that the AI knows to start decreasing awareness
-                increaseDetection = false;
+                // get the playerScript from the player
+                Player playerScript = _player.GetComponent<Player>();
+
+                // if the player is currently moving
+                if (playerScript.isMoving)
+                {
+                    // set this bool to true so that the detection doesn't yet decrease
+                    increaseDetection = true;
+                    //start increasing by the modifier dependant on what pose the player is in
+                    _detectionAmount += playerScript.suspicionRate;
+
+                    // make sure the detection amount can't be higher than the max
+                    if (_detectionAmount > _maxDetection)
+                        _detectionAmount = _maxDetection;
+                }
+                // otherwise if the player ISN'T moving
+                else if (!playerScript.isMoving)
+                {
+                    // set this to true so that the AI knows to start decreasing awareness
+                    increaseDetection = false;
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // if the trigger collider belonging to the player leaves the AI's trigger collider
-        if (other.transform.parent.tag == "Player")
+        if (other.transform.parent == null)
         {
-            // the AI should no longer be able to hear the player, start decreasing the detection amount
-            increaseDetection = false;
+            return;
+        }
+        else
+        {
+            // if the trigger collider belonging to the player leaves the AI's trigger collider
+            if (other.transform.parent.tag == "Player")
+            {
+                // the AI should no longer be able to hear the player, start decreasing the detection amount
+                increaseDetection = false;
+            }
         }
     }
 }
