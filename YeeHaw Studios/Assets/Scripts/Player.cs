@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     public float walkSuspicionRate;
     public float crouchSuspicionRate;
 
+    // the amount of noise the player is making
+
+
     #endregion
 
     #region Private Variables
@@ -150,27 +153,6 @@ public class Player : MonoBehaviour
         }
         _wasCrouching = _crouching;
 
-
-
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    GetComponent<CapsuleCollider>().height = 1;
-        //    //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
-        //    _movementType = "Crouch";
-        //    // crouch movement
-        //    _speed = crouchSpeed;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.LeftShift))
-        //{
-        //    GetComponent<CapsuleCollider>().height = 2;
-        //    _movementType = "Walk";
-        //    Debug.Log("Let go of shift");
-        //    // normal movement
-        //    _speed = walkSpeed;
-        //}
-
-
         // apply rotations
         Rotation();
     }
@@ -182,10 +164,6 @@ public class Player : MonoBehaviour
         if (_translationX != 0 || _translationZ != 0)
         {
             isMoving = true;
-            //      Turn on the SphereCollider
-            //_col.enabled = true;
-            //      Do a switch statement for the collider and suspicion rates to change between walking and crouching states
-            //      This switch can also change the speed here, and the crouch logic can maybe also go here
             switch (_movementType)
             {
                 case "Walk":
@@ -207,7 +185,6 @@ public class Player : MonoBehaviour
         else
         {
             isMoving = false;
-            //_col.enabled = false;
         }
 
         RaycastHit outlineHit;

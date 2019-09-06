@@ -9,6 +9,7 @@ public class ViewCone : MonoBehaviour
     private Vector3 forwardDistance;
 
     private Sentry _guardScript;
+    private SecurityCamera _securityCameraScript;
 
     public float distance = 10;
     public float radius = 8;
@@ -27,6 +28,7 @@ public class ViewCone : MonoBehaviour
 
     IEnumerator Start()
     {
+        _securityCameraScript = GetComponentInParent<SecurityCamera>();
         _guardScript = GetComponentInParent<Sentry>();
         _meshScript = GetComponent<BuildMesh>();
         //_noAngle = transform.forward * 10.0f;
@@ -83,6 +85,7 @@ public class ViewCone : MonoBehaviour
         tempVec = _meshScript.vertices[8];
         SetDirectionPoint(tempVec);
 
+        /*
         //// inner diamond
         //tempVec = new Vector3(2.5f, 0, distance);
         //SetDirectionPoint(tempVec);
@@ -139,6 +142,7 @@ public class ViewCone : MonoBehaviour
 
         //vertical
         //diagonal
+        */
     }
 
     void SetDirectionPoint(Vector3 direction)
@@ -153,8 +157,14 @@ public class ViewCone : MonoBehaviour
         for (int i = 0; i < _directionList.Count; i++)
         {
             Debug.DrawRay(transform.position, _directionList[i], Color.cyan);
+
             if (Physics.Raycast(transform.position, _directionList[i], out hit, _meshScript.distance))
-                _guardScript.SendMessage("SeePlayer", hit);
+                if (GetComponentInParent<Sentry>())
+                    _guardScript.SendMessage("SeePlayer", hit);
+                if (GetComponentInParent<SecurityCamera>())
+                    _securityCameraScript.SendMessage("SeePlayer", hit);
+
+
         }
         _directionList.Clear();
         CreateDirectionList();

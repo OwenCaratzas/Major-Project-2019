@@ -11,6 +11,9 @@ public class SecurityCamera : MonoBehaviour
 
     private float _interpolationValue = 0.0f;
 
+    public List<GameObject> guardList;
+    private Sentry _guardScript;
+    
     // Update is called once per frame
     void Update()
     {
@@ -30,4 +33,18 @@ public class SecurityCamera : MonoBehaviour
             _interpolationValue = 0.0f;
         }
     }
+
+    void SeePlayer(RaycastHit hit)
+    {
+        if (hit.collider.tag == "Player")
+        {
+            for (int i = 0; i < guardList.Capacity; i++)
+            {
+                _guardScript = guardList[i].GetComponent<Sentry>();
+                _guardScript.SendMessage("SeePlayer", hit);
+                //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+            }
+        }
+    }
+
 }

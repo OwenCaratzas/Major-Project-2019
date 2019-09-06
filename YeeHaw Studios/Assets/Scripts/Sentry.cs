@@ -51,6 +51,14 @@ public class Sentry : MonoBehaviour
     private GameObject _player;
 
     private bool increaseDetection;
+
+    // current behaviour
+    private string _curBehaviour;
+
+    // the different behaviour states
+    private string _chase = "Chase";
+    private string _patrol = "Patrol";
+    private string _search = "Search";
     #endregion
 
 
@@ -72,6 +80,34 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
+
+        /*
+        chase->search->patrol
+        chase will always follow this progression
+
+        search->chase/patrol
+        search can lead to both chase and patrol
+
+        patrol->chase/search
+        patrol can lead to both chase and search
+        */
+
+        switch (_curBehaviour)
+        {
+                // Chase code AND set values like AI speed and stuff correctly
+            case "Chase":
+                break;
+                // Make sure the AI resumes patrolling between the points and slows down to normal
+            case "Patrol":
+                //_agent
+                break;
+                // if the AI has just been chasing the player and can no longer see them, look before resuming patrol
+            case "Search":
+                break;
+
+            default:
+                break;
+        }
         // Update where the viewcone raycasts should be shot from
         //ViewCone();
 
@@ -133,125 +169,17 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        Vector3 direction = other.transform.position - transform.position;
-    //        float angle = Vector3.Angle(direction, transform.forward);
-
-    //        if (angle < fovAngle * 0.5f)
-    //        {
-    //            RaycastHit hit;
-
-    //            if (Physics.Raycast(transform.position/* + transform.up*/, direction.normalized, out hit, col.radius))
-    //            {
-    //                if (hit.collider.gameObject.tag == "Player")
-    //                {
-    //                    Debug.Log("FOUND THE PLAYER");
-    //                    foundPlayer = true;
-    //                    player = hit.collider.gameObject;
-    //                    GetComponent<Renderer>().material = alerted;
-    //                }
-    //                else
-    //                {
-    //                    foundPlayer = false;
-    //                    GetComponent<Renderer>().material = passive;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                foundPlayer = false;
-    //                GetComponent<Renderer>().material = passive;
-    //            }
-    //        }
-    //    }
-    //}
-
-
-    //private void ViewCone()
-    //{
-    //    // get the forward direction and multiply by how long you want the raycasts to be
-    //    _noAngle = transform.forward * 10;
-
-    //    // each of these are the calculated angles from the (North East South West) corners of the generated mesh 
-    //    Quaternion rightAngle = Quaternion.AngleAxis(_meshScript.vertices[3].x * 4, Vector3.up);
-    //    Quaternion leftAngle = Quaternion.AngleAxis(_meshScript.vertices[7].x * 4, Vector3.up);
-    //    Quaternion downAngle = Quaternion.AngleAxis(_meshScript.vertices[5].y * 4, Vector3.right);
-    //    Quaternion topAngle = Quaternion.AngleAxis(_meshScript.vertices[1].y * 4, Vector3.right);
-
-    //    // The angle is then multiplied by the forward direction so that it points in front of the AI
-    //    Vector3 newRightAngle = rightAngle * _noAngle;
-    //    Vector3 newLeftAngle = leftAngle * _noAngle;
-    //    Vector3 newBottomAngle = downAngle * _noAngle;
-    //    Vector3 newTopAngle = topAngle * _noAngle;
-
-    //    //Debug.Log("Right raycast angle/direction: " +newRightAngle);
-    //    //Debug.Log("Left raycast angle/direction: " + newLeftAngle);
-    //    //Debug.Log("Bottom raycast angle/direction: " + newBottomAngle);
-    //    Debug.Log("Top raycast x: " + newTopAngle.x);
-    //    Debug.Log("Top raycast y: " + newTopAngle.y);
-
-    //    float radius = 3;
-    //    float height = _maxRange;
-    //    float surface_area;
-    //    float volume;
-    //    surface_area = Mathf.PI * radius * (radius * Mathf.Sqrt(radius * radius + height * height));
-    //    volume = (1.0f / 3) * Mathf.PI * radius * radius * height;
-    //    //Debug.Log("Surface Area of cone is : " + surface_area);
-    //    //Debug.Log("Volume of Cone is : " + volume);
-
-    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newRightAngle, Color.yellow);
-    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newLeftAngle, Color.yellow);
-    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newBottomAngle, Color.green);
-    //    Debug.DrawRay(visionDetectionOrigin.transform.position, newTopAngle, Color.green);
-
-    //    Debug.DrawRay(visionDetectionOrigin.transform.position, _noAngle, Color.yellow);
-
-
-
-    //    RaycastHit hit;
-
-    //    if (Physics.Raycast(visionDetectionOrigin.transform.position, newRightAngle, out hit, _maxRange))
-    //    {
-    //        SeePlayer(hit);
-    //    }
-    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newLeftAngle, out hit, _maxRange))
-    //    {
-    //        SeePlayer(hit);
-    //    }
-    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newBottomAngle, out hit, _maxRange))
-    //    {
-    //        SeePlayer(hit);
-    //    }
-    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, newTopAngle, out hit, _maxRange))
-    //    {
-    //        SeePlayer(hit);
-    //    }
-    //    else if (Physics.Raycast(visionDetectionOrigin.transform.position, _noAngle, out hit, _maxRange))
-    //    {
-    //        SeePlayer(hit);
-    //    }
-
-    //}
-
-
     void SeePlayer(RaycastHit hit)
     {
         if (hit.collider.tag == "Player")
         {
             increaseDetection = true;
             _player = hit.collider.gameObject;
-            //_detectionAmoun++;
-            _detectionAmount += _maxDetection * 0.5f;
+            _detectionAmount = _maxDetection;
         }
         else
         {
             increaseDetection = false;
-            //_detectionAmount--;
-
-            //if (_detectionAmount <= 0)
-            //    _detectionAmount = 0;
         }
     }
 
@@ -259,6 +187,7 @@ public class Sentry : MonoBehaviour
     {
         Debug.Log("The guard heard that");
         Chase(audioTarget);
+        _curBehaviour = _chase;
     }
 
     public GameObject PlayerTarget
@@ -270,6 +199,7 @@ public class Sentry : MonoBehaviour
     public float DetectionAmount
     {
         get { return _detectionAmount; }
+        set { _detectionAmount = value; }
     }
 
     public float MaxDetectionAmount
