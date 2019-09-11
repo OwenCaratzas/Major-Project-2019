@@ -14,6 +14,9 @@ TagManager:
   - Escape
   - Guard
   - TestObject
+  - Countdown
+  - Display
+  - Canvas
   layers:
   - Default
   - TransparentFX
