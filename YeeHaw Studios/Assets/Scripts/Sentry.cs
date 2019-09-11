@@ -52,15 +52,31 @@ public class Sentry : MonoBehaviour
 
     private bool increaseDetection;
 
-    // current behaviour
-    private string _curBehaviour;
-
     // the different behaviour states
-    private string _chase = "Chase";
-    private string _patrol = "Patrol";
-    private string _search = "Search";
+    private enum _BEHAVIOURS { Patrol, Search, Chase};
+
+    // current behaviour
+    private _BEHAVIOURS _curBehaviour;
     #endregion
 
+    #region Getters & Setters
+    public GameObject PlayerTarget
+    {
+        get { return _player; }
+        set { _player = value; }
+    }
+
+    public float DetectionAmount
+    {
+        get { return _detectionAmount; }
+        set { _detectionAmount = value; }
+    }
+
+    public float MaxDetectionAmount
+    {
+        get { return _maxDetection; }
+    }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -92,24 +108,24 @@ public class Sentry : MonoBehaviour
         patrol can lead to both chase and search
         */
 
+        // Swtich statement to control what behaviour is being used. Only one can be used at a time.
         switch (_curBehaviour)
         {
-                // Chase code AND set values like AI speed and stuff correctly
-            case "Chase":
+            // Make sure the AI resumes patrolling between the points and slows down to normal
+            case _BEHAVIOURS.Patrol:
+                PatrolBehaviour();
                 break;
-                // Make sure the AI resumes patrolling between the points and slows down to normal
-            case "Patrol":
-                //_agent
+            // if the AI has just been chasing the player and can no longer see them, look before resuming patrol
+            case _BEHAVIOURS.Search:
+                SearchBehaviour();
                 break;
-                // if the AI has just been chasing the player and can no longer see them, look before resuming patrol
-            case "Search":
+            // Chase code AND set values like AI speed and stuff correctly
+            case _BEHAVIOURS.Chase:
+                ChaseBehaviour();
                 break;
-
             default:
                 break;
         }
-        // Update where the viewcone raycasts should be shot from
-        //ViewCone();
 
         // decrease detection if the player is not being detected
         if (!increaseDetection)
@@ -123,22 +139,29 @@ public class Sentry : MonoBehaviour
         if (_detectionAmount >= _maxDetection)
         {
             _foundPlayer = true;
+            _curBehaviour = _BEHAVIOURS.Chase;
         }
         else if (_detectionAmount < _maxDetection)
         {
             _foundPlayer = false;
+            _curBehaviour = _BEHAVIOURS.Search;
+        }
+        else if (_detectionAmount <= 0)
+        {
+            _foundPlayer = false;
+            _curBehaviour = _BEHAVIOURS.Patrol;
         }
 
-        if (_foundPlayer)
-        {
-            Chase(_player.transform);
-            _agent.speed = 3.0f;
-        }
-        else if (!_foundPlayer)
-        {
-            Patrol();
-            _agent.speed = 1.0f;
-        }
+        //if (_foundPlayer)
+        //{
+        //    Chase(_player.transform);
+        //    _agent.speed = 3.0f;
+        //}
+        //else if (!_foundPlayer)
+        //{
+        //    Patrol();
+        //    _agent.speed = 1.0f;
+        //}
     }
 
     public void Chase(Transform targetPosition)
@@ -187,25 +210,29 @@ public class Sentry : MonoBehaviour
     {
         Debug.Log("The guard heard that");
         Chase(audioTarget);
-        _curBehaviour = _chase;
+        _curBehaviour = _BEHAVIOURS.Chase;
     }
 
-    public GameObject PlayerTarget
+    void PatrolBehaviour()
     {
-        get { return _player; }
-        set { _player = value; }
+        //"Main" for everything patrol related
+        _agent.speed = 1.0f;
+        Patrol();
     }
 
-    public float DetectionAmount
+    void SearchBehaviour()
     {
-        get { return _detectionAmount; }
-        set { _detectionAmount = value; }
+        //"Main" for everything search related
+        _agent.speed = 2.0f;
     }
 
-    public float MaxDetectionAmount
+    void ChaseBehaviour()
     {
-        get { return _maxDetection; }
+        //"Main" for everything chase related
+        _agent.speed = 3.0f;
+        Chase(_player.transform);
     }
+   
 
     private void OnTriggerStay(Collider other)
     {
