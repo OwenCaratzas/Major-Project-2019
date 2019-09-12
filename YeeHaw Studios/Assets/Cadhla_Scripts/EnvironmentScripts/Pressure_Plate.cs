@@ -27,7 +27,7 @@ public class Pressure_Plate : MonoBehaviour
                 if(alertGuard.PlayerTarget == null)
                     alertGuard.PlayerTarget = collision.gameObject;
 
-                alertGuard.Chase(player.transform);
+                alertGuard.NewTarget(player.transform.position);
             }
         }
     }

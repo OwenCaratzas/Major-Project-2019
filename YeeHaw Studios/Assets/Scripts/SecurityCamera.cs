@@ -13,10 +13,22 @@ public class SecurityCamera : MonoBehaviour
 
     public List<GameObject> guardList;
     private Sentry _guardScript;
-    
+    private Light _spotlight;
+    private bool _alert;
+
+    private void Start()
+    {
+        _spotlight = GetComponentInChildren<Light>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (_alert)
+            _spotlight.color = Color.red;
+        else
+            _spotlight.color = new Color(1, 0.64f, 0, 1);
+
         // Animate the rotation between start to end
         transform.Rotate(0, Mathf.Lerp(startPoint, endPoint, _interpolationValue), 0);
 
@@ -38,6 +50,7 @@ public class SecurityCamera : MonoBehaviour
     {
         if (hit.collider.tag == "Player")
         {
+            _alert = true;
             for (int i = 0; i < guardList.Capacity; i++)
             {
                 _guardScript = guardList[i].GetComponent<Sentry>();
@@ -45,6 +58,8 @@ public class SecurityCamera : MonoBehaviour
                 //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
             }
         }
+        else
+            _alert = false;
     }
 
 }

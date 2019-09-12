@@ -27,6 +27,7 @@ public class Sentry : MonoBehaviour
     #endregion
 
     #region Private Variables
+    [SerializeField]
     private float _detectionAmount = 0.0f;
     private float _maxDetection = 100.0f;
     private float _maxRange = 150.0f;
@@ -52,13 +53,25 @@ public class Sentry : MonoBehaviour
 
     private bool increaseDetection;
 
+    [SerializeField]
+    private bool _startSearch;
+
     // the different behaviour states
     private enum _BEHAVIOURS { Patrol, Search, Chase};
 
     // current behaviour
+    [SerializeField]
     private _BEHAVIOURS _curBehaviour;
     #endregion
 
+    public float startPoint = -1.0f;
+    public float endPoint = 1.0f;
+
+    public float interpolationMultiplier = 0.25f;
+
+    private float _interpolationValue = 0.0f;
+
+    private Light _spotlight;
     #region Getters & Setters
     public GameObject PlayerTarget
     {
@@ -81,6 +94,7 @@ public class Sentry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _spotlight = GetComponentInChildren<Light>();
         _meshScript = GetComponentInChildren<BuildMesh>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoBraking = false;
@@ -130,7 +144,7 @@ public class Sentry : MonoBehaviour
         // decrease detection if the player is not being detected
         if (!increaseDetection)
         {
-            _detectionAmount -= _maxDetection * 0.005f;
+            _detectionAmount -= _maxDetection * 0.0005f;
             if (_detectionAmount < 0)
                 _detectionAmount = 0;
         }
@@ -139,35 +153,27 @@ public class Sentry : MonoBehaviour
         if (_detectionAmount >= _maxDetection)
         {
             _foundPlayer = true;
-            _curBehaviour = _BEHAVIOURS.Chase;
-        }
-        else if (_detectionAmount < _maxDetection)
-        {
-            _foundPlayer = false;
-            _curBehaviour = _BEHAVIOURS.Search;
+            _lastKnownPlayerPos = _player.transform.position;
         }
         else if (_detectionAmount <= 0)
+            _foundPlayer = false; //_curBehaviour = _BEHAVIOURS.Patrol;
+
+        if (_foundPlayer)
         {
-            _foundPlayer = false;
-            _curBehaviour = _BEHAVIOURS.Patrol;
+            _curBehaviour = _BEHAVIOURS.Chase;
+            //Chase(_player.transform);
+            
         }
-
-        //if (_foundPlayer)
-        //{
-        //    Chase(_player.transform);
-        //    _agent.speed = 3.0f;
-        //}
-        //else if (!_foundPlayer)
-        //{
-        //    Patrol();
-        //    _agent.speed = 1.0f;
-        //}
+        else if ((!_foundPlayer && _startSearch) || _startSearch)
+        {
+            //Patrol();
+            //_curBehaviour = _BEHAVIOURS.Patrol;
+            _curBehaviour = _BEHAVIOURS.Search;
+            //_agent.speed = 1.0f;
+        }
     }
 
-    public void Chase(Transform targetPosition)
-    {
-        _agent.destination = targetPosition.position;
-    }
+    
 
     void Patrol()
     {
@@ -179,6 +185,13 @@ public class Sentry : MonoBehaviour
         }
         else if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
+            //if (Vector3.Distance(currentTarget.position, _lastKnownPlayerPos) < 5.0f)
+            //{
+            //    Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
+            //    _curBehaviour = _BEHAVIOURS.Search;
+            //    _lastKnownPlayerPos = new Vector3();
+            //}
+            //StartSearch();
             if (currentTarget != targetList[targetList.Length - 1])
             {
                 _lastTarget++;
@@ -198,6 +211,7 @@ public class Sentry : MonoBehaviour
         {
             increaseDetection = true;
             _player = hit.collider.gameObject;
+            _lastKnownPlayerPos = _player.transform.position;
             _detectionAmount = _maxDetection;
         }
         else
@@ -209,13 +223,14 @@ public class Sentry : MonoBehaviour
     void HeardSound()
     {
         Debug.Log("The guard heard that");
-        Chase(audioTarget);
-        _curBehaviour = _BEHAVIOURS.Chase;
+        NewTarget(audioTarget.position);
+        //_curBehaviour = _BEHAVIOURS.Chase;
     }
 
     void PatrolBehaviour()
     {
         //"Main" for everything patrol related
+        _spotlight.color = Color.yellow;
         _agent.speed = 1.0f;
         Patrol();
     }
@@ -223,16 +238,33 @@ public class Sentry : MonoBehaviour
     void SearchBehaviour()
     {
         //"Main" for everything search related
-        _agent.speed = 2.0f;
+        _spotlight.color = new Color(1, 0.64f, 0, 1);
+        _agent.speed = 0.0f;
+        // rotate for a few seconds then go back to patrol
+        StartCoroutine("SearchRotation");
+        _curBehaviour = _BEHAVIOURS.Patrol;
+        
     }
 
     void ChaseBehaviour()
     {
         //"Main" for everything chase related
+        _spotlight.color = Color.red;
         _agent.speed = 3.0f;
-        Chase(_player.transform);
+        //_lastKnownPlayerPos = _player.transform.position;
+        //Chase(_player.transform);
+        //_startSearch = true;
+        NewTarget(_lastKnownPlayerPos);
+        //if (_agent.transform.position == _lastKnownPlayerPos)
+        //    _curBehaviour = _BEHAVIOURS.Search;
     }
-   
+
+    public void NewTarget(Vector3 targetPosition)
+    {
+        //_lastKnownPlayerPos = targetPosition;
+        _agent.destination = targetPosition;
+        StartSearch();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -289,6 +321,40 @@ public class Sentry : MonoBehaviour
                 // the AI should no longer be able to hear the player, start decreasing the detection amount
                 increaseDetection = false;
             }
+        }
+    }
+
+    IEnumerator SearchRotation()
+    {
+        // Animate the rotation between start to end
+        transform.Rotate(0, Mathf.Lerp(startPoint, endPoint, _interpolationValue), 0);
+
+        // Increase the interpolation value
+        _interpolationValue += interpolationMultiplier * Time.deltaTime;
+
+        // If the interpolator value reaches it's current target, 
+        // the points are swapped so that it should move to the opposite direction
+        if (_interpolationValue > 1.0f)
+        {
+            float temp = endPoint;
+            endPoint = startPoint;
+            startPoint = temp;
+            _interpolationValue = 0.0f;
+        }
+        print(Time.time);
+        yield return new WaitForSecondsRealtime(5);
+        print(Time.time);
+        _startSearch = false;
+    }
+
+    void StartSearch()
+    {
+        if (Vector3.Distance(transform.position, _lastKnownPlayerPos) < 0.5f)
+        {
+            _startSearch = true;
+            _foundPlayer = false;
+            Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
+            _curBehaviour = _BEHAVIOURS.Search;
         }
     }
 }

@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 
     // the amount of noise the player is making
 
+    // Is the player grounded?
+    public bool isGrounded;
 
     #endregion
 
@@ -101,11 +103,14 @@ public class Player : MonoBehaviour
         _rb.MovePosition(transform.position  + (transform.right * _translationX) + (transform.forward * _translationZ));
 
         // push the rigidbody directly up the y axis by multiplying it by the jumpForce
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && isGrounded)
+        {
+            isGrounded = false;
             _rb.AddForce(transform.up * jumpForce);
+        }
 
         // are we crouching or not?
-
+        
         _crouching = Input.GetKey(KeyCode.LeftShift);
         if (_wasCrouching)
         {
@@ -246,5 +251,13 @@ public class Player : MonoBehaviour
     public float Speed
     {
         get { return _speed; }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == ("Ground") && isGrounded == false)
+        {
+            isGrounded = true;
+        }
     }
 }
