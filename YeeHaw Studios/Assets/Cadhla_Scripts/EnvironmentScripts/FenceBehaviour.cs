@@ -7,6 +7,7 @@ public class FenceBehaviour : MonoBehaviour
     public GameObject[] Fences;
     public GameObject Lever;
 
+
     private bool fenceActive = true;
 
 

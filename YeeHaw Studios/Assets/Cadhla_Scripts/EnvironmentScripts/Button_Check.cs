@@ -29,10 +29,10 @@ public class Button_Check : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ClickedOn();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    ClickedOn();
+        //}
 
         if (buttonDown == true)
         {

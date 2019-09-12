@@ -242,7 +242,6 @@ MonoBehaviour:
   - {fileID: 3832324098313369050}
   button: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
   buttonDownCheck: []
-  buttonCheck: 
   numberOfTrueBooleans: 0
   maxTrueBooleansNeeded: 0
 --- !u!1 &6156305890637979700
@@ -347,6 +346,11 @@ PrefabInstance:
       propertyPath: buttonBool
       value: 
       objectReference: {fileID: 5659587572301630296}
+    - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonDown
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
 --- !u!4 &3832324098639942792 stripped
@@ -433,6 +437,11 @@ PrefabInstance:
       propertyPath: buttonBool
       value: 
       objectReference: {fileID: 5659587572301630296}
+    - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
 --- !u!4 &5437722934012330387 stripped

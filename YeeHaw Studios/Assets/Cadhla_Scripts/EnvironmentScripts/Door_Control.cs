@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door_Control : MonoBehaviour
 {
@@ -75,11 +76,12 @@ public class Door_Control : MonoBehaviour
             // Set our position as a fraction of the distance between the markers.
            speed = (speed) + speedTime * Time.deltaTime;
            doorMesh.transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);
-        }
 
+        }
     }
 
-        public void AddToButtonBool()
+
+    public void AddToButtonBool()
         {
             numberOfTrueBooleans++;
         }

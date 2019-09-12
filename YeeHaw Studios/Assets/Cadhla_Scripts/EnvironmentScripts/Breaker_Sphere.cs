@@ -17,6 +17,8 @@ public class Breaker_Sphere : MonoBehaviour
 
     public bool breakerReady;
 
+    public Control_Panel breakerBool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,6 @@ public class Breaker_Sphere : MonoBehaviour
     {
         if (other.gameObject.tag == "Breaker")
         {
-            Debug.Log("Hit");
             breakerReady = true;
         }
     }
@@ -61,6 +62,7 @@ public class Breaker_Sphere : MonoBehaviour
         {
             Move = false;
             breakerLength = 0f;
+            breakerBool.AddToBreakerBool();
         }
     }
 }

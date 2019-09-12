@@ -15,10 +15,12 @@ public class Item_Use : MonoBehaviour
     public GameObject lightningBolt;
     public GameObject Player;
 
-    [SerializeField] private PowerBar powerBar;
-    float power = 1f;
+    public PowerBar powerBar;
+    public float power = 1f;
 
-    private bool powerDrain = false;
+    public bool powerDrain = false;
+
+    public bool powerRecharging = false;
 
     public Image equipmentImage;
     public Sprite equipmentOff;
@@ -40,7 +42,7 @@ public class Item_Use : MonoBehaviour
         {
             if (power > 0)
             {
-                if (itemInactive == true && power == 1f)
+                if (itemInactive == true && power >= 1f)
                 {
                     itemReady = true;
                     itemInactive = false;
@@ -56,6 +58,7 @@ public class Item_Use : MonoBehaviour
             }
         }
 
+        //sprite check
         if (itemInactive == true)
         {
             equipmentImage.sprite = equipmentOff;
@@ -66,6 +69,38 @@ public class Item_Use : MonoBehaviour
             equipmentImage.sprite = equipmentOn;
         }
 
+        //power bar check for draining
+        if (powerDrain == true)
+        {
+            if (power >= 0f)
+            {
+                power -= .01f;
+                powerBar.SetSize(power);
+            }
+        }
+        if (power <= 0)
+        {
+            powerDrain = false;
+        }
+
+        //power bar recharge
+        if (powerRecharging == true)
+        {
+            if (power <= 1f)
+            {
+                power += 0.1f;
+                powerBar.SetReverseSize(power);
+            }
+        }
+        if (power >= 1)
+        {
+            powerRecharging = false;
+        }
+
+
+
+
+        //testing mechanic
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (itemReady == true && power == 1f)
@@ -74,20 +109,9 @@ public class Item_Use : MonoBehaviour
                 itemReady = false;
                 GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
                 powerDrain = true;
+                Lightning();
                 //equipmentLimit--;
             }
-        }
-        if (powerDrain == true)
-        {
-            if (power > 0f)
-            {
-                power -= .01f;
-                powerBar.SetSize(power);
-            }
-        }
-        if (power == 0)
-        {
-            powerDrain = false;
         }
     }
 
@@ -95,10 +119,23 @@ public class Item_Use : MonoBehaviour
     {
         if (itemReady == true)
         {
-            itemInactive = false;
+            Debug.Log("Shocking!");
+            itemInactive = true;
             itemReady = false;
             GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
+            powerDrain = true;
             //equipmentLimit--;
         }
     }
+
+
+    public void RechargeNow()
+    {
+        if (power <= 0)
+        {
+            powerRecharging = true;
+        }
+
+    }
+
 }

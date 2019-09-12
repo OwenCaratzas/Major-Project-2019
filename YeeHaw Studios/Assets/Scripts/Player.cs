@@ -37,6 +37,12 @@ public class Player : MonoBehaviour
     // Is the player grounded?
     public bool isGrounded;
 
+    // Item UI reference
+    public Item_Use rechargeUp;
+
+    // battery gameobject reference
+    public GameObject Battery;
+
     #endregion
 
     #region Private Variables
@@ -227,6 +233,41 @@ public class Player : MonoBehaviour
                     hit.rigidbody.AddForce(transform.forward * 1000);
                 }
 
+                else if (hit.transform.tag == "BreakerSphere")
+                {
+                    hit.transform.gameObject.SendMessage("CompleteCircuit");
+                }
+
+                else if (hit.transform.tag == "Lever")
+                {
+                    hit.transform.gameObject.SendMessage("PullTheLever");
+
+                    if (gameObject.GetComponent<Item_Use>().itemReady)
+                    {
+                        gameObject.GetComponent<Item_Use>().Lightning();
+                    }
+                }
+
+                else if (hit.transform.tag == "Escape")
+                {
+                    hit.transform.gameObject.SendMessage("EscapeNow");
+                }
+
+                else if (hit.transform.tag == "Safe")
+                {
+                    hit.transform.gameObject.SendMessage("Search");
+                }
+
+                else if (hit.transform.tag == "Battery")
+                {
+                    Battery = hit.transform.gameObject;
+                    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
+                    {
+                        rechargeUp.RechargeNow();
+                        hit.transform.gameObject.SendMessage("TakeCharge");
+                    }
+                }
+
                 gameObject.GetComponent<Item_Use>().Lightning();
             }
         }
@@ -251,6 +292,22 @@ public class Player : MonoBehaviour
     public float Speed
     {
         get { return _speed; }
+    }
+
+    public void TurnOffMouse()
+    {
+        // lock cursor to the middle of the screen
+        Cursor.lockState = CursorLockMode.Locked;
+        // make the cursor invisible
+        Cursor.visible = false;
+    }
+
+    public void TurnOnMouse()
+    {
+        // lock cursor to the middle of the screen
+        Cursor.lockState = CursorLockMode.Confined;
+        // make the cursor invisible
+        Cursor.visible = true;
     }
 
     void OnCollisionEnter(Collision col)
