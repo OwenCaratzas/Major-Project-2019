@@ -98,7 +98,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866066648326772858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.729, z: 0.651}
+  m_LocalPosition: {x: 0, y: 0.729, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 866066648318626236}
@@ -437,6 +437,12 @@ MonoBehaviour:
   alerted: {fileID: 2100000, guid: 9b243c707bda5d748a69ea2080647280, type: 2}
   radiusVert: {x: 0, y: 0, z: 0}
   distanceVert: {x: 0, y: 0, z: 0}
+  _detectionAmount: 0
+  _startSearch: 0
+  _curBehaviour: 0
+  startPoint: -1
+  endPoint: 1
+  interpolationMultiplier: 0.25
 --- !u!135 &2608310379249769795
 SphereCollider:
   m_ObjectHideFlags: 0

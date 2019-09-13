@@ -6,20 +6,43 @@ public class Player : MonoBehaviour
 {
     #region Public Variables
 
-    // the camera mounted onto the player
+    /// <summary>
+    /// Place the camera mounted on the player here
+    /// </summary>
+    [Tooltip("Place the main camera here")]
     public Camera playerCamera;
 
     // normal movement speed
+    /// <summary>
+    /// How fast the player walks
+    /// </summary>
+    [Tooltip("Walk speed multiplier")]
     public float walkSpeed;
 
     // when crouching, movement speed is dropped lower
+    /// <summary>
+    /// How fast the player crouches
+    /// </summary>
+    [Tooltip("Crouch speed multiplier")]
     public float crouchSpeed;
 
     // force applied on the y axis to push the player up to simulate a jump. 50.0f is pretty good for an ok jump
+    /// <summary>
+    /// The amount of upward force applied to the player upong jumping
+    /// </summary>
+    [Tooltip("The amount of upward force applied to the player")]
     public float jumpForce = 50.0f;
 
     // controls what radius the audio collider will be on either walking or crouching
+    /// <summary>
+    /// Audio radius for walking
+    /// </summary>
+    [Tooltip("The radius in which the AI will hear the player moving while walking")]
     public float walkAudioRadius;
+    /// <summary>
+    /// Audio radius for crouching
+    /// </summary>
+    [Tooltip("The radius in which the AI will hear the player moving while crouching")]
     public float crouchAudioRadius;
 
     // keep track of whether the player is moving or not
@@ -29,7 +52,15 @@ public class Player : MonoBehaviour
     public float suspicionRate;
 
     // suspicionRate will change between these depending on if the player is walking or crouching
+    /// <summary>
+    /// Detection rate for walking
+    /// </summary>
+    [Tooltip("The rate in which the AI will detect the player moving while walking")]
     public float walkSuspicionRate;
+    /// <summary>
+    /// Detection rate for crouching
+    /// </summary>
+    [Tooltip("The rate in which the AI will detect the player moving while crouching")]
     public float crouchSuspicionRate;
 
     // the amount of noise the player is making
@@ -82,7 +113,7 @@ public class Player : MonoBehaviour
 
     private bool _crouching;
     #endregion
-    
+
     //private Shader _objectShader;
 
     private void Start()
@@ -106,7 +137,7 @@ public class Player : MonoBehaviour
         _translationZ = Input.GetAxis("Vertical") * _speed;
 
         // apply the inputs to the character and move them
-        _rb.MovePosition(transform.position  + (transform.right * _translationX) + (transform.forward * _translationZ));
+        _rb.MovePosition(transform.position + (transform.right * _translationX) + (transform.forward * _translationZ));
 
         // push the rigidbody directly up the y axis by multiplying it by the jumpForce
         if (Input.GetKeyDown("space") && isGrounded)
@@ -116,7 +147,6 @@ public class Player : MonoBehaviour
         }
 
         // are we crouching or not?
-        //_crouching = Input.GetKey(KeyCode.LeftShift);
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (_crouching)
@@ -160,7 +190,7 @@ public class Player : MonoBehaviour
                     scale.z = transform.position.z;
                     transform.position = scale;
                 }
-                
+
 
                 //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
                 _movementType = "Crouch";
@@ -291,7 +321,7 @@ public class Player : MonoBehaviour
         _mouseY = Mathf.Clamp(_mouseY, -80, 80);
 
         _rb.MoveRotation(_rb.rotation * Quaternion.Euler(new Vector3(0, _mouseX, 0)));
-        
+
         playerCamera.transform.localRotation = Quaternion.Euler(_mouseY, 0, 0);
     }
 
