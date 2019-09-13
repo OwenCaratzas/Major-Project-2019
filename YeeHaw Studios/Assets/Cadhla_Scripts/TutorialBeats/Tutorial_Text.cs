@@ -46,7 +46,7 @@ public class Tutorial_Text : MonoBehaviour
         textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0f);
 
         startTimer = false;
-        WaitTime = 8f;
+        WaitTime = 5.5f;
 
         //promptBeatOne = GameObject.FindGameObjectWithTag("PromptOne");
 
@@ -103,11 +103,6 @@ public class Tutorial_Text : MonoBehaviour
 
         TutorialStillOne.SetActive(true);
         GameUI.SetActive(false);
-
-        startTimer = true;
-
-        player.TurnOffMouse();
-        player.walkSpeed = 0f;
     }
     public void TutorialBeatThree()
     {
@@ -130,10 +125,6 @@ public class Tutorial_Text : MonoBehaviour
         TutorialStillTwo.SetActive(true);
         GameUI.SetActive(false);
 
-        startTimer = true;
-
-        player.TurnOffMouse();
-        player.walkSpeed = 0f;
     }
     public void TutorialBeatFive()
     {
@@ -167,11 +158,6 @@ public class Tutorial_Text : MonoBehaviour
 
         TutorialStillFour.SetActive(true);
         GameUI.SetActive(false);
-
-        startTimer = true;
-
-        player.TurnOffMouse();
-        player.walkSpeed = 0f;
     }
 
     public void TutorialBeatEight()
@@ -183,11 +169,6 @@ public class Tutorial_Text : MonoBehaviour
 
         TutorialStillThree.SetActive(true);
         GameUI.SetActive(false);
-
-        startTimer = true;
-
-        player.TurnOffMouse();
-        player.walkSpeed = 0f;
     }
 
     public void TutorialBeatNine()
@@ -200,11 +181,6 @@ public class Tutorial_Text : MonoBehaviour
 
         TutorialStillFive.SetActive(true);
         GameUI.SetActive(false);
-
-        startTimer = true;
-
-        player.TurnOffMouse();
-        player.walkSpeed = 0f;
     }
        
     public void EndBeat()

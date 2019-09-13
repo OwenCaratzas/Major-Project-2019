@@ -8,36 +8,28 @@ public class TutorialBeatTwo : MonoBehaviour
     Tutorial_Text displayBeat;
 
     public GameObject GuardOne;
+    public Player player;
 
-    public float timer = 8f;
-    private bool startTimer = false;
+    public Tutorial_Text displayEnd;
+
 
     private void Start()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
-    {
-        if (startTimer == true)
-        {
-            timer -= 1 * Time.deltaTime;
-        }
-
-        if (timer <= 0)
-        {
-            GuardOne.GetComponent<NavMeshAgent>().acceleration = 8.0f;
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            startTimer = true;
             GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
             displayBeat = obj.GetComponent<Tutorial_Text>();
             displayBeat.TutorialBeatTwo();
+
+            Time.timeScale = 0f;
+            player.TurnOffMouse();
+
             StartCoroutine(EndTutorial());
         }
     }
@@ -45,7 +37,14 @@ public class TutorialBeatTwo : MonoBehaviour
 
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSecondsRealtime(6);
+
+        Time.timeScale = 1f;
+
+        GuardOne.GetComponent<NavMeshAgent>().acceleration = 4.0f;
+        player.TurnOnMouse();
+        displayEnd.EndBeat();
+
         Destroy(gameObject);
     }
 }

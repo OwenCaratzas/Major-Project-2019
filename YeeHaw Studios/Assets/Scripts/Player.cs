@@ -116,8 +116,14 @@ public class Player : MonoBehaviour
         }
 
         // are we crouching or not?
-        
-        _crouching = Input.GetKey(KeyCode.LeftShift);
+        //_crouching = Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (_crouching)
+                _crouching = false;
+            else
+                _crouching = true;
+        }
         if (_wasCrouching)
         {
             if (!_crouching)

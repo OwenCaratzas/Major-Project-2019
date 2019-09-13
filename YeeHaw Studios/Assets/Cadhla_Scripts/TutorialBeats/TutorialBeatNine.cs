@@ -5,14 +5,18 @@ using UnityEngine;
 public class TutorialBeatNine : MonoBehaviour
 {
     Tutorial_Text displayBeat;
+    public Player player;
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Collide");
             GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
             displayBeat = obj.GetComponent<Tutorial_Text>();
+
+            Time.timeScale = 0.0f;
+            player.TurnOffMouse();
+
             displayBeat.TutorialBeatNine();
             StartCoroutine(EndTutorial());
         }
@@ -20,7 +24,12 @@ public class TutorialBeatNine : MonoBehaviour
 
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
+
+        Time.timeScale = 1f;
+        player.TurnOnMouse();
+        displayBeat.EndBeat();
+
         Destroy(gameObject);
     }
 }

@@ -73,7 +73,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8189437982835155335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.81999993, z: 0.14999962}
+  m_LocalPosition: {x: 0, y: 0.712, z: 0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8189437983402747654}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 2411875624567821269}
   - component: {fileID: 637183433688099848}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Cadhla_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,6 +388,7 @@ MonoBehaviour:
   suspicionRate: 0
   walkSuspicionRate: 0.4
   crouchSuspicionRate: 0.1
+  isGrounded: 0
   rechargeUp: {fileID: 0}
   Battery: {fileID: 0}
   interactRange: 5
