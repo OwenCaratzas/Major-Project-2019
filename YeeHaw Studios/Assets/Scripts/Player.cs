@@ -19,6 +19,13 @@ public class Player : MonoBehaviour
     [Tooltip("Walk speed multiplier")]
     public float walkSpeed;
 
+    // sprinting speed
+    /// <summary>
+    /// How fast the player sprints
+    /// </summary>
+    [Tooltip("Sprint speed multiplier")]
+    public float sprintSpeed;
+
     // when crouching, movement speed is dropped lower
     /// <summary>
     /// How fast the player crouches
@@ -33,12 +40,20 @@ public class Player : MonoBehaviour
     [Tooltip("The amount of upward force applied to the player")]
     public float jumpForce = 50.0f;
 
-    // controls what radius the audio collider will be on either walking or crouching
+    // controls what radius the audio collider will be on either walking, sprinting or crouching
+
     /// <summary>
     /// Audio radius for walking
     /// </summary>
     [Tooltip("The radius in which the AI will hear the player moving while walking")]
     public float walkAudioRadius;
+
+    /// <summary>
+    /// Audio radius for sprinting
+    /// </summary>
+    [Tooltip("The radius in which the AI will hear the player moving while sprinting")]
+    public float sprintAudioRadius;
+
     /// <summary>
     /// Audio radius for crouching
     /// </summary>
@@ -51,12 +66,20 @@ public class Player : MonoBehaviour
     // the rate in which the player is becoming suspicious
     public float suspicionRate;
 
-    // suspicionRate will change between these depending on if the player is walking or crouching
+    // suspicionRate will change between these depending on if the player is walking, sprinting or crouching
+
     /// <summary>
     /// Detection rate for walking
     /// </summary>
     [Tooltip("The rate in which the AI will detect the player moving while walking")]
     public float walkSuspicionRate;
+
+    /// <summary>
+    /// Detection rate for sprinting
+    /// </summary>
+    [Tooltip("The rate in which the AI will detect the player moving while sprinting")]
+    public float sprintSuspicionRate;
+
     /// <summary>
     /// Detection rate for crouching
     /// </summary>
@@ -97,7 +120,7 @@ public class Player : MonoBehaviour
 
     // how far the player can interact with interactable objects. It get's serialized so we can see the value change without having that public
     [SerializeField]
-    private float interactRange = 3;
+    private float _interactRange = 3;
 
     // rigidbody attached to the player's gameobject
     private Rigidbody _rb;
@@ -106,13 +129,30 @@ public class Player : MonoBehaviour
     public SphereCollider _col;
 
     // keep track of what time of movement the player is doing
+    [SerializeField]
     private string _movementType;
 
-
+    // crouch state of the previous frame
+    [SerializeField]
     private bool _wasCrouching;
-
+    [SerializeField]
     private bool _crouching;
+    [SerializeField]
+    private bool _sprinting;
+
+    /// <summary>
+    /// Should we crouch after sprinting
+    /// </summary>
+    private bool _sprintCrouching;
+
+    
     #endregion
+
+    public float InteractRange
+    {
+        get { return _interactRange; }
+        set { _interactRange = value; }
+    }
 
     //private Shader _objectShader;
 
@@ -127,6 +167,7 @@ public class Player : MonoBehaviour
         //_col = GetComponent<SphereCollider>();
         _rb = GetComponent<Rigidbody>();
         _speed = walkSpeed;
+        _movementType = "Walk";
     }
 
 
@@ -147,56 +188,87 @@ public class Player : MonoBehaviour
         }
 
         // are we crouching or not?
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             if (_crouching)
                 _crouching = false;
             else
                 _crouching = true;
         }
-        if (_wasCrouching)
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (!_crouching)
-            {
-                //GetComponent<CapsuleCollider>().height = 2;
-
-                Vector3 scale = GetComponent<Collider>().transform.localScale;
-                scale.y *= 2.0f;
-                GetComponent<Collider>().transform.localScale = scale;
-
-                _movementType = "Walk";
-                Debug.Log("Let go of shift");
-                // normal movement
-                _speed = walkSpeed;
-            }
+            if (_crouching)
+                _sprintCrouching = true;
+            _sprinting = true;
+            _crouching = false;
         }
         else
         {
-            if (_crouching)
+            //_crouching = !_crouching;
+            if (_sprintCrouching)
             {
-                //GetComponent<CapsuleCollider>().height = 1;
-
-                Vector3 scale = GetComponent<Collider>().transform.localScale;
-                scale.y *= 0.5f;
-                GetComponent<Collider>().transform.localScale = scale;
-
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, -transform.up, out hit, 3.0f))
-                {
-                    scale = hit.point;
-                    //scale = transform.position;
-                    scale.x = transform.position.x;
-                    scale.y += 0.1f;
-                    scale.z = transform.position.z;
-                    transform.position = scale;
-                }
-
-
-                //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
-                _movementType = "Crouch";
-                // crouch movement
-                _speed = crouchSpeed;
+                _sprintCrouching = false;
+                _crouching = true;
             }
+
+            _sprinting = false;
+        }
+
+        if (_sprinting)
+        {
+            _movementType = "Sprint";
+        }
+
+        // if the player WAS crouching, but no longer is crouching, make the player stand up and move to walking
+        if (_wasCrouching || !_sprinting)
+        {
+            if (!_crouching)
+            {
+                Vector3 scale = GetComponent<Collider>().transform.localScale;
+                scale.y = 1.0f;
+                GetComponent<Collider>().transform.localScale = scale;
+                GetComponent<CapsuleCollider>().height = 2;
+                //if (_sprinting)
+                //{
+                //    _movementType = "Sprint";
+                //}
+                //else
+                //{
+                    _movementType = "Walk";
+                    Debug.Log("Let go of shift");
+                    // normal movement
+                   
+                //}
+
+            }
+        }
+        if (_crouching)
+        {
+            //GetComponent<CapsuleCollider>().height = 1;
+
+            Vector3 scale = GetComponent<Collider>().transform.localScale;
+            scale.y = 0.5f;
+            GetComponent<Collider>().transform.localScale = scale;
+
+            //THIS EVENTUALLY NEEDS TO WORK PROPERLY
+            //RaycastHit hit;
+            //if (Physics.Raycast(transform.position, -transform.up, out hit, 3.0f))
+            //{
+            //    scale = hit.point;
+            //    //scale = transform.position;
+            //    scale.x = transform.position.x;
+            //    //if(scale.y )
+            //    scale.y += 0.1f;
+            //    scale.z = transform.position.z;
+            //    transform.position = scale;
+            //}
+
+
+            //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
+            _movementType = "Crouch";
+            // crouch movement
+            
         }
         _wasCrouching = _crouching;
 
@@ -213,14 +285,22 @@ public class Player : MonoBehaviour
             isMoving = true;
             switch (_movementType)
             {
+                case "Sprint":
+                    suspicionRate = sprintSuspicionRate;
+                    _col.radius = sprintAudioRadius;
+                    _speed = sprintSpeed;
+                    break;
+
                 case "Walk":
                     suspicionRate = walkSuspicionRate;
                     _col.radius = walkAudioRadius;
+                    _speed = walkSpeed;
                     break;
 
                 case "Crouch":
                     suspicionRate = crouchSuspicionRate;
                     _col.radius = crouchAudioRadius;
+                    _speed = crouchSpeed;
                     break;
 
                 default:
@@ -235,22 +315,22 @@ public class Player : MonoBehaviour
         }
 
         RaycastHit outlineHit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, interactRange))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, _interactRange))
         {
             //objectShader = outlineHit.transform.gameObject.GetComponent<Shader>
             //if(outlineHit.transform.)
         }
 
         if (gameObject.GetComponent<Item_Use>().itemReady)
-            interactRange = 10;
+            _interactRange = 10;
         else
-            interactRange = 5;
+            _interactRange = 5;
 
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactRange))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange))
             {
                 //if it was a button, activate it's script
                 if (hit.transform.tag == "Button")
