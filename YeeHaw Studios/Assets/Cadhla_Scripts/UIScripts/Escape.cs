@@ -7,9 +7,9 @@ public class Escape : MonoBehaviour
 {
     public GameObject safe;
 
-    public void EscapeNow()
+    public void OnTriggerEnter(Collider other)
     {
-        if (gameObject.tag == "Escape")
+        if (other.gameObject.tag == "Player")
         {
             if (safe.GetComponent<Safe_Script>().objectiveCompleted)
             {

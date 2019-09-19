@@ -11,21 +11,17 @@ public class Pressure_Plate : MonoBehaviour
 
     // Start is called before the first frame update
 
-
-    public void Start()
-    {
-    }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collide");
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            player = collision.gameObject.GetComponent<Player>();
+            player = other.gameObject.GetComponent<Player>();
 
             if (player.Speed == player.walkSpeed)
             {
-                if(alertGuard.PlayerTarget == null)
-                    alertGuard.PlayerTarget = collision.gameObject;
+                if (alertGuard.PlayerTarget == null)
+                    alertGuard.PlayerTarget = other.gameObject;
 
                 alertGuard.NewTarget(player.transform.position);
             }

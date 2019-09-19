@@ -36,7 +36,6 @@ public class Door_Control : MonoBehaviour
     {
         maxTrueBooleansNeeded = numButtons;
 
-        doorTimer = 20.0f;
 
         //find individual scripts
         buttonDownCheck = new Button_Check[buttonArr.Length];

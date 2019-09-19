@@ -25,7 +25,7 @@ public class FenceBehaviour : MonoBehaviour
     void PullTheLever()
     {
         Debug.Log("Pull The Lever");
-        Lever.transform.Rotate(0, 0, -90.0f, Space.Self);
+        Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
         fenceActive = false;
     }
 }
