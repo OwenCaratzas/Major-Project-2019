@@ -19,12 +19,16 @@ public class OutlineToggle : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < playerScript.InteractRange)
+        if (Vector3.Distance(transform.position, player.transform.position) <= playerScript.InteractRange)
         {
-            thisRend.sharedMaterial.SetFloat("Outline width", 0.25f);
+            thisRend.material.SetFloat("_Outline", 0.075f);
+            Debug.Log(thisRend.material.GetFloat("_Outline"));
             //outLineShader.id
         }
         else
-            thisRend.sharedMaterial.SetFloat("Outline width", 0);
+        {
+            thisRend.material.SetFloat("_Outline", 0.002f);
+            Debug.Log(thisRend.material.GetFloat("_Outline"));
+        }
     }
 }
