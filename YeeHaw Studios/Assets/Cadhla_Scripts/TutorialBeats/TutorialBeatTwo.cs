@@ -41,7 +41,9 @@ public class TutorialBeatTwo : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        GuardOne.GetComponent<NavMeshAgent>().acceleration = 4.0f;
+        //GuardOne.GetComponent<NavMeshAgent>().acceleration = 4.0f;
+        //GuardOne.GetComponent<Sentry>().DetectionAmount = 0;
+        GuardOne.GetComponent<Sentry>().beatTwoOver = true;
         player.TurnOnMouse();
         displayEnd.EndBeat();
 

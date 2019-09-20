@@ -13,7 +13,7 @@ public class Item_Use : MonoBehaviour
     public bool itemReady = false;
 
     public GameObject lightningBolt;
-    public GameObject Player;
+    public GameObject boltSpawn;
 
     public PowerBar powerBar;
     public float power = 1f;
@@ -37,7 +37,6 @@ public class Item_Use : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (power > 0)
@@ -107,7 +106,7 @@ public class Item_Use : MonoBehaviour
             {
                 itemInactive = true;
                 itemReady = false;
-                GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
+                GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
                 powerDrain = true;
                 Lightning();
                 //equipmentLimit--;
@@ -122,7 +121,7 @@ public class Item_Use : MonoBehaviour
             Debug.Log("Shocking!");
             itemInactive = true;
             itemReady = false;
-            GameObject go = Instantiate(lightningBolt, Player.transform.position, Player.transform.rotation);
+            GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
             powerDrain = true;
             //equipmentLimit--;
         }

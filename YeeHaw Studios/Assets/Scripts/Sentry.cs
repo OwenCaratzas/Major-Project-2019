@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Sentry : MonoBehaviour
 {
     #region Public Variables
-    
+    public float suspicionRate;
     /// <summary>
     /// List of transforms which will be the series of waypoints
     /// </summary>
@@ -28,6 +29,12 @@ public class Sentry : MonoBehaviour
     public float startPoint = -1.0f;
 
     /// <summary>
+    /// set animator controller for access
+    /// </summary>
+    [Tooltip("Animator Controller reference")]
+    public Animator m_robotAnimController;
+
+    /// <summary>
     /// Interpolation end value
     /// </summary>
     [Tooltip("Interpolation end value")]
@@ -38,6 +45,11 @@ public class Sentry : MonoBehaviour
     /// </summary>
     [Tooltip("The higher the multiplier, the shorter/faster the vision sweep")]
     public float interpolationMultiplier = 0.25f;
+
+    [Header("Band-aid fix, tick if it isn't the first guard")]
+    public bool beatTwoOver = false;
+
+    public GameObject captureScreen;
     #endregion
 
     #region Private Variables
@@ -141,55 +153,57 @@ public class Sentry : MonoBehaviour
         patrol->chase/search
         patrol can lead to both chase and search
         */
+        if (beatTwoOver)
+        {
+            // Swtich statement to control what behaviour is being used. Only one can be used at a time.
+            switch (_curBehaviour)
+            {
+                // Make sure the AI resumes patrolling between the points and slows down to normal
+                case _BEHAVIOURS.Patrol:
+                    PatrolBehaviour();
+                    break;
+                // if the AI has just been chasing the player and can no longer see them, look before resuming patrol
+                case _BEHAVIOURS.Search:
+                    SearchBehaviour();
+                    break;
+                // Chase code AND set values like AI speed and stuff correctly
+                case _BEHAVIOURS.Chase:
+                    DetectedBehaviour();
+                    break;
+                default:
+                    break;
+            }
 
-        // Swtich statement to control what behaviour is being used. Only one can be used at a time.
-        switch (_curBehaviour)
-        {
-            // Make sure the AI resumes patrolling between the points and slows down to normal
-            case _BEHAVIOURS.Patrol:
-                PatrolBehaviour();
-                break;
-            // if the AI has just been chasing the player and can no longer see them, look before resuming patrol
-            case _BEHAVIOURS.Search:
-                SearchBehaviour();
-                break;
-            // Chase code AND set values like AI speed and stuff correctly
-            case _BEHAVIOURS.Chase:
-                ChaseBehaviour();
-                break;
-            default:
-                break;
-        }
+            // decrease detection if the player is not being detected
+            if (!increaseDetection)
+            {
+                _detectionAmount -= MaxDetectionAmount * 0.0005f;
+                if (_detectionAmount < 0)
+                    _detectionAmount = 0;
+            }
 
-        // decrease detection if the player is not being detected
-        if (!increaseDetection)
-        {
-            _detectionAmount -= MaxDetectionAmount * 0.0005f;
-            if (_detectionAmount < 0)
-                _detectionAmount = 0;
-        }
+            //Debug.Log("detection amount: " + _detectionAmount);
+            if (_detectionAmount >= MaxDetectionAmount)
+            {
+                _foundPlayer = true;
+                _lastKnownPlayerPos = _player.transform.position;
+            }
+            else if (_detectionAmount <= 0)
+                _foundPlayer = false; //_curBehaviour = _BEHAVIOURS.Patrol;
 
-        //Debug.Log("detection amount: " + _detectionAmount);
-        if (_detectionAmount >= MaxDetectionAmount)
-        {
-            _foundPlayer = true;
-            _lastKnownPlayerPos = _player.transform.position;
-        }
-        else if (_detectionAmount <= 0)
-            _foundPlayer = false; //_curBehaviour = _BEHAVIOURS.Patrol;
+            if (_foundPlayer)
+            {
+                _curBehaviour = _BEHAVIOURS.Chase;
+                //Chase(_player.transform);
 
-        if (_foundPlayer)
-        {
-            _curBehaviour = _BEHAVIOURS.Chase;
-            //Chase(_player.transform);
-            
-        }
-        else if ((!_foundPlayer && _startSearch) || _startSearch)
-        {
-            //Patrol();
-            //_curBehaviour = _BEHAVIOURS.Patrol;
-            _curBehaviour = _BEHAVIOURS.Search;
-            //_agent.speed = 1.0f;
+            }
+            else if ((!_foundPlayer && _startSearch) || _startSearch)
+            {
+                //Patrol();
+                //_curBehaviour = _BEHAVIOURS.Patrol;
+                _curBehaviour = _BEHAVIOURS.Search;
+                //_agent.speed = 1.0f;
+            }
         }
     }
 
@@ -197,13 +211,17 @@ public class Sentry : MonoBehaviour
 
     void Patrol()
     {
+        // set patrol anim
+        m_robotAnimController.SetBool("Patrol", true);
+        m_robotAnimController.SetBool("Searching", false);
+
         if (Vector3.Distance(_destination, _currentTarget.position) > 1.0f)
         {
             //destination = target.position;
             _destination = _currentTarget.position;
             _agent.destination = _destination;
         }
-        else if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        else if (!_agent.pathPending && _agent.remainingDistance < 1)
         {
             if (_currentTarget != targetList[targetList.Length - 1])
             {
@@ -248,27 +266,51 @@ public class Sentry : MonoBehaviour
         Patrol();
     }
 
+
     void SearchBehaviour()
     {
+        m_robotAnimController.SetBool("Searching", true);
+        m_robotAnimController.SetBool("Chase", false);
+
         //"Main" for everything search related
         _spotlight.color = new Color(1, 0.64f, 0, 1);
         _agent.speed = 0.0f;
         // rotate for a few seconds then go back to patrol
-        StartCoroutine("SearchRotation");
+        StartCoroutine(SearchRotation());
         _curBehaviour = _BEHAVIOURS.Patrol;
         
     }
 
+
+    void DetectedBehaviour()
+    {
+        // set the detection animation and freeze the guard in place for a short period of time
+        _spotlight.color = Color.red;
+        _agent.speed = 0.0f;
+        m_robotAnimController.SetBool("Detected", true);
+        m_robotAnimController.SetBool("Patrol", false);
+        StartCoroutine(DetectionPlayThrough());
+    }
+
+    IEnumerator DetectionPlayThrough()
+    {
+        yield return new WaitForSeconds(1);
+        ChaseBehaviour();
+    }
+
     void ChaseBehaviour()
     {
+
         //"Main" for everything chase related
         _spotlight.color = Color.red;
+        m_robotAnimController.SetBool("Detected", false);
+        m_robotAnimController.SetBool("Chase", true);
         _agent.speed = 3.0f;
         //_lastKnownPlayerPos = _player.transform.position;
         //Chase(_player.transform);
         //_startSearch = true;
         NewTarget(_lastKnownPlayerPos);
-        Debug.Log("Chase: " + Vector3.Distance(transform.position, _lastKnownPlayerPos));
+        //Debug.Log("Chase: " + Vector3.Distance(transform.position, _lastKnownPlayerPos));
         //if (_agent.transform.position == _lastKnownPlayerPos)
         //    _curBehaviour = _BEHAVIOURS.Search;
     }
@@ -289,7 +331,7 @@ public class Sentry : MonoBehaviour
         }
         else
         {
-            if (other.transform.parent.tag == "Player")
+            if (other.transform.parent.tag == "Player" && beatTwoOver)
             {
                 //Debug.Log(other.transform.parent.tag);
                 // the parent of the collider is the player, so set _player to that gameobject
@@ -298,14 +340,18 @@ public class Sentry : MonoBehaviour
 
                 // get the playerScript from the player
                 Player playerScript = _player.GetComponent<Player>();
-
+                float distance = Vector3.Distance(other.transform.position, transform.position);
                 // if the player is currently moving
                 if (playerScript.isMoving)
                 {
                     // set this bool to true so that the detection doesn't yet decrease
                     increaseDetection = true;
+                    suspicionRate = playerScript.suspicionRate;
+                    //suspicionRate = (distance * 0.1f);
+                    suspicionRate = suspicionRate * 1 / distance;
+                    suspicionRate *= 2;
                     //start increasing by the modifier dependant on what pose the player is in
-                    _detectionAmount += playerScript.suspicionRate;
+                    _detectionAmount += suspicionRate;
 
                     // make sure the detection amount can't be higher than the max
                     if (_detectionAmount > MaxDetectionAmount)
@@ -367,8 +413,34 @@ public class Sentry : MonoBehaviour
         {
             _startSearch = true;
             _foundPlayer = false;
-            Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(_currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
+            //Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(_currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
             _curBehaviour = _BEHAVIOURS.Search;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != null)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                if (_curBehaviour == _BEHAVIOURS.Chase)
+                    StartCoroutine(LoseScreen());
+                else if (_curBehaviour == _BEHAVIOURS.Patrol || _curBehaviour == _BEHAVIOURS.Search)
+                    DetectionAmount = 100;
+            }
+        }
+    }
+
+    IEnumerator LoseScreen()
+    {
+        captureScreen.SetActive(true);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        SceneManager.LoadScene("LevelSelect");
+        Debug.Log("Didn't work");
     }
 }

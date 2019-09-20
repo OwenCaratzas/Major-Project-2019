@@ -86,7 +86,7 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        text.text = "W,A,S,D to move\n\nMouse to look around\n\nSHIFT to Crouch".ToString();
+        text.text = "W,A,S,D to move\n\nMouse to look around\n\nCTRL to Crouch".ToString();
 
         FadeIn = true;
         FadeOut = false;
@@ -130,7 +130,7 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        text.text = "Cameras lack noise sensors but will alert Guards".ToString();
+        text.text = "Cameras lack noise sensors but will alert Guards\n\nSHIFT to Sprint".ToString();
 
         startTimer = true;
 

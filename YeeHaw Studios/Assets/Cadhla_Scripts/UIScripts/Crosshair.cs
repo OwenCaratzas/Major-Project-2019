@@ -22,13 +22,17 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player) //standing check here
+        if (player.MovementType == "Walk" || player.MovementType == "Sprint") //standing check here
         {
             crosshair.sprite = standing;
+            crosshair.SetNativeSize();
+
         }
-        else if (player) //crouching check here
-            {
+        else if (player.MovementType == "Crouch") //crouching check here
+        {
             crosshair.sprite = crouching;
+            crosshair.SetNativeSize();
+
         }
     }
 }

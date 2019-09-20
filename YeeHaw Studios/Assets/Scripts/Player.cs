@@ -154,10 +154,16 @@ public class Player : MonoBehaviour
         set { _interactRange = value; }
     }
 
+    public string MovementType
+    {
+        get { return _movementType; }
+        set { _movementType = value; }
+    }
     //private Shader _objectShader;
 
     private void Start()
     {
+        //Time.timeScale = 1f;
         // lock cursor to the middle of the screen
         Cursor.lockState = CursorLockMode.Locked;
         // make the cursor invisible
