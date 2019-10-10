@@ -355,7 +355,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      firstFrame: 1
+      firstFrame: 2
       lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
@@ -376,16 +376,16 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.0075000008
-        functionName: PrintStep
+      - time: 0.45369565
+        functionName: PlayStep
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 8492809f1b5c00b4a826f3d52bef904a,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.47
-        functionName: PrintStep
+      - time: 0.98847824
+        functionName: PlayStep
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 8492809f1b5c00b4a826f3d52bef904a,
           type: 3}

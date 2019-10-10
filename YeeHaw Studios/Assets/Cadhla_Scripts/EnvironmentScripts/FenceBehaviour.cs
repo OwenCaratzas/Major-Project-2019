@@ -10,6 +10,9 @@ public class FenceBehaviour : MonoBehaviour
 
     private bool fenceActive = true;
 
+    public AudioClip leverClip;
+    public AudioSource leverAudio;
+
 
     void Update()
     {
@@ -26,6 +29,10 @@ public class FenceBehaviour : MonoBehaviour
     {
         Debug.Log("Pull The Lever");
         Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
+
+        leverAudio.Play();
+        leverAudio.clip = leverClip;
+
         fenceActive = false;
     }
 }

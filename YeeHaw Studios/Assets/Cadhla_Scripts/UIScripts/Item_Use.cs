@@ -26,6 +26,10 @@ public class Item_Use : MonoBehaviour
     public Sprite equipmentOff;
     public Sprite equipmentOn;
 
+    public AudioClip noChargeClip;
+    public AudioClip EMP_activate;
+    public AudioSource noChargeAudio;
+
     void Start()
     {
         //equipmentLimit = EconomyManager.rangeExtendCount;
@@ -55,6 +59,12 @@ public class Item_Use : MonoBehaviour
                     equipmentImage.sprite = equipmentOn;
                 }
             }
+
+            else if(power <= 0)
+            {
+                noChargeAudio.Play();
+                noChargeAudio.clip = noChargeClip;
+            }
         }
 
         //sprite check
@@ -75,6 +85,12 @@ public class Item_Use : MonoBehaviour
             {
                 power -= .01f;
                 powerBar.SetSize(power);
+
+                if (noChargeAudio.clip != EMP_activate)
+                {
+                    noChargeAudio.clip = EMP_activate;
+                    noChargeAudio.Play();
+                }
             }
         }
         if (power <= 0)

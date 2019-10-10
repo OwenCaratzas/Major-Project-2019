@@ -17,6 +17,9 @@ public class Button_Check : MonoBehaviour
 
     public Door_Control buttonBool;
 
+    public AudioClip buttonClip;
+    public AudioSource buttonAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,9 @@ public class Button_Check : MonoBehaviour
 
     public void ClickedOn()
     {
+        buttonAudio.Play();
+        buttonAudio.clip = buttonClip;
+
         buttonDown = true;
         buttonBool.AddToButtonBool();
         Debug.Log("IT WORKED");

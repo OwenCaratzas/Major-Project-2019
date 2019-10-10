@@ -10,6 +10,9 @@ public class Steam : MonoBehaviour
 
     public Animator m_robotAnimController;
 
+    public AudioSource whistleAudio;
+    public AudioClip whistle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,11 @@ public class Steam : MonoBehaviour
         {
             steamOne.SetActive(true);
             steamTwo.SetActive(true);
+
+            Debug.Log("PlayWhistle");
+
+            whistleAudio.Play();
+            whistleAudio.clip = whistle;
         }
         else
         {

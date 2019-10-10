@@ -29,13 +29,17 @@ public class Door_Control : MonoBehaviour
     public int numberOfTrueBooleans = 0;
     public int maxTrueBooleansNeeded;
 
+    public AudioSource doorTimerAudio;
+    public AudioClip doorTimerClip;
+
+    public AudioSource doorOpen;
+    public AudioClip doorOpenClip;
 
 
     // Start is called before the first frame update
     void Start()
     {
         maxTrueBooleansNeeded = numButtons;
-
 
         //find individual scripts
         buttonDownCheck = new Button_Check[buttonArr.Length];
@@ -54,12 +58,18 @@ public class Door_Control : MonoBehaviour
         //check when to start timer
         if (numberOfTrueBooleans == 1)
         {
+            if (doorTimerAudio.clip != doorTimerClip)
+            {
+                doorTimerAudio.clip = doorTimerClip;
+                doorTimerAudio.Play();
+            }
             doorTimer -= (1.0f * Time.deltaTime);
         }
 
         //check if timer has ended
         if (doorTimer <= 0)
         {
+            doorTimerAudio.clip = null;
             doorTimer = 20;
             numberOfTrueBooleans = 0;
             for (int i = 0; i < buttonDownCheck.Length; i++)
@@ -76,6 +86,11 @@ public class Door_Control : MonoBehaviour
            speed = (speed) + speedTime * Time.deltaTime;
            doorMesh.transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);
 
+            if (doorOpen.clip != doorOpenClip)
+            {
+                doorOpen.clip = doorOpenClip;
+                doorOpen.Play();
+            }
         }
     }
 

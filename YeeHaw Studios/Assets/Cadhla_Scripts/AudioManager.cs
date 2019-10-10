@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioClip guardFootstepClip;
+    public AudioSource footstepAudio;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -16,8 +18,10 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public void PrintStep (string s)
+    public void PlayStep ()
     {
-        Debug.Log("PrintStep: " + s + "called at:" + Time.time);
+        footstepAudio.Play();
+        footstepAudio.clip = guardFootstepClip;
     }
+
 }

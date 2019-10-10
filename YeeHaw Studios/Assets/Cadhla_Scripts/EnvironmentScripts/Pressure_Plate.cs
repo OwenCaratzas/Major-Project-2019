@@ -9,6 +9,9 @@ public class Pressure_Plate : MonoBehaviour
     public Sentry alertGuard;
     GameObject pressurePosition;
 
+    public AudioClip impactClip;
+    public AudioSource impactAudio;
+
     // Start is called before the first frame update
 
     private void OnTriggerEnter(Collider other)
@@ -18,8 +21,13 @@ public class Pressure_Plate : MonoBehaviour
         {
             player = other.gameObject.GetComponent<Player>();
 
-            if (player.Speed == player.walkSpeed)
+            if (player.Speed >= player.walkSpeed)
             {
+                if (impactAudio.clip != impactAudio)
+                {
+                    impactAudio.clip = impactClip;
+                    impactAudio.Play();
+                }
                 if (alertGuard.PlayerTarget == null)
                     alertGuard.PlayerTarget = other.gameObject;
 

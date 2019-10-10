@@ -18,6 +18,17 @@ TagManager:
   - Display
   - Canvas
   - Ground
+  - BreakerSphere
+  - Safe
+  - TutorialDisplay
+  - TextBox
+  - Fence
+  - Lever
+  - Battery
+  - FenceDetection
+  - PromptOne
+  - TutorialStills
+  - DoorTimer
   layers:
   - Default
   - TransparentFX

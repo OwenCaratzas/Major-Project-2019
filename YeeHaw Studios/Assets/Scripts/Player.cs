@@ -97,6 +97,12 @@ public class Player : MonoBehaviour
     // battery gameobject reference
     public GameObject Battery;
 
+    //setting player footstep audio
+    public AudioClip WalkingFootstepClip;
+    public AudioClip CrouchingFootstepClip;
+    public AudioClip RunningFootstepClip;
+    public AudioSource playerFootstepAudio;
+
     #endregion
 
     #region Private Variables
@@ -174,6 +180,8 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _speed = walkSpeed;
         _movementType = "Walk";
+
+
     }
 
 
@@ -295,18 +303,42 @@ public class Player : MonoBehaviour
                     suspicionRate = sprintSuspicionRate;
                     _col.radius = sprintAudioRadius;
                     _speed = sprintSpeed;
+
+                    //setting audio to play
+                    if (playerFootstepAudio.clip != RunningFootstepClip)
+                    {
+                        playerFootstepAudio.volume = 0.3f;
+                        playerFootstepAudio.clip = RunningFootstepClip;
+                        playerFootstepAudio.Play();
+                    }
                     break;
 
                 case "Walk":
                     suspicionRate = walkSuspicionRate;
                     _col.radius = walkAudioRadius;
                     _speed = walkSpeed;
+
+                    //setting audio to play
+                    if (playerFootstepAudio.clip != WalkingFootstepClip)
+                    {
+                        playerFootstepAudio.volume = 0.2f;
+                        playerFootstepAudio.clip = WalkingFootstepClip;
+                        playerFootstepAudio.Play();
+                    }
                     break;
 
                 case "Crouch":
                     suspicionRate = crouchSuspicionRate;
                     _col.radius = crouchAudioRadius;
                     _speed = crouchSpeed;
+
+                    //setting audio to play
+                    if (playerFootstepAudio.clip != CrouchingFootstepClip)
+                    {
+                        playerFootstepAudio.volume = 0.1f;
+                        playerFootstepAudio.clip = CrouchingFootstepClip;
+                        playerFootstepAudio.Play();
+                    }
                     break;
 
                 default:
@@ -318,6 +350,9 @@ public class Player : MonoBehaviour
         else
         {
             isMoving = false;
+
+            playerFootstepAudio.clip = null;
+            playerFootstepAudio.Pause();
         }
 
         RaycastHit outlineHit;
@@ -393,6 +428,8 @@ public class Player : MonoBehaviour
                 gameObject.GetComponent<Item_Use>().Lightning();
             }
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -294,7 +294,7 @@ public class Sentry : MonoBehaviour
 
     IEnumerator DetectionPlayThrough()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         ChaseBehaviour();
     }
 
