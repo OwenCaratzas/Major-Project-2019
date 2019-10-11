@@ -16,6 +16,7 @@ public class ViewCone : MonoBehaviour
     //public float directionMultiplier;
 
     public List<Vector3> _directionList = new List<Vector3>();
+    public List<RaycastHit> hitList = new List<RaycastHit>();
     public Vector3[] vertArray;
 
     // Start is called before the first frame update
@@ -85,7 +86,7 @@ public class ViewCone : MonoBehaviour
         tempVec = _meshScript.vertices[8];
         SetDirectionPoint(tempVec);
 
-        /*
+        
         //// inner diamond
         //tempVec = new Vector3(2.5f, 0, distance);
         //SetDirectionPoint(tempVec);
@@ -140,9 +141,9 @@ public class ViewCone : MonoBehaviour
         //tempVec = new Vector3(-0.9375f, -0.9375f, distance);
         //SetDirectionPoint(tempVec);
 
-        //vertical
-        //diagonal
-        */
+        ////vertical
+        ////diagonal
+        
     }
 
     void SetDirectionPoint(Vector3 direction)
@@ -153,19 +154,22 @@ public class ViewCone : MonoBehaviour
 
     void ViewConeCheck()
     {
+        hitList.Clear();
+
         RaycastHit hit;
         for (int i = 0; i < _directionList.Count; i++)
         {
             Debug.DrawRay(transform.position, _directionList[i], Color.cyan);
 
             if (Physics.Raycast(transform.position, _directionList[i], out hit, _meshScript.distance))
-                if (GetComponentInParent<Sentry>())
-                    _guardScript.SendMessage("SeePlayer", hit);
-                if (GetComponentInParent<SecurityCamera>())
-                    _securityCameraScript.SendMessage("SeePlayer", hit);
-
-
+                hitList.Add(hit);
         }
+
+        if (GetComponentInParent<Sentry>())
+            _guardScript.SendMessage("SeePlayer", hitList);
+        if (GetComponentInParent<SecurityCamera>())
+            _securityCameraScript.SendMessage("SeePlayer", hitList);
+
         _directionList.Clear();
         CreateDirectionList();
     }

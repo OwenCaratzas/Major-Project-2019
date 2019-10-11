@@ -15,6 +15,7 @@ public class SecurityCamera : MonoBehaviour
     private Sentry _guardScript;
     private Light _spotlight;
     private bool _alert;
+    private bool _playerNotFound;
 
     private void Start()
     {
@@ -46,23 +47,52 @@ public class SecurityCamera : MonoBehaviour
         }
     }
 
-    void SeePlayer(RaycastHit hit)
+    void SeePlayer(List<RaycastHit> hitList)
     {
-        if (hit.collider != null)
+        _playerNotFound = true;
+
+        if (hitList != null)
         {
-            if (hit.collider.tag == "Player")
+            for (int i = 0; i < hitList.Count-1; i++)
             {
-                _alert = true;
-                for (int i = 0; i < guardList.Capacity; i++)
+                //if (hitList[i].collider != null)
+                //{
+                if (hitList[i].collider.tag == "Player")
                 {
-                    _guardScript = guardList[i].GetComponent<Sentry>();
-                    _guardScript.SendMessage("SeePlayer", hit);
-                    //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+                    _playerNotFound = false;
+                    _alert = true;
+                    for (int j = 0; j < guardList.Capacity; j++)
+                    {
+                        _guardScript = guardList[i].GetComponent<Sentry>();
+                        _guardScript.SendMessage("SeePlayer", hitList);
+                        //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+                    }
                 }
+                else if (_playerNotFound)
+                    _alert = false;
+                //}
             }
-            else
-                _alert = false;
         }
+        else
+            _alert = false;
+
+        
+
+        //if (hit.collider != null)
+        //{
+        //    if (hit.collider.tag == "Player")
+        //    {
+        //        _alert = true;
+        //        for (int i = 0; i < guardList.Capacity; i++)
+        //        {
+        //            _guardScript = guardList[i].GetComponent<Sentry>();
+        //            _guardScript.SendMessage("SeePlayer", hit);
+        //            //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+        //        }
+        //    }
+        //    else
+        //        _alert = false;
+        //}
     }
 
 }

@@ -102,6 +102,8 @@ public class Sentry : MonoBehaviour
     private float _interpolationValue = 0.0f;
 
     private Light _spotlight;
+
+    bool _playerNotFound;
     #endregion
 
 
@@ -175,7 +177,7 @@ public class Sentry : MonoBehaviour
             }
 
             // decrease detection if the player is not being detected
-            if (!increaseDetection)
+            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase)
             {
                 _detectionAmount -= MaxDetectionAmount * 0.0005f;
                 if (_detectionAmount < 0)
@@ -186,7 +188,7 @@ public class Sentry : MonoBehaviour
             if (_detectionAmount >= MaxDetectionAmount)
             {
                 _foundPlayer = true;
-                _lastKnownPlayerPos = _player.transform.position;
+                //_lastKnownPlayerPos = _player.transform.position;
             }
             else if (_detectionAmount <= 0)
                 _foundPlayer = false; //_curBehaviour = _BEHAVIOURS.Patrol;
@@ -236,19 +238,42 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    void SeePlayer(RaycastHit hit)
+    void SeePlayer(List<RaycastHit> hitList)
     {
-        if (hit.collider.tag == "Player")
+
+        if (hitList != null)
         {
-            increaseDetection = true;
-            _player = hit.collider.gameObject;
-            _lastKnownPlayerPos = _player.transform.position;
-            _detectionAmount = MaxDetectionAmount;
+            _playerNotFound = true;
+
+            for (int i = 0; i < hitList.Count-1; i++)
+            {
+                if (hitList[i].collider.tag == "Player")
+                {
+                    _playerNotFound = false;
+                    increaseDetection = true;
+                    _player = hitList[i].collider.gameObject;
+                    _detectionAmount = MaxDetectionAmount;
+                    _lastKnownPlayerPos = _player.transform.position;
+                }
+                else if(_playerNotFound)
+                    increaseDetection = false;
+            }
         }
         else
-        {
             increaseDetection = false;
-        }
+
+        //if (hit.collider.tag == "Player")
+        //{
+        //    Debug.Log("IT SEES");
+        //    increaseDetection = true;
+        //    _player = hit.collider.gameObject;
+        //    _detectionAmount = MaxDetectionAmount;
+        //    _lastKnownPlayerPos = _player.transform.position;
+        //}
+        //else
+        //{
+        //    increaseDetection = false;
+        //}
     }
 
     void HeardSound()
@@ -356,6 +381,9 @@ public class Sentry : MonoBehaviour
                     // make sure the detection amount can't be higher than the max
                     if (_detectionAmount > MaxDetectionAmount)
                         _detectionAmount = MaxDetectionAmount;
+
+                    if(_detectionAmount >= MaxDetectionAmount)
+                        _lastKnownPlayerPos = _player.transform.position;
                 }
                 // otherwise if the player ISN'T moving
                 else if (!playerScript.isMoving)
