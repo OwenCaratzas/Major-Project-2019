@@ -160,9 +160,17 @@ public class ViewCone : MonoBehaviour
         for (int i = 0; i < _directionList.Count; i++)
         {
             Debug.DrawRay(transform.position, _directionList[i], Color.cyan);
-
-            if (Physics.Raycast(transform.position, _directionList[i], out hit, _meshScript.distance))
+            LayerMask someMask = ~0;
+            if (Physics.Raycast(transform.position, _directionList[i], out hit, _meshScript.distance, someMask, QueryTriggerInteraction.Ignore))
+            {
                 hitList.Add(hit);
+                if (hit.collider.tag == "Player")
+                {
+                    Debug.DrawRay(transform.position, _directionList[i], Color.red);
+                }
+            }
+
+
         }
 
         if (GetComponentInParent<Sentry>())

@@ -49,7 +49,10 @@ public class Sentry : MonoBehaviour
     [Header("Band-aid fix, tick if it isn't the first guard")]
     public bool beatTwoOver = false;
 
+    [Space]
     public GameObject captureScreen;
+
+    [Header("Serialized Private variables")]
     #endregion
 
     #region Private Variables
@@ -245,7 +248,7 @@ public class Sentry : MonoBehaviour
         {
             _playerNotFound = true;
 
-            for (int i = 0; i < hitList.Count-1; i++)
+            for (int i = 0; i < hitList.Count; i++)
             {
                 if (hitList[i].collider.tag == "Player")
                 {
@@ -298,7 +301,8 @@ public class Sentry : MonoBehaviour
         m_robotAnimController.SetBool("Chase", false);
 
         //"Main" for everything search related
-        _spotlight.color = new Color(1, 0.64f, 0, 1);
+        //_spotlight.color = new Color(1, 0.64f, 0, 1);
+        _spotlight.color = Color.blue;
         _agent.speed = 0.0f;
         // rotate for a few seconds then go back to patrol
         StartCoroutine(SearchRotation());
@@ -349,6 +353,8 @@ public class Sentry : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        ///*
+
         // if the trigger collider belonging to the player enters and stays within the AI's trigger collider
         if (other.transform.parent == null)
         {
@@ -393,6 +399,9 @@ public class Sentry : MonoBehaviour
                 }
             }
         }
+
+        //*/
+
     }
 
     private void OnTriggerExit(Collider other)

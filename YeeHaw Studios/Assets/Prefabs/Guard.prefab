@@ -51,7 +51,7 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0.03
     m_NormalBias: 0.4
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
@@ -225,7 +225,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608310379249769804}
-  m_LocalRotation: {x: -0, y: 0.7097873, z: -0, w: 0.7044161}
+  m_LocalRotation: {x: 0, y: 0.70978594, z: 0, w: 0.7044174}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -257,7 +257,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608310379249769804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 1
@@ -292,10 +292,10 @@ MonoBehaviour:
   - {fileID: 0}
   audioTarget: {fileID: 0}
   startPoint: -1
-  m_robotAnimController: {fileID: 0}
+  m_robotAnimController: {fileID: 5574686303614970606}
   endPoint: 1
   interpolationMultiplier: 0.25
-  beatTwoOver: 0
+  beatTwoOver: 1
   captureScreen: {fileID: 0}
   _detectionAmount: 0
   _startSearch: 0
@@ -428,6 +428,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2608310379249769794}
     m_Modifications:
+    - target: {fileID: 6838291527217756415, guid: 0fb896be5b23c1c4c84313aba1544e3b,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_Robot
+      objectReference: {fileID: 0}
     - target: {fileID: 6838291527218177055, guid: 0fb896be5b23c1c4c84313aba1544e3b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,10 +488,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6838291527217756415, guid: 0fb896be5b23c1c4c84313aba1544e3b,
+    - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
         type: 3}
-      propertyPath: m_Name
-      value: SM_Robot
+      propertyPath: m_Volume
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
         type: 3}
@@ -498,34 +503,9 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 1.6
       objectReference: {fileID: 0}
-    - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
-        type: 3}
-      propertyPath: rolloffMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
-        type: 3}
-      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
-        type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459213857277824624, guid: 0fb896be5b23c1c4c84313aba1544e3b,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 8908751691311826395, guid: 0fb896be5b23c1c4c84313aba1544e3b,
         type: 3}
       propertyPath: footstepAudio
-      value: 
-      objectReference: {fileID: 3574696713803673227}
-    - target: {fileID: 8908751691311826395, guid: 0fb896be5b23c1c4c84313aba1544e3b,
-        type: 3}
-      propertyPath: whistleAudio
       value: 
       objectReference: {fileID: 3574696713803673227}
     m_RemovedComponents: []

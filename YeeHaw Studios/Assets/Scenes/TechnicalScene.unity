@@ -499,7 +499,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -3145,6 +3145,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3120921799025837776, guid: 53f8c06b048a9a8448602d5670389fc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2191013260638017852, guid: 53f8c06b048a9a8448602d5670389fc3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3253,7 +3258,7 @@ PrefabInstance:
     - target: {fileID: 3585769030091817669, guid: 53f8c06b048a9a8448602d5670389fc3,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7820617992733143590, guid: 53f8c06b048a9a8448602d5670389fc3,
         type: 3}
@@ -3292,7 +3297,7 @@ PrefabInstance:
     - target: {fileID: 6502344507054881168, guid: 53f8c06b048a9a8448602d5670389fc3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2891724523610045491, guid: 53f8c06b048a9a8448602d5670389fc3,
         type: 3}
@@ -4310,6 +4315,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 5659587572301630297, guid: ca1a3abf4c82a4e47872d661dcc78091,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5659587572301630276, guid: ca1a3abf4c82a4e47872d661dcc78091,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5079,11 +5089,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608310379249769805, guid: d290e853922c20945b1e9e70c1b0e7e2,
         type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1865967944}
-    - target: {fileID: 2608310379249769805, guid: d290e853922c20945b1e9e70c1b0e7e2,
-        type: 3}
       propertyPath: targetList.Array.data[0]
       value: 
       objectReference: {fileID: 1865967944}
@@ -5102,22 +5107,7 @@ PrefabInstance:
       propertyPath: targetList.Array.data[3]
       value: 
       objectReference: {fileID: 623868508}
-    - target: {fileID: 2608310379249769805, guid: d290e853922c20945b1e9e70c1b0e7e2,
-        type: 3}
-      propertyPath: _curBehaviour
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 866066648318626235, guid: d290e853922c20945b1e9e70c1b0e7e2,
-        type: 3}
-      propertyPath: m_Shadows.m_Bias
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 866066648318626235, guid: d290e853922c20945b1e9e70c1b0e7e2,
-        type: 3}
-      propertyPath: m_DrawHalo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2608310379249769795, guid: d290e853922c20945b1e9e70c1b0e7e2,
+    - target: {fileID: 2608310379249769806, guid: d290e853922c20945b1e9e70c1b0e7e2,
         type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5426,7 +5416,7 @@ PrefabInstance:
     - target: {fileID: 3935564690541161138, guid: 41ac18b4f75a01e42b6c81aec154cea3,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41ac18b4f75a01e42b6c81aec154cea3, type: 3}

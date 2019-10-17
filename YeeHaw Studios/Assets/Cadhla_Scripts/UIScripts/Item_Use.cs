@@ -115,19 +115,19 @@ public class Item_Use : MonoBehaviour
 
 
 
-        //testing mechanic
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (itemReady == true && power == 1f)
-            {
-                itemInactive = true;
-                itemReady = false;
-                GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
-                powerDrain = true;
-                Lightning();
-                //equipmentLimit--;
-            }
-        }
+        ////testing mechanic
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    if (itemReady == true && power == 1f)
+        //    {
+        //        itemInactive = true;
+        //        itemReady = false;
+        //        GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
+        //        powerDrain = true;
+        //        Lightning();
+        //        //equipmentLimit--;
+        //    }
+        //}
     }
 
     public void Lightning()

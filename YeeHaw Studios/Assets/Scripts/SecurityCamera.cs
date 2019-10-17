@@ -12,6 +12,7 @@ public class SecurityCamera : MonoBehaviour
     private float _interpolationValue = 0.0f;
 
     public List<GameObject> guardList;
+    public GameObject[] guardArr;
     private Sentry _guardScript;
     private Light _spotlight;
     private bool _alert;
@@ -53,7 +54,7 @@ public class SecurityCamera : MonoBehaviour
 
         if (hitList != null)
         {
-            for (int i = 0; i < hitList.Count-1; i++)
+            for (int i = 0; i < hitList.Count; i++)
             {
                 //if (hitList[i].collider != null)
                 //{
@@ -61,7 +62,7 @@ public class SecurityCamera : MonoBehaviour
                 {
                     _playerNotFound = false;
                     _alert = true;
-                    for (int j = 0; j < guardList.Capacity; j++)
+                    for (int j = 0; j < guardList.Count; j++)
                     {
                         _guardScript = guardList[i].GetComponent<Sentry>();
                         _guardScript.SendMessage("SeePlayer", hitList);
