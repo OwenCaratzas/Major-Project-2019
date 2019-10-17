@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Escape : MonoBehaviour
 {
     public GameObject safe;
+    public Player mouseControl;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -13,6 +14,8 @@ public class Escape : MonoBehaviour
         {
             if (safe.GetComponent<Safe_Script>().objectiveCompleted)
             {
+                mouseControl.TurnOnMouse();
+                Time.timeScale = 1f;
                 SceneManager.LoadScene("LevelSelect");
             }
         }

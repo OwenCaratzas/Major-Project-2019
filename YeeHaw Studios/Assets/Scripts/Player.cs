@@ -181,6 +181,8 @@ public class Player : MonoBehaviour
         _speed = walkSpeed;
         _movementType = "Walk";
 
+        TurnOnMouse();
+
 
     }
 
@@ -351,6 +353,7 @@ public class Player : MonoBehaviour
         {
             isMoving = false;
 
+            suspicionRate = 0f;
             playerFootstepAudio.clip = null;
             playerFootstepAudio.Pause();
         }
@@ -429,6 +432,11 @@ public class Player : MonoBehaviour
             }
         }
 
+        crouchSuspicionRate = Random.Range(0.04f, 0.06f);
+        walkSuspicionRate = Random.Range(0.18f, 0.22f);
+        sprintSuspicionRate = Random.Range(0.37f, 0.43f);
+
+
 
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -465,7 +473,7 @@ public class Player : MonoBehaviour
     {
         // lock cursor to the middle of the screen
         Cursor.lockState = CursorLockMode.Confined;
-        // make the cursor invisible
+        // make the cursor visible
         Cursor.visible = true;
     }
 

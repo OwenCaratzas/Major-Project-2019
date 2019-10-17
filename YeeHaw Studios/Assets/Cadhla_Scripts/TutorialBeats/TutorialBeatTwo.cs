@@ -27,7 +27,7 @@ public class TutorialBeatTwo : MonoBehaviour
             displayBeat = obj.GetComponent<Tutorial_Text>();
             displayBeat.TutorialBeatTwo();
 
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             player.TurnOffMouse();
 
             StartCoroutine(EndTutorial());
@@ -45,6 +45,7 @@ public class TutorialBeatTwo : MonoBehaviour
         //GuardOne.GetComponent<Sentry>().DetectionAmount = 0;
         GuardOne.GetComponent<Sentry>().beatTwoOver = true;
         player.TurnOnMouse();
+
         displayEnd.EndBeat();
 
         Destroy(gameObject);

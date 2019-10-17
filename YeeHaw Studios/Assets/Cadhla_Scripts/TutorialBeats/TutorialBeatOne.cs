@@ -10,7 +10,6 @@ public class TutorialBeatOne : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Collide");
             GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
             displayBeat = obj.GetComponent<Tutorial_Text>();
             displayBeat.TutorialBeatOne();
