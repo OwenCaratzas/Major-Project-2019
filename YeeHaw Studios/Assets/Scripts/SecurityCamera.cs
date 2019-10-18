@@ -64,7 +64,7 @@ public class SecurityCamera : MonoBehaviour
                     _alert = true;
                     for (int j = 0; j < guardList.Count; j++)
                     {
-                        _guardScript = guardList[i].GetComponent<Sentry>();
+                        _guardScript = guardList[j].GetComponent<Sentry>();
                         _guardScript.SendMessage("SeePlayer", hitList);
                         //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
                     }
