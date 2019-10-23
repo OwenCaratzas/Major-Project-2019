@@ -5,32 +5,39 @@ using UnityEngine.UI;
 
 public class Tutorial_Text : MonoBehaviour
 {
-    public Text text;
-    public Text textTwo;
-    public Text textThree;
-
-    public Image textBox;
     public Image stillDisplay;
+    public Image playDisplay;
 
-    public Image TutorialStillOne;
-    public Image TutorialStillTwo;
-    public GameObject TutorialStillThree;
-    public GameObject TutorialStillFour;
-    public GameObject TutorialStillFive;
+    public Sprite BeatOne;
+    public Sprite BeatTwo;
+    public Sprite BeatThree;
+    public Sprite BeatFour;
+    public Sprite BeatFive;
+    public Sprite BeatSix;
+    public Sprite BeatSeven;
+    public Sprite BeatEight;
+    public Sprite BeatNine;
 
     private bool T_2_B;
 
 
-    public Image GameUI;
+    public GameObject GameUI;
 
-    public float WaitTime;
-    public float FadeInTime;
-    public float FadeOutTime;
+    private float WaitTime;
+    private float FadeInTime;
+    private float FadeOutTime;
+
+    private float FadeInStillTime;
+    private float FadeOutStillTime;
+
 
     private Coroutine currentCoroutine = null;
 
-    private bool FadeIn;
-    private bool FadeOut;
+    private bool FadeInStill;
+    private bool FadeOutStill;
+
+    private bool FadeInPlay;
+    private bool FadeOutPlay;
 
     private bool startTimer;
 
@@ -45,54 +52,67 @@ public class Tutorial_Text : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textBox = GameObject.FindGameObjectWithTag("TextBox").GetComponent<Image>();
-        textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0f);
+        stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, 0f);
+        playDisplay.color = new Color(playDisplay.color.r, playDisplay.color.g, playDisplay.color.b, 0f);
 
-        FadeIn = false;
-        FadeOut = false;
+        FadeInPlay = false;
+        FadeOutPlay = false;
+
+        FadeInStill = false;
+        FadeOutStill = false;
 
         startTimer = false;
-        WaitTime = 5.5f;
-
-        //promptBeatOne = GameObject.FindGameObjectWithTag("PromptOne");
+        WaitTime = 4f;
 
     }
 
     public void Update()
     {
        
-        if (FadeIn == true)
+        if (FadeInPlay == true)
         {
             if (FadeInTime <= 1)
             {
-                FadeInTime = FadeInTime + (1f * Time.deltaTime);
+                FadeInTime = FadeInTime + (1f * Time.unscaledDeltaTime);
             }
 
-            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, FadeInTime);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, FadeInTime);
-
-            if (T_2_B == true)
-            {
-                TutorialStillOne.color = new Color(text.color.r, text.color.g, text.color.b, FadeInTime);
-                GameUI.color = new Color(text.color.r, text.color.g, text.color.b, 0f);
-            }
+           playDisplay.color = new Color(playDisplay.color.r, playDisplay.color.g, playDisplay.color.b, FadeInTime);
         }
 
         
-        if (FadeOut == true)
+        if (FadeOutPlay == true)
         {
             if (FadeOutTime >= 0)
             {
-                FadeOutTime = FadeOutTime - (1f * Time.deltaTime);
+                FadeOutTime = FadeOutTime - (1f * Time.unscaledDeltaTime);
             }
-            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, FadeOutTime);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, FadeOutTime);
+            playDisplay.color = new Color(playDisplay.color.r, playDisplay.color.g, playDisplay.color.b, FadeOutTime);
         }
 
 
+        if (FadeInStill == true)
+        {
+            if (FadeInStillTime <= 1)
+            {
+                FadeInStillTime = FadeInStillTime + (1f * Time.unscaledDeltaTime);
+            }
+
+            stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeInStillTime);
+        }
+
+
+        if (FadeOutStill == true)
+        {
+            if (FadeOutStillTime >= 0)
+            {
+                FadeOutStillTime = FadeOutStillTime - (1f * Time.unscaledDeltaTime);
+            }
+            stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeOutStillTime);
+        }
+
         if (startTimer == true)
         {
-            WaitTime -= 1 * Time.deltaTime;
+            WaitTime -= 1 * Time.unscaledDeltaTime;
             if (WaitTime <= 0)
             {
                 EndBeat();
@@ -105,10 +125,12 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        text.text = "W,A,S,D to move\n\nMouse to look around\n\nCTRL to Crouch".ToString();
+        playDisplay.sprite = BeatOne;
+        stillDisplay.sprite = null;
 
-        FadeIn = true;
-        FadeOut = false;
+        FadeInPlay = true;
+        FadeOutPlay = false;
+
         startTimer = true;
     }
 
@@ -116,120 +138,133 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        FadeIn = true;
-        FadeOut = false;
+        FadeInStill = true;
+        FadeOutStill = false;
 
-        textTwo.text = "Stay out of the Guards Spotlights\n\n".ToString();
-        textThree.text = "If spotted Guards will chase you down and attempt to capture you.".ToString();
+        GameUI.SetActive(false);
+
+        startTimer = true;
+
+        stillDisplay.sprite = BeatTwo;
+        playDisplay.sprite = null;
     }
     public void TutorialBeatThree()
     {
         FadeInTime = 0f;
 
-        text.text = "Pressure Plates make lots of sound so crouch to avoid activating".ToString();
+        playDisplay.sprite = BeatThree;
+        stillDisplay.sprite = null;
 
-        FadeIn = true;
-        FadeOut = false;
+        FadeInPlay = true;
+        FadeOutPlay = false;
+
+        GameUI.SetActive(false);
+
         startTimer = true;
     }
     public void TutorialBeatFour()
     {
-        FadeIn = false;
-        FadeOut = true;
+        FadeInTime = 0f;
 
-        textTwo.text = "Electric Fences will stun you".ToString();
-        textThree.text = "Wait for a Guard to approach or find the Power Lever to deactivate\n\nLeft - Click to interactive with the Power Lever".ToString();
+        FadeInStill = false;
+        FadeOutStill = true;
 
-        //TutorialStillTwo.SetActive(true);
-        //GameUI.SetActive(false);
+        GameUI.SetActive(false);
 
+        startTimer = true;
+
+        stillDisplay.sprite = BeatFour;
+        playDisplay.sprite = null;
     }
     public void TutorialBeatFive()
     {
         FadeInTime = 0f;
 
-        text.text = "Cameras lack noise sensors but will alert Guards\n\nSHIFT to Sprint".ToString();
+        playDisplay.sprite = BeatFive;
+        stillDisplay.sprite = null;
 
         startTimer = true;
 
-        FadeIn = true;
-        FadeOut = false;
+        FadeInPlay = true;
+        FadeOutPlay = false;
     }
     public void TutorialBeatSix()
     {
         FadeInTime = 0f;
 
-        text.text = "Find the two buttons in the carriage to open Security Doors, use Left - Click to activate them\n\nBe quick, the buttons reset after a short time".ToString();
+        playDisplay.sprite = BeatSix;
+        stillDisplay.sprite = null;
 
         startTimer = true;
 
-        FadeIn = true;
-        FadeOut = false;
+        FadeInPlay = true;
+        FadeOutPlay = false;
     }
     public void TutorialBeatSeven()
     {
-        FadeIn = false;
-        FadeOut = true;
+        FadeInTime = 0f;
 
-        textTwo.text = "Trip the breakers on the Control Panel to retract Fences".ToString();
-        textThree.text = "Left-Click the Breakers when the Power Surge passes through".ToString();
+        FadeInPlay = false;
+        FadeOutPlay = true;
 
-        TutorialStillFour.SetActive(true);
-        //GameUI.SetActive(false);
+        startTimer = true;
+
+        playDisplay.sprite = BeatSeven;
+        stillDisplay.sprite = null;
     }
 
     public void TutorialBeatEight()
     {
-        FadeIn = false;
-        FadeOut = true;
+        FadeInTime = 0f;
 
-        textTwo.text = "Find the safe and steal the goods to complete the heist".ToString();
+        FadeInStill = false;
+        FadeOutStill = true;
 
-        TutorialStillThree.SetActive(true);
-       // GameUI.SetActive(false);
+        GameUI.SetActive(false);
+
+        startTimer = true;
+
+        stillDisplay.sprite = BeatEight;
+        playDisplay.sprite = null;
     }
 
     public void TutorialBeatNine()
     {
-        FadeIn = false;
-        FadeOut = true;
+        FadeInTime = 0f;
 
-        textTwo.text = "The ElectroMagnet can be used to interact with Buttons and Levers at a distance".ToString();
-        textThree.text = "Press Q to active and click when aiming at them".ToString();
+        FadeInPlay = false;
+        FadeOutPlay = true;
 
-        TutorialStillFive.SetActive(true);
-        //GameUI.SetActive(false);
+        startTimer = true;
+
+        playDisplay.sprite = BeatNine;
+        stillDisplay.sprite = null;
     }
-       
+
     public void EndBeat()
     {
-        
-        text.text = "";
-        textTwo.text = "";
-        textThree.text = "";
-
         player.TurnOffMouse();
         player.walkSpeed = 0.05f;
 
-        //TutorialStillOne.SetActive(false);
-        //TutorialStillTwo.SetActive(false);
-        TutorialStillThree.SetActive(false);
-        TutorialStillFour.SetActive(false);
-        TutorialStillFive.SetActive(false);
-
         FadeOutTime = FadeInTime;
 
-        FadeIn = false;
-        FadeOut = true;
+        GameUI.SetActive(true);
+
+        if (FadeInPlay == true)
+        {
+            FadeInPlay = false;
+            FadeOutPlay = true;
+        }
+
+        if (FadeInStill == true)
+        {
+            FadeInStill = false;
+            FadeOutStill = true;
+        }
 
         startTimer = false;
-        WaitTime = 8;
+        WaitTime = 4;
 
         Time.timeScale = 1f;
-
-       // GameUI.SetActive(true);
-
-        
-        //textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0f);
     }
 }

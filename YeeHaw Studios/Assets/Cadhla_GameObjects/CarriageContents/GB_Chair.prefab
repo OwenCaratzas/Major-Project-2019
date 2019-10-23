@@ -71,6 +71,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Chair
       objectReference: {fileID: 0}
+    - target: {fileID: 1440519062365916122, guid: c6b460ecdfaed7f4bac26ab9c0ca9976,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1440519062365427706, guid: c6b460ecdfaed7f4bac26ab9c0ca9976,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,8 +10,6 @@ public class TutorialBeatTwo : MonoBehaviour
     public GameObject GuardOne;
     public Player player;
 
-    public Tutorial_Text displayEnd;
-
 
     private void Start()
     {
@@ -27,7 +25,7 @@ public class TutorialBeatTwo : MonoBehaviour
             displayBeat = obj.GetComponent<Tutorial_Text>();
             displayBeat.TutorialBeatTwo();
 
-            //Time.timeScale = 0f;
+            Time.timeScale = 0f;
             player.TurnOffMouse();
 
             StartCoroutine(EndTutorial());
@@ -37,7 +35,7 @@ public class TutorialBeatTwo : MonoBehaviour
 
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSecondsRealtime(6);
+        yield return new WaitForSecondsRealtime(3);
 
         Time.timeScale = 1f;
 
@@ -46,7 +44,7 @@ public class TutorialBeatTwo : MonoBehaviour
         GuardOne.GetComponent<Sentry>().beatTwoOver = true;
         player.TurnOnMouse();
 
-        displayEnd.EndBeat();
+        displayBeat.EndBeat();
 
         Destroy(gameObject);
     }
