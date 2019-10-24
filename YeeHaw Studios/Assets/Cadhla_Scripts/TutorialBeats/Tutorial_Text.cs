@@ -166,15 +166,15 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
+        stillDisplay.sprite = BeatFour;
+        playDisplay.sprite = null;
+
         FadeInStill = false;
         FadeOutStill = true;
 
         GameUI.SetActive(false);
 
         startTimer = true;
-
-        stillDisplay.sprite = BeatFour;
-        playDisplay.sprite = null;
     }
     public void TutorialBeatFive()
     {
