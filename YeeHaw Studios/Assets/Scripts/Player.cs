@@ -103,6 +103,12 @@ public class Player : MonoBehaviour
     public AudioClip RunningFootstepClip;
     public AudioSource playerFootstepAudio;
 
+    /// <summary>
+    /// set animator controller for access
+    /// </summary>
+    [Tooltip("Animator Controller reference")]
+    public Animator HandsAnim;
+
     #endregion
 
     #region Private Variables
@@ -180,6 +186,11 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _speed = walkSpeed;
         _movementType = "Walk";
+
+        HandsAnim.SetBool("Idle", true);
+        HandsAnim.SetBool("Crouching", false);
+        HandsAnim.SetBool("Walking", false);
+        HandsAnim.SetBool("Running", false);
 
         TurnOnMouse();
 
@@ -310,6 +321,10 @@ public class Player : MonoBehaviour
                     suspicionRate = sprintSuspicionRate;
                     _col.radius = sprintAudioRadius;
                     _speed = sprintSpeed;
+                    HandsAnim.SetBool("Running", true);
+                    HandsAnim.SetBool("Walking", false);
+                    HandsAnim.SetBool("Crouching", false);
+                    HandsAnim.SetBool("Idle", false);
 
                     //setting audio to play
                     if (playerFootstepAudio.clip != RunningFootstepClip)
@@ -324,6 +339,10 @@ public class Player : MonoBehaviour
                     suspicionRate = walkSuspicionRate;
                     _col.radius = walkAudioRadius;
                     _speed = walkSpeed;
+                    HandsAnim.SetBool("Walking", true);
+                    HandsAnim.SetBool("Running", false);
+                    HandsAnim.SetBool("Crouching", false);
+                    HandsAnim.SetBool("Idle", false);
 
                     //setting audio to play
                     if (playerFootstepAudio.clip != WalkingFootstepClip)
@@ -338,6 +357,11 @@ public class Player : MonoBehaviour
                     suspicionRate = crouchSuspicionRate;
                     _col.radius = crouchAudioRadius;
                     _speed = crouchSpeed;
+
+                    HandsAnim.SetBool("Crouching", true);
+                    HandsAnim.SetBool("Running", false);
+                    HandsAnim.SetBool("Walking", false);
+                    HandsAnim.SetBool("Idle", false);
 
                     //setting audio to play
                     if (playerFootstepAudio.clip != CrouchingFootstepClip)
@@ -361,6 +385,11 @@ public class Player : MonoBehaviour
             suspicionRate = 0f;
             playerFootstepAudio.clip = null;
             playerFootstepAudio.Pause();
+
+            HandsAnim.SetBool("Idle", true);
+            HandsAnim.SetBool("Running", false);
+            HandsAnim.SetBool("Walking", false);
+            HandsAnim.SetBool("Crouching", false);
         }
 
         RaycastHit outlineHit;

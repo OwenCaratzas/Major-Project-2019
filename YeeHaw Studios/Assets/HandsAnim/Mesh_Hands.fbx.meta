@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: a943ed65243ec8c4cbab1103fceb7cbc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: GEO_hands
+    100002: J_L_elbow
+    100004: J_L_Finger_Controller
+    100006: J_L_index_1
+    100008: J_L_index_2
+    100010: J_L_index_3
+    100012: J_L_index_4
+    100014: J_L_middle_1
+    100016: J_L_middle_2
+    100018: J_L_middle_3
+    100020: J_L_middle_4
+    100022: J_L_pinky_1
+    100024: J_L_pinky_2
+    100026: J_L_pinky_3
+    100028: J_L_pinky_4
+    100030: J_L_ring_1
+    100032: J_L_ring_2
+    100034: J_L_ring_3
+    100036: J_L_ring_4
+    100038: J_L_shoulder
+    100040: J_L_thumb_1
+    100042: J_L_thumb_2
+    100044: J_L_thumb_3
+    100046: J_L_thumb_4
+    100048: J_R_elbow
+    100050: J_R_Finger_Controller
+    100052: J_R_index_1
+    100054: J_R_index_2
+    100056: J_R_index_3
+    100058: J_R_index_4
+    100060: J_R_middle_1
+    100062: J_R_middle_2
+    100064: J_R_middle_3
+    100066: J_R_middle_4
+    100068: J_R_pinky_1
+    100070: J_R_pinky_2
+    100072: J_R_pinky_3
+    100074: J_R_pinky_4
+    100076: J_R_ring_1
+    100078: J_R_ring_2
+    100080: J_R_ring_3
+    100082: J_R_ring_4
+    100084: J_R_shoulder
+    100086: J_R_thumb_1
+    100088: J_R_thumb_2
+    100090: J_R_thumb_3
+    100092: J_R_thumb_4
+    100094: J_root
+    100096: //RootNode
+    400000: GEO_hands
+    400002: J_L_elbow
+    400004: J_L_Finger_Controller
+    400006: J_L_index_1
+    400008: J_L_index_2
+    400010: J_L_index_3
+    400012: J_L_index_4
+    400014: J_L_middle_1
+    400016: J_L_middle_2
+    400018: J_L_middle_3
+    400020: J_L_middle_4
+    400022: J_L_pinky_1
+    400024: J_L_pinky_2
+    400026: J_L_pinky_3
+    400028: J_L_pinky_4
+    400030: J_L_ring_1
+    400032: J_L_ring_2
+    400034: J_L_ring_3
+    400036: J_L_ring_4
+    400038: J_L_shoulder
+    400040: J_L_thumb_1
+    400042: J_L_thumb_2
+    400044: J_L_thumb_3
+    400046: J_L_thumb_4
+    400048: J_R_elbow
+    400050: J_R_Finger_Controller
+    400052: J_R_index_1
+    400054: J_R_index_2
+    400056: J_R_index_3
+    400058: J_R_index_4
+    400060: J_R_middle_1
+    400062: J_R_middle_2
+    400064: J_R_middle_3
+    400066: J_R_middle_4
+    400068: J_R_pinky_1
+    400070: J_R_pinky_2
+    400072: J_R_pinky_3
+    400074: J_R_pinky_4
+    400076: J_R_ring_1
+    400078: J_R_ring_2
+    400080: J_R_ring_3
+    400082: J_R_ring_4
+    400084: J_R_shoulder
+    400086: J_R_thumb_1
+    400088: J_R_thumb_2
+    400090: J_R_thumb_3
+    400092: J_R_thumb_4
+    400094: J_root
+    400096: //RootNode
+    2100000: TXT_Gloves
+    2100002: TXT_Skin
+    2100004: TXT_Steel
+    4300000: GEO_hands
+    9500000: //RootNode
+    13700000: GEO_hands
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.2
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.008
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
