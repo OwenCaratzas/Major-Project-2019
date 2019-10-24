@@ -242,8 +242,8 @@ public class Player : MonoBehaviour
             if (!_crouching)
             {
                 Vector3 scale = GetComponent<Collider>().transform.localScale;
-                scale.y = 1.0f;
-                GetComponent<Collider>().transform.localScale = scale;
+                //scale.y = 1.0f;
+                //GetComponent<Collider>().transform.localScale = scale;
                 GetComponent<CapsuleCollider>().height = 2;
                 //if (_sprinting)
                 //{
@@ -252,7 +252,6 @@ public class Player : MonoBehaviour
                 //else
                 //{
                     _movementType = "Walk";
-                    Debug.Log("Let go of shift");
                     // normal movement
                    
                 //}
@@ -261,11 +260,17 @@ public class Player : MonoBehaviour
         }
         if (_crouching)
         {
-            //GetComponent<CapsuleCollider>().height = 1;
+            GetComponent<CapsuleCollider>().height = 0.5f;
 
-            Vector3 scale = GetComponent<Collider>().transform.localScale;
-            scale.y = 0.5f;
-            GetComponent<Collider>().transform.localScale = scale;
+
+
+            //may need this
+
+            //Vector3 scale = GetComponent<Collider>().transform.localScale;
+            //scale.y = 0.5f;
+            //GetComponent<Collider>().transform.localScale = scale;
+
+
 
             //THIS EVENTUALLY NEEDS TO WORK PROPERLY
             //RaycastHit hit;

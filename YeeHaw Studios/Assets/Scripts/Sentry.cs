@@ -49,6 +49,9 @@ public class Sentry : MonoBehaviour
     [Header("Band-aid fix, tick if it isn't the first guard")]
     public bool beatTwoOver = false;
 
+    public bool search = false;
+    public bool skipDetection = false;
+
     [Space]
     public GameObject captureScreen;
 
@@ -72,7 +75,8 @@ public class Sentry : MonoBehaviour
     /// <summary>
     /// The last player location that the AI was aware of
     /// </summary>
-    private Vector3 _lastKnownPlayerPos;
+    /// needs to be set as private again after testing
+    public Vector3 _lastKnownPlayerPos;
 
     /// <summary>
     /// Where the AI should be navigating
@@ -97,7 +101,7 @@ public class Sentry : MonoBehaviour
     private bool _startSearch;
 
     // the different behaviour states
-    private enum _BEHAVIOURS { Patrol, Search, Chase};
+    private enum _BEHAVIOURS { Patrol, Search, Detected, Chase };
 
     // current behaviour
     [SerializeField]
@@ -171,9 +175,13 @@ public class Sentry : MonoBehaviour
                 case _BEHAVIOURS.Search:
                     SearchBehaviour();
                     break;
+                case _BEHAVIOURS.Detected:
+                    DetectedBehaviour();
+                    break;
                 // Chase code AND set values like AI speed and stuff correctly
                 case _BEHAVIOURS.Chase:
-                    DetectedBehaviour();
+                    //DetectedBehaviour();
+                    ChaseBehaviour();
                     break;
                 default:
                     break;
@@ -198,7 +206,10 @@ public class Sentry : MonoBehaviour
 
             if (_foundPlayer)
             {
-                _curBehaviour = _BEHAVIOURS.Chase;
+                if(skipDetection)
+                    _curBehaviour = _BEHAVIOURS.Chase;
+                else if(!skipDetection)
+                    _curBehaviour = _BEHAVIOURS.Detected;
                 //Chase(_player.transform);
 
             }
@@ -212,7 +223,7 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    
+
 
     void Patrol()
     {
@@ -258,7 +269,7 @@ public class Sentry : MonoBehaviour
                     _detectionAmount = MaxDetectionAmount;
                     _lastKnownPlayerPos = _player.transform.position;
                 }
-                else if(_playerNotFound)
+                else if (_playerNotFound)
                     increaseDetection = false;
             }
         }
@@ -288,6 +299,7 @@ public class Sentry : MonoBehaviour
 
     void PatrolBehaviour()
     {
+        Debug.Log("Patrol Behaviour");
         //"Main" for everything patrol related
         _spotlight.color = Color.yellow;
         _agent.speed = 1.0f;
@@ -297,6 +309,9 @@ public class Sentry : MonoBehaviour
 
     void SearchBehaviour()
     {
+        skipDetection = false;
+
+        Debug.Log("Search Behaviour");
         m_robotAnimController.SetBool("Searching", true);
         m_robotAnimController.SetBool("Chase", false);
 
@@ -307,29 +322,42 @@ public class Sentry : MonoBehaviour
         // rotate for a few seconds then go back to patrol
         StartCoroutine(SearchRotation());
         _curBehaviour = _BEHAVIOURS.Patrol;
-        
     }
 
 
     void DetectedBehaviour()
     {
+
+        Debug.Log("Detected Behaviour");
         // set the detection animation and freeze the guard in place for a short period of time
         _spotlight.color = Color.red;
         _agent.speed = 0.0f;
         m_robotAnimController.SetBool("Detected", true);
         m_robotAnimController.SetBool("Patrol", false);
-        StartCoroutine(DetectionPlayThrough());
+
+        Invoke("ChaseBehaviour", 2);
+
+        
+        //_curBehaviour = _BEHAVIOURS.Chase;
+        //StartCoroutine(DetectionPlayThrough());
     }
 
     IEnumerator DetectionPlayThrough()
     {
+        _spotlight.color = Color.red;
+        //search = true;
+        m_robotAnimController.SetBool("Detected", true);
+        m_robotAnimController.SetBool("Patrol", false);
         yield return new WaitForSeconds(2);
-        ChaseBehaviour();
+        //search = false;
+        //ChaseBehaviour();
+        _curBehaviour = _BEHAVIOURS.Chase;
     }
 
     void ChaseBehaviour()
     {
-
+        skipDetection = true;
+        Debug.Log("Chase Behaviour");
         //"Main" for everything chase related
         _spotlight.color = Color.red;
         m_robotAnimController.SetBool("Detected", false);
@@ -338,6 +366,7 @@ public class Sentry : MonoBehaviour
         //_lastKnownPlayerPos = _player.transform.position;
         //Chase(_player.transform);
         //_startSearch = true;
+        _curBehaviour = _BEHAVIOURS.Chase;
         NewTarget(_lastKnownPlayerPos);
         //Debug.Log("Chase: " + Vector3.Distance(transform.position, _lastKnownPlayerPos));
         //if (_agent.transform.position == _lastKnownPlayerPos)
@@ -388,7 +417,7 @@ public class Sentry : MonoBehaviour
                     if (_detectionAmount > MaxDetectionAmount)
                         _detectionAmount = MaxDetectionAmount;
 
-                    if(_detectionAmount >= MaxDetectionAmount)
+                    if (_detectionAmount >= MaxDetectionAmount)
                         _lastKnownPlayerPos = _player.transform.position;
                 }
                 // otherwise if the player ISN'T moving
@@ -448,6 +477,7 @@ public class Sentry : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _lastKnownPlayerPos) < 1f)
         {
+            Debug.Log("AI has reached the last known player position");
             _startSearch = true;
             _foundPlayer = false;
             //Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(_currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
