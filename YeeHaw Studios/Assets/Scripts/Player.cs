@@ -242,6 +242,81 @@ public class Player : MonoBehaviour
             _sprinting = false;
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange))
+            {
+                Debug.Log(hit.collider.name);
+
+                Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.green, _interactRange);
+
+                //if it was a button, activate it's script
+                if (hit.transform.tag == "Button")
+                {
+                    //Debug.Log("Button clicked");
+                    //hit.transform.gameObject.GetComponent<Button_Check>().ClickedOn();
+                    hit.transform.gameObject.SendMessage("ClickedOn");
+
+                    if (gameObject.GetComponent<Item_Use>().itemReady)
+                    {
+                        gameObject.GetComponent<Item_Use>().Lightning();
+                    }
+                }
+                else if (hit.transform.tag == "Chest")
+                {
+                    //Debug.Log("Chest clicked");
+                    hit.transform.gameObject.SendMessage("CollectMoney");
+                }
+                else if (hit.transform.tag == "TestObject")
+                {
+                    hit.rigidbody.AddForce(transform.forward * 1000);
+                }
+
+                else if (hit.transform.tag == "BreakerSphere")
+                {
+                    hit.transform.gameObject.SendMessage("CompleteCircuit");
+                }
+
+                else if (hit.transform.tag == "Lever")
+                {
+                    //Debug.Log("HitLever");
+                    hit.transform.gameObject.SendMessage("PullTheLever");
+
+                    if (gameObject.GetComponent<Item_Use>().itemReady)
+                    {
+                        gameObject.GetComponent<Item_Use>().Lightning();
+                    }
+                }
+
+                else if (hit.transform.tag == "Escape")
+                {
+                    hit.transform.gameObject.SendMessage("EscapeNow");
+                }
+
+                else if (hit.transform.tag == "Safe")
+                {
+                    hit.transform.gameObject.SendMessage("Search");
+                }
+
+                else if (hit.transform.tag == "Battery")
+                {
+                    Battery = hit.transform.gameObject;
+                    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
+                    {
+                        rechargeUp.RechargeNow();
+                        hit.transform.gameObject.SendMessage("TakeCharge");
+                    }
+                }
+
+                //gameObject.GetComponent<Item_Use>().Lightning();
+            }
+        }
+
+        crouchSuspicionRate = Random.Range(0.04f, 0.06f);
+        walkSuspicionRate = Random.Range(0.18f, 0.22f);
+        sprintSuspicionRate = Random.Range(0.37f, 0.43f);
+
         if (_sprinting)
         {
             _movementType = "Sprint";
@@ -392,12 +467,12 @@ public class Player : MonoBehaviour
             HandsAnim.SetBool("Crouching", false);
         }
 
-        RaycastHit outlineHit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, _interactRange))
-        {
-            //objectShader = outlineHit.transform.gameObject.GetComponent<Shader>
-            //if(outlineHit.transform.)
-        }
+        //RaycastHit outlineHit;
+        //if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out outlineHit, _interactRange))
+        //{
+        //    //objectShader = outlineHit.transform.gameObject.GetComponent<Shader>
+        //    //if(outlineHit.transform.)
+        //}
 
         if (gameObject.GetComponent<Item_Use>().itemReady)
             _interactRange = 10;
@@ -405,78 +480,86 @@ public class Player : MonoBehaviour
             _interactRange = 5;
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange))
-            {
-                //if it was a button, activate it's script
-                if (hit.transform.tag == "Button")
-                {
-                    Debug.Log("Button clicked");
-                    //hit.transform.gameObject.GetComponent<Button_Check>().ClickedOn();
-                    hit.transform.gameObject.SendMessage("ClickedOn");
-                }
-                else if (hit.transform.tag == "Chest")
-                {
-                    Debug.Log("Chest clicked");
-                    hit.transform.gameObject.SendMessage("CollectMoney");
-                }
-                else if (hit.transform.tag == "TestObject")
-                {
-                    hit.rigidbody.AddForce(transform.forward * 1000);
-                }
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange))
+        //    {
+        //        Debug.Log(hit.collider.name);
 
-                else if (hit.transform.tag == "BreakerSphere")
-                {
-                    hit.transform.gameObject.SendMessage("CompleteCircuit");
-                }
+        //        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.green, _interactRange);
 
-                else if (hit.transform.tag == "Lever")
-                {
-                    hit.transform.gameObject.SendMessage("PullTheLever");
+        //        //if it was a button, activate it's script
+        //        if (hit.transform.tag == "Button")
+        //        {
+        //            //Debug.Log("Button clicked");
+        //            //hit.transform.gameObject.GetComponent<Button_Check>().ClickedOn();
+        //            hit.transform.gameObject.SendMessage("ClickedOn");
 
-                    if (gameObject.GetComponent<Item_Use>().itemReady)
-                    {
-                        gameObject.GetComponent<Item_Use>().Lightning();
-                    }
-                }
+        //            if (gameObject.GetComponent<Item_Use>().itemReady)
+        //            {
+        //                gameObject.GetComponent<Item_Use>().Lightning();
+        //            }
+        //        }
+        //        else if (hit.transform.tag == "Chest")
+        //        {
+        //            //Debug.Log("Chest clicked");
+        //            hit.transform.gameObject.SendMessage("CollectMoney");
+        //        }
+        //        else if (hit.transform.tag == "TestObject")
+        //        {
+        //            hit.rigidbody.AddForce(transform.forward * 1000);
+        //        }
 
-                else if (hit.transform.tag == "Escape")
-                {
-                    hit.transform.gameObject.SendMessage("EscapeNow");
-                }
+        //        else if (hit.transform.tag == "BreakerSphere")
+        //        {
+        //            hit.transform.gameObject.SendMessage("CompleteCircuit");
+        //        }
 
-                else if (hit.transform.tag == "Safe")
-                {
-                    hit.transform.gameObject.SendMessage("Search");
-                }
+        //        else if (hit.transform.tag == "Lever")
+        //        {
+        //            //Debug.Log("HitLever");
+        //            hit.transform.gameObject.SendMessage("PullTheLever");
 
-                else if (hit.transform.tag == "Battery")
-                {
-                    Battery = hit.transform.gameObject;
-                    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
-                    {
-                        rechargeUp.RechargeNow();
-                        hit.transform.gameObject.SendMessage("TakeCharge");
-                    }
-                }
+        //            if (gameObject.GetComponent<Item_Use>().itemReady)
+        //            {
+        //                gameObject.GetComponent<Item_Use>().Lightning();
+        //            }
+        //        }
 
-                gameObject.GetComponent<Item_Use>().Lightning();
-            }
-        }
+        //        else if (hit.transform.tag == "Escape")
+        //        {
+        //            hit.transform.gameObject.SendMessage("EscapeNow");
+        //        }
 
-        crouchSuspicionRate = Random.Range(0.04f, 0.06f);
-        walkSuspicionRate = Random.Range(0.18f, 0.22f);
-        sprintSuspicionRate = Random.Range(0.37f, 0.43f);
+        //        else if (hit.transform.tag == "Safe")
+        //        {
+        //            hit.transform.gameObject.SendMessage("Search");
+        //        }
+
+        //        else if (hit.transform.tag == "Battery")
+        //        {
+        //            Battery = hit.transform.gameObject;
+        //            if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
+        //            {
+        //                rechargeUp.RechargeNow();
+        //                hit.transform.gameObject.SendMessage("TakeCharge");
+        //            }
+        //        }
+
+        //        //gameObject.GetComponent<Item_Use>().Lightning();
+        //    }
+        //}
+
+        //crouchSuspicionRate = Random.Range(0.04f, 0.06f);
+        //walkSuspicionRate = Random.Range(0.18f, 0.22f);
+        //sprintSuspicionRate = Random.Range(0.37f, 0.43f);
 
 
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Application.Quit();
+        //}
     }
 
     void Rotation()

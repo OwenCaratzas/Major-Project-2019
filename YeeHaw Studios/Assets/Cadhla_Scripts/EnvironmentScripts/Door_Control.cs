@@ -52,7 +52,7 @@ public class Door_Control : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         //check when to start timer

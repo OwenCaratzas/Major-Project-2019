@@ -188,7 +188,7 @@ public class Sentry : MonoBehaviour
             }
 
             // decrease detection if the player is not being detected
-            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase)
+            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase /*|| Vector3.Distance(_player.transform.position, _agent.pathEndPosition) > 0.1f*/)
             {
                 _detectionAmount -= MaxDetectionAmount * 0.0005f;
                 if (_detectionAmount < 0)
@@ -292,14 +292,14 @@ public class Sentry : MonoBehaviour
 
     void HeardSound()
     {
-        Debug.Log("The guard heard that");
+        //Debug.Log("The guard heard that");
         NewTarget(audioTarget.position);
         //_curBehaviour = _BEHAVIOURS.Chase;
     }
 
     void PatrolBehaviour()
     {
-        Debug.Log("Patrol Behaviour");
+        //Debug.Log("Patrol Behaviour");
         //"Main" for everything patrol related
         _spotlight.color = Color.yellow;
         _agent.speed = 1.0f;
@@ -311,7 +311,7 @@ public class Sentry : MonoBehaviour
     {
         skipDetection = false;
 
-        Debug.Log("Search Behaviour");
+        //Debug.Log("Search Behaviour");
         m_robotAnimController.SetBool("Searching", true);
         m_robotAnimController.SetBool("Chase", false);
 
@@ -328,7 +328,7 @@ public class Sentry : MonoBehaviour
     void DetectedBehaviour()
     {
 
-        Debug.Log("Detected Behaviour");
+        //Debug.Log("Detected Behaviour");
         // set the detection animation and freeze the guard in place for a short period of time
         _spotlight.color = Color.red;
         _agent.speed = 0.0f;
@@ -356,8 +356,9 @@ public class Sentry : MonoBehaviour
 
     void ChaseBehaviour()
     {
+        //if(Vector3.Distance(_player.transform.position, _agent.pathEndPosition) > 1.0f)
         skipDetection = true;
-        Debug.Log("Chase Behaviour");
+        //Debug.Log("Chase Behaviour");
         //"Main" for everything chase related
         _spotlight.color = Color.red;
         m_robotAnimController.SetBool("Detected", false);
@@ -477,7 +478,7 @@ public class Sentry : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _lastKnownPlayerPos) < 1f)
         {
-            Debug.Log("AI has reached the last known player position");
+            //Debug.Log("AI has reached the last known player position");
             _startSearch = true;
             _foundPlayer = false;
             //Debug.Log("Distance from AI to the last known player position is: " + Vector2.Distance(_currentTarget.position, _lastKnownPlayerPos) + "AI needs to start searching");
@@ -508,6 +509,6 @@ public class Sentry : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         SceneManager.LoadScene("LevelSelect");
-        Debug.Log("Didn't work");
+        //Debug.Log("Didn't work");
     }
 }

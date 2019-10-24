@@ -44,7 +44,7 @@ public class TutorialBeatTwo : MonoBehaviour
         GuardOne.GetComponent<Sentry>().beatTwoOver = true;
         player.TurnOnMouse();
 
-        displayBeat.EndBeat();
+        //displayBeat.EndBeat();
 
         Destroy(gameObject);
     }

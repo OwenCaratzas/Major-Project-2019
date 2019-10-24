@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Tutorial_Text : MonoBehaviour
 {
-    public Image stillDisplay;
+    //public Image stillDisplay;
     public Image playDisplay;
 
     public Sprite BeatOne;
@@ -27,14 +27,14 @@ public class Tutorial_Text : MonoBehaviour
     private float FadeInTime;
     private float FadeOutTime;
 
-    private float FadeInStillTime;
-    private float FadeOutStillTime;
+    //private float FadeInStillTime;
+    //private float FadeOutStillTime;
 
 
     private Coroutine currentCoroutine = null;
 
-    private bool FadeInStill;
-    private bool FadeOutStill;
+    //private bool FadeInStill;
+    //private bool FadeOutStill;
 
     private bool FadeInPlay;
     private bool FadeOutPlay;
@@ -52,14 +52,14 @@ public class Tutorial_Text : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, 0f);
+        //stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, 0f);
         playDisplay.color = new Color(playDisplay.color.r, playDisplay.color.g, playDisplay.color.b, 0f);
 
         FadeInPlay = false;
         FadeOutPlay = false;
 
-        FadeInStill = false;
-        FadeOutStill = false;
+        //FadeInStill = false;
+        //FadeOutStill = false;
 
         startTimer = false;
         WaitTime = 4f;
@@ -90,25 +90,25 @@ public class Tutorial_Text : MonoBehaviour
         }
 
 
-        if (FadeInStill == true)
-        {
-            if (FadeInStillTime <= 1)
-            {
-                FadeInStillTime = FadeInStillTime + (1f * Time.unscaledDeltaTime);
-            }
+        //if (FadeInStill == true)
+        //{
+        //    if (FadeInStillTime <= 1)
+        //    {
+        //        FadeInStillTime = FadeInStillTime + (1f * Time.unscaledDeltaTime);
+        //    }
 
-            stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeInStillTime);
-        }
+        //    stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeInStillTime);
+        //}
 
 
-        if (FadeOutStill == true)
-        {
-            if (FadeOutStillTime >= 0)
-            {
-                FadeOutStillTime = FadeOutStillTime - (1f * Time.unscaledDeltaTime);
-            }
-            stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeOutStillTime);
-        }
+        //if (FadeOutStill == true)
+        //{
+        //    if (FadeOutStillTime >= 0)
+        //    {
+        //        FadeOutStillTime = FadeOutStillTime - (1f * Time.unscaledDeltaTime);
+        //    }
+        //    stillDisplay.color = new Color(stillDisplay.color.r, stillDisplay.color.g, stillDisplay.color.b, FadeOutStillTime);
+        //}
 
         if (startTimer == true)
         {
@@ -126,7 +126,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInTime = 0f;
 
         playDisplay.sprite = BeatOne;
-        stillDisplay.sprite = null;
+        //stillDisplay.sprite = null;
 
         FadeInPlay = true;
         FadeOutPlay = false;
@@ -136,41 +136,47 @@ public class Tutorial_Text : MonoBehaviour
 
     public void TutorialBeatTwo()
     {
-        FadeInTime = 0f;
+        //FadeInStillTime = 0f;
 
-        FadeInStill = true;
-        FadeOutStill = false;
+        //FadeInStill = true;
+        //FadeOutStill = false;
+
+        FadeInTime = 0f;
+        FadeInPlay = true;
+        FadeOutPlay = false;
 
         GameUI.SetActive(false);
 
-        startTimer = true;
+        //stillDisplay.sprite = BeatTwo;
+        playDisplay.sprite = BeatTwo;
 
-        stillDisplay.sprite = BeatTwo;
-        playDisplay.sprite = null;
+        startTimer = true;
     }
     public void TutorialBeatThree()
     {
         FadeInTime = 0f;
 
         playDisplay.sprite = BeatThree;
-        stillDisplay.sprite = null;
+        //stillDisplay.sprite = null;
 
         FadeInPlay = true;
         FadeOutPlay = false;
-
-        GameUI.SetActive(false);
 
         startTimer = true;
     }
     public void TutorialBeatFour()
     {
+        //FadeInStillTime = 0f;
+
+        //stillDisplay.sprite = BeatFour;
+        playDisplay.sprite = BeatFour;
+
+        //FadeInStill = true;
+        //FadeOutStill = false;
+
         FadeInTime = 0f;
-
-        stillDisplay.sprite = BeatFour;
-        playDisplay.sprite = null;
-
-        FadeInStill = false;
-        FadeOutStill = true;
+        FadeInPlay = true;
+        FadeOutPlay = false;
 
         GameUI.SetActive(false);
 
@@ -181,7 +187,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInTime = 0f;
 
         playDisplay.sprite = BeatFive;
-        stillDisplay.sprite = null;
+        //stillDisplay.sprite = null;
 
         startTimer = true;
 
@@ -193,7 +199,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInTime = 0f;
 
         playDisplay.sprite = BeatSix;
-        stillDisplay.sprite = null;
+        //stillDisplay.sprite = null;
 
         startTimer = true;
 
@@ -204,27 +210,31 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        FadeInPlay = false;
-        FadeOutPlay = true;
+        FadeInPlay = true;
+        FadeOutPlay = false;
 
         startTimer = true;
 
         playDisplay.sprite = BeatSeven;
-        stillDisplay.sprite = null;
+        //stillDisplay.sprite = null;
     }
 
     public void TutorialBeatEight()
     {
-        FadeInTime = 0f;
+        // FadeInStillTime = 0f;
 
-        FadeInStill = false;
-        FadeOutStill = true;
+        // FadeInStill = true;
+        // FadeOutStill = false;
+
+        FadeInTime = 0f;
+        FadeInPlay = true;
+        FadeOutPlay = false;
 
         GameUI.SetActive(false);
 
         startTimer = true;
 
-        stillDisplay.sprite = BeatEight;
+        //stillDisplay.sprite = BeatEight;
         playDisplay.sprite = null;
     }
 
@@ -232,13 +242,13 @@ public class Tutorial_Text : MonoBehaviour
     {
         FadeInTime = 0f;
 
-        FadeInPlay = false;
-        FadeOutPlay = true;
+        FadeInPlay = true;
+        FadeOutPlay = false;
 
         startTimer = true;
 
         playDisplay.sprite = BeatNine;
-        stillDisplay.sprite = null;
+       // stillDisplay.sprite = null;
     }
 
     public void EndBeat()
@@ -247,6 +257,7 @@ public class Tutorial_Text : MonoBehaviour
         player.walkSpeed = 0.05f;
 
         FadeOutTime = FadeInTime;
+       // FadeOutStillTime = FadeInStillTime;
 
         GameUI.SetActive(true);
 
@@ -256,11 +267,11 @@ public class Tutorial_Text : MonoBehaviour
             FadeOutPlay = true;
         }
 
-        if (FadeInStill == true)
-        {
-            FadeInStill = false;
-            FadeOutStill = true;
-        }
+        //if (FadeInStill == true)
+        //{
+        //    FadeInStill = false;
+        //    FadeOutStill = true;
+        //}
 
         startTimer = false;
         WaitTime = 4;

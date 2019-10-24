@@ -28,7 +28,7 @@ public class TutorialBeatSeven : MonoBehaviour
 
         Time.timeScale = 1f;
         player.TurnOnMouse();
-        displayBeat.EndBeat();
+        //displayBeat.EndBeat();
 
         Destroy(gameObject);
     }
