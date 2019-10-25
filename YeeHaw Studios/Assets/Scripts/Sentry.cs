@@ -97,6 +97,8 @@ public class Sentry : MonoBehaviour
 
     private bool increaseDetection;
 
+    private bool _playerOutOFBounds = false;
+
     [SerializeField]
     private bool _startSearch;
 
@@ -151,7 +153,7 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(_agent.pathStatus);
         /*
         chase->search->patrol
         chase will always follow this progression
@@ -188,7 +190,7 @@ public class Sentry : MonoBehaviour
             }
 
             // decrease detection if the player is not being detected
-            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase /*|| Vector3.Distance(_player.transform.position, _agent.pathEndPosition) > 0.1f*/)
+            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase)
             {
                 _detectionAmount -= MaxDetectionAmount * 0.0005f;
                 if (_detectionAmount < 0)
@@ -321,6 +323,7 @@ public class Sentry : MonoBehaviour
         _agent.speed = 0.0f;
         // rotate for a few seconds then go back to patrol
         StartCoroutine(SearchRotation());
+        _playerOutOFBounds = false;
         _curBehaviour = _BEHAVIOURS.Patrol;
     }
 
@@ -367,6 +370,7 @@ public class Sentry : MonoBehaviour
         //_lastKnownPlayerPos = _player.transform.position;
         //Chase(_player.transform);
         //_startSearch = true;
+        
         _curBehaviour = _BEHAVIOURS.Chase;
         NewTarget(_lastKnownPlayerPos);
         //Debug.Log("Chase: " + Vector3.Distance(transform.position, _lastKnownPlayerPos));
@@ -476,7 +480,31 @@ public class Sentry : MonoBehaviour
 
     void StartSearch()
     {
-        if (Vector3.Distance(transform.position, _lastKnownPlayerPos) < 1f)
+        NavMeshHit navHit;
+        NavMeshPath boundsPath = new NavMeshPath();
+        if (NavMesh.SamplePosition(_player.transform.position, out navHit, 1f, NavMesh.AllAreas))
+        {
+            if(Vector3.Distance(_player.transform.position, navHit.position) > 1f)
+                _playerOutOFBounds = true;
+        }
+
+        if (NavMesh.CalculatePath(_agent.transform.position, _lastKnownPlayerPos, NavMesh.AllAreas, boundsPath))
+        {
+            //boundsPath.
+            Debug.Log(boundsPath.status);
+            if (boundsPath.status == NavMeshPathStatus.PathPartial)
+            {
+                Debug.Log("Path Not Complete");
+            }
+            //NavMesh.FindClosestEdge
+                
+        }
+
+        if ((Vector3.Distance(transform.position, _lastKnownPlayerPos) < 1f) || (boundsPath.status == NavMeshPathStatus.PathPartial)
+            //|| NavMesh.CalculatePath(_agent.transform.position, _lastKnownPlayerPos, NavMesh.AllAreas, _agent.path)
+            /*(NavMesh.SamplePosition(_lastKnownPlayerPos, out navHit, 5f,NavMesh.AllAreas)) == false*/
+            /*_playerOutOFBounds*/
+            /*|| (Vector3.Distance(_player.transform.position, _agent.pathEndPosition) > 5f)*/)
         {
             //Debug.Log("AI has reached the last known player position");
             _startSearch = true;
