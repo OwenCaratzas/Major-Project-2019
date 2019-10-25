@@ -25,9 +25,6 @@ public class TutorialBeatTwo : MonoBehaviour
             displayBeat = obj.GetComponent<Tutorial_Text>();
             displayBeat.TutorialBeatTwo();
 
-            Time.timeScale = 0f;
-            player.TurnOffMouse();
-
             StartCoroutine(EndTutorial());
         }
     }
@@ -42,9 +39,6 @@ public class TutorialBeatTwo : MonoBehaviour
         //GuardOne.GetComponent<NavMeshAgent>().acceleration = 4.0f;
         //GuardOne.GetComponent<Sentry>().DetectionAmount = 0;
         GuardOne.GetComponent<Sentry>().beatTwoOver = true;
-        player.TurnOnMouse();
-
-        //displayBeat.EndBeat();
 
         Destroy(gameObject);
     }

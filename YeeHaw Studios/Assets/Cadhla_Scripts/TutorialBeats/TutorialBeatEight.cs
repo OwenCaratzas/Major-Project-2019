@@ -14,9 +14,6 @@ public class TutorialBeatEight : MonoBehaviour
             GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
             displayBeat = obj.GetComponent<Tutorial_Text>();
 
-            Time.timeScale = 0.0f;
-            player.TurnOffMouse();
-
             displayBeat.TutorialBeatEight();
             StartCoroutine(EndTutorial());
         }
@@ -27,8 +24,6 @@ public class TutorialBeatEight : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
 
         Time.timeScale = 1f;
-        player.TurnOnMouse();
-        //displayBeat.EndBeat();
 
         Destroy(gameObject);
     }

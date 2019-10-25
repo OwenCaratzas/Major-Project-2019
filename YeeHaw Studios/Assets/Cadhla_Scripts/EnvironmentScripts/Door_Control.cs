@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Door_Control : MonoBehaviour
 {
-
-    public float doorTimer;
-
     private bool buttonOn = false;
 
     public GameObject doorMesh;
@@ -28,9 +25,6 @@ public class Door_Control : MonoBehaviour
     [SerializeField]
     public int numberOfTrueBooleans = 0;
     public int maxTrueBooleansNeeded;
-
-    public AudioSource doorTimerAudio;
-    public AudioClip doorTimerClip;
 
     public AudioSource doorOpen;
     public AudioClip doorOpenClip;
@@ -54,31 +48,6 @@ public class Door_Control : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //check when to start timer
-        if (numberOfTrueBooleans == 1)
-        {
-            if (doorTimerAudio.clip != doorTimerClip)
-            {
-                doorTimerAudio.clip = doorTimerClip;
-                doorTimerAudio.Play();
-            }
-            doorTimer -= (1.0f * Time.deltaTime);
-        }
-
-        //check if timer has ended
-        if (doorTimer <= 0)
-        {
-            doorTimerAudio.clip = null;
-            doorTimer = 20;
-            numberOfTrueBooleans = 0;
-            for (int i = 0; i < buttonDownCheck.Length; i++)
-            {
-                buttonDownCheck[i].buttonDown = false;
-
-            }
-        }
-
         //check when to move door
         if (numberOfTrueBooleans == maxTrueBooleansNeeded)
         {

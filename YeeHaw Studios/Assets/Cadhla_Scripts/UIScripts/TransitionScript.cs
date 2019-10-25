@@ -16,8 +16,7 @@ public class TransitionScript : MonoBehaviour
     private float threeFadeIn;
     private float fourFadeIn;
 
-    public Image image;
-    public Sprite blankMenu;
+    public GameObject Main;
 
     private float FadeOut;
 
@@ -31,7 +30,7 @@ public class TransitionScript : MonoBehaviour
         textThree.color = new Color(textThree.color.r, textThree.color.g, textThree.color.b, 0f);
         textFour.color = new Color(textFour.color.r, textFour.color.g, textFour.color.b, 0f);
 
-        image.sprite = blankMenu;
+        Main.SetActive(false);
     }
 
     // Update is called once per frame

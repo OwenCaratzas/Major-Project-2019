@@ -9,18 +9,18 @@ public class Item_Use : MonoBehaviour
     public GameObject image;
     //public static float equipmentLimit;
 
-    public bool itemInactive = true;
+    private bool itemInactive = true;
     public bool itemReady = false;
 
     public GameObject lightningBolt;
     public GameObject boltSpawn;
 
     public PowerBar powerBar;
-    public float power = 1f;
+    private float power = 1f;
 
-    public bool powerDrain = false;
+    private bool powerDrain = false;
 
-    public bool powerRecharging = false;
+    private bool powerRecharging = false;
 
     public Image equipmentImage;
     public Sprite equipmentOff;
@@ -34,8 +34,6 @@ public class Item_Use : MonoBehaviour
     {
         //equipmentLimit = EconomyManager.rangeExtendCount;
         //text = GameObject.FindGameObjectWithTag("Equipment").GetComponent<Text>();
-
-        equipmentImage = GameObject.FindGameObjectWithTag("Display").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -98,19 +96,29 @@ public class Item_Use : MonoBehaviour
             powerDrain = false;
         }
 
-        //power bar recharge
-        if (powerRecharging == true)
+        //recharge over time
+
+        if (power < 1)
         {
-            if (power <= 1f)
-            {
-                power += 0.1f;
-                powerBar.SetReverseSize(power);
-            }
+            power += 0.02f * Time.deltaTime;
+            powerBar.SetReverseSize(power);
         }
-        if (power >= 1)
-        {
-            powerRecharging = false;
-        }
+
+
+
+        ////power bar recharge
+        //if (powerRecharging == true)
+        //{
+        //    if (power <= 1f)
+        //    {
+        //        power += 0.1f;
+        //        powerBar.SetReverseSize(power);
+        //    }
+        //}
+        //if (power >= 1)
+        //{
+        //    powerRecharging = false;
+        //}
 
 
 
