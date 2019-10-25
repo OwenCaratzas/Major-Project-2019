@@ -17,6 +17,8 @@ public class ProximityHighlight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         _renderer = GetComponent<Renderer>();
         _material = _renderer.material;
         _playerScript = player.GetComponent<Player>();

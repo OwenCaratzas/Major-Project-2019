@@ -18,6 +18,11 @@ public class IntroFade : MonoBehaviour
     public GameObject gameUI;
     public GameObject TutorialOne;
 
+    public Text BeatOne;
+
+    public TypeWriterEffect stringRef;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +60,25 @@ public class IntroFade : MonoBehaviour
         blackOutGo = false;
     }
 
+    void FirstBeat()
+    {
+        BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 255f);
+    }
+
+    void SecondBeat()
+    {
+        stringRef.currentText = "".ToString();
+        stringRef.fullText = "Avoid the Guards and Camera's ".ToString();
+        stringRef.SendMessage("ShowText");
+    }
+
+    void ThirdBeat()
+    {
+        stringRef.currentText = "".ToString();
+        stringRef.fullText = "Reach the Escape and Don't get caught ".ToString();
+        stringRef.SendMessage("ShowText");
+    }
+
     void EndIntro()
     {
         cam1.SetActive(false);
@@ -62,5 +86,7 @@ public class IntroFade : MonoBehaviour
 
         TutorialOne.SetActive(true);
         gameUI.SetActive(true);
+
+        BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 0f);
     }
 }

@@ -2053,7 +2053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &562379650
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2147,7 +2147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 32.213, y: 471.089, z: 9.815001}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.93, y: 5.11}
+  m_AnchoredPosition: {x: 0.98691404, y: 1.7585742}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &562379656
@@ -2167,6 +2167,8 @@ MonoBehaviour:
   cam2: {fileID: 816769126}
   gameUI: {fileID: 74147839}
   TutorialOne: {fileID: 1421239724}
+  BeatOne: {fileID: 700134974}
+  stringRef: {fileID: 700134973}
 --- !u!1001 &568750684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4059,6 +4061,30 @@ Transform:
   m_Father: {fileID: 1955008733}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &700134973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3425367694237563910, guid: 53f8c06b048a9a8448602d5670389fc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835993334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a93cf87eeab47f45a3b35e0be68c8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &700134974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8021896649939039019, guid: 53f8c06b048a9a8448602d5670389fc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835993334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &735683539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5579,7 +5605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &758134706
 Transform:
   m_ObjectHideFlags: 0
@@ -8418,7 +8444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1421239725
 Transform:
   m_ObjectHideFlags: 0
@@ -14135,7 +14161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1771606979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14148,7 +14174,7 @@ RectTransform:
   m_LocalScale: {x: 12.522296, y: 6.449805, z: 6.449805}
   m_Children: []
   m_Father: {fileID: 1939720250}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14548,6 +14574,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ef5864c3b7a826843a90ba4da1e49fa5,
         type: 3}
+    - target: {fileID: 4624711757196424468, guid: 53f8c06b048a9a8448602d5670389fc3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021896649939039019, guid: 53f8c06b048a9a8448602d5670389fc3,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021896649939039019, guid: 53f8c06b048a9a8448602d5670389fc3,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425367694237563910, guid: 53f8c06b048a9a8448602d5670389fc3,
+        type: 3}
+      propertyPath: fullText
+      value: 'FIND THE SAFE AND STEAL THE BLUEPRINTS '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f8c06b048a9a8448602d5670389fc3, type: 3}
 --- !u!1001 &1842388862
@@ -17784,13 +17830,18 @@ PrefabInstance:
     - target: {fileID: 8189437982835155335, guid: db4566672f744024c81a8287f9d47ca7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 637183433688099848, guid: db4566672f744024c81a8287f9d47ca7,
         type: 3}
       propertyPath: HandsAnim
       value: 
       objectReference: {fileID: 1993753152}
+    - target: {fileID: 1449189018557129057, guid: db4566672f744024c81a8287f9d47ca7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c567542acbc6a3a4688b0bbeda2aae97, type: 2}
     - target: {fileID: 8189437983402747654, guid: db4566672f744024c81a8287f9d47ca7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17896,11 +17947,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1449189018557129057, guid: db4566672f744024c81a8287f9d47ca7,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: c567542acbc6a3a4688b0bbeda2aae97, type: 2}
     - target: {fileID: 1449189018552983457, guid: db4566672f744024c81a8287f9d47ca7,
         type: 3}
       propertyPath: m_ReceiveShadows

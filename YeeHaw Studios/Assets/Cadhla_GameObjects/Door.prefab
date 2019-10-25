@@ -522,7 +522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e87c0faa0394334cb36ac53bd6f105b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorTimer: 0
   doorMesh: {fileID: 2855054330180658557}
   startMarker: {fileID: 1775185551878696260}
   endMarker: {fileID: 6463999270088101785}
@@ -535,8 +534,6 @@ MonoBehaviour:
   buttonDownCheck: []
   numberOfTrueBooleans: 0
   maxTrueBooleansNeeded: 0
-  doorTimerAudio: {fileID: 0}
-  doorTimerClip: {fileID: 8300000, guid: 9f88dc3ad6919bb4598f236b2e38453c, type: 3}
   doorOpen: {fileID: 718607948796923307}
   doorOpenClip: {fileID: 8300000, guid: f9099790f566c0041b024d47de57754a, type: 3}
 --- !u!1 &6156305890637979700

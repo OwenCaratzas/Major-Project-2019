@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1817814442339388639}
   - component: {fileID: 1817814442339388632}
   - component: {fileID: 8162049400516529344}
+  - component: {fileID: 3736923803497844408}
   m_Layer: 0
   m_Name: Button
   m_TagString: Button
@@ -111,6 +112,22 @@ MonoBehaviour:
   speed: 0.1
   journeyLength: 0
   buttonBool: {fileID: 0}
+  buttonClip: {fileID: 0}
+  buttonAudio: {fileID: 0}
+--- !u!114 &3736923803497844408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817814442339388635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07c01b6bab832343bf4e7f8d4bbfb77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineWidth: 0.025
+  player: {fileID: 0}
 --- !u!1 &1817814442563317141
 GameObject:
   m_ObjectHideFlags: 0
