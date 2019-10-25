@@ -145,7 +145,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInPlay = true;
         FadeOutPlay = false;
 
-        GameUI.SetActive(false);
+        //GameUI.SetActive(false);
 
         //stillDisplay.sprite = BeatTwo;
         playDisplay.sprite = BeatTwo;
@@ -178,7 +178,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInPlay = true;
         FadeOutPlay = false;
 
-        GameUI.SetActive(false);
+        //GameUI.SetActive(false);
 
         startTimer = true;
     }
@@ -230,7 +230,7 @@ public class Tutorial_Text : MonoBehaviour
         FadeInPlay = true;
         FadeOutPlay = false;
 
-        GameUI.SetActive(false);
+        //GameUI.SetActive(false);
 
         startTimer = true;
 

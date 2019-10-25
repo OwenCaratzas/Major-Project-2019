@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca72e09420af540834f09c93f24cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stillDisplay: {fileID: 3966814175510505433}
   playDisplay: {fileID: 871047168168662312}
   BeatOne: {fileID: 21300000, guid: b4ef862914026bd4590e364bf13efecf, type: 3}
   BeatTwo: {fileID: 21300000, guid: 3665ff8483040cd459367872d7dce954, type: 3}
@@ -685,87 +684,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 1121043795316479830}
---- !u!1 &2615284383359192240
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3669053373270749828}
-  - component: {fileID: 121569967687114356}
-  - component: {fileID: 4151583615038612136}
-  m_Layer: 5
-  m_Name: TextTwo
-  m_TagString: TutorialDisplay
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3669053373270749828
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615284383359192240}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8744894759546640001}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -112, y: 220}
-  m_SizeDelta: {x: 350.8, y: 97.4}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!222 &121569967687114356
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615284383359192240}
-  m_CullTransparentMesh: 0
---- !u!114 &4151583615038612136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615284383359192240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0.5057735, b: 0.0046724924, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 82a2d8d0cfd971d4bb37fa9b310449d2, type: 3}
-    m_FontSize: 24
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Objective Complete
-
-    Get to the Escape Door Downstairs'
 --- !u!1 &2888337614699648705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2089,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1294563504545770951}
-  - {fileID: 3669053373270749828}
   m_Father: {fileID: 2191013260638017852}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2304,15 +2221,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41ac18b4f75a01e42b6c81aec154cea3, type: 3}
---- !u!224 &3585769029352232655 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3935564691817758392, guid: 41ac18b4f75a01e42b6c81aec154cea3,
-    type: 3}
-  m_PrefabInstance: {fileID: 531102407182968951}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3585769029352232648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3935564691817758399, guid: 41ac18b4f75a01e42b6c81aec154cea3,
+    type: 3}
+  m_PrefabInstance: {fileID: 531102407182968951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3585769029352232655 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3935564691817758392, guid: 41ac18b4f75a01e42b6c81aec154cea3,
     type: 3}
   m_PrefabInstance: {fileID: 531102407182968951}
   m_PrefabAsset: {fileID: 0}

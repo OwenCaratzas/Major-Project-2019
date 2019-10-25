@@ -247,9 +247,9 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange))
             {
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
 
-                Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.green, _interactRange);
+                //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.green, _interactRange);
 
                 //if it was a button, activate it's script
                 if (hit.transform.tag == "Button")
