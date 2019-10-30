@@ -22,6 +22,10 @@ public class TransitionScript : MonoBehaviour
 
     public float timer;
 
+    private float skipTimer;
+    private float skipFinish = 3f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,25 @@ public class TransitionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        if (Input.GetKey(KeyCode.E))
+        {
+                skipTimer += Time.deltaTime;
+        }
+
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            skipTimer = 0f;
+        }
+
+
+
+        if (skipTimer >= skipFinish)
+        {
+            StartLevel();
+        }
+
 
         timer = timer + 1 * Time.deltaTime;
 
@@ -77,7 +100,12 @@ public class TransitionScript : MonoBehaviour
 
         if (timer > 14)
         {
-            SceneManager.LoadScene("LevelOne");
+            StartLevel();
         }
+    }
+
+    void StartLevel()
+    {
+        SceneManager.LoadScene("LevelOne");
     }
 }

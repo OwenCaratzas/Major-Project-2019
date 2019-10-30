@@ -296,8 +296,11 @@ MonoBehaviour:
   endPoint: 1
   interpolationMultiplier: 0.25
   beatTwoOver: 1
+  search: 0
+  skipDetection: 0
   captureScreen: {fileID: 0}
   _detectionAmount: 0
+  _lastKnownPlayerPos: {x: 0, y: 0, z: 0}
   _startSearch: 0
   _curBehaviour: 0
 --- !u!135 &2608310379249769795
@@ -508,6 +511,11 @@ PrefabInstance:
       propertyPath: footstepAudio
       value: 
       objectReference: {fileID: 3574696713803673227}
+    - target: {fileID: 6838291527222965463, guid: 0fb896be5b23c1c4c84313aba1544e3b,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fb896be5b23c1c4c84313aba1544e3b, type: 3}
 --- !u!4 &5574686303622153444 stripped

@@ -22,6 +22,9 @@ public class IntroFade : MonoBehaviour
 
     public TypeWriterEffect stringRef;
 
+    private float skipTimer;
+    private float skipFinish = 3f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,17 @@ public class IntroFade : MonoBehaviour
             blackIn = blackIn - (2.0f * Time.deltaTime);
             blackout.color = new Color(blackout.color.r, blackout.color.g, blackout.color.b, blackIn);
         }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            skipTimer += Time.deltaTime;
+        }
+
+        if (skipTimer >= skipFinish)
+        {
+            EndIntro();
+        }
+
     }
 
 
@@ -87,6 +101,7 @@ public class IntroFade : MonoBehaviour
         TutorialOne.SetActive(true);
         gameUI.SetActive(true);
 
+        FadeIn();
         BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 0f);
     }
 }
