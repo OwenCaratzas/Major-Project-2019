@@ -201,46 +201,14 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         // update the inputs and multiply by the speed modifier
-        _translationX = Input.GetAxis("Horizontal") * _speed;
-        _translationZ = Input.GetAxis("Vertical") * _speed;
+        _translationX = Input.GetAxis("Horizontal")/* * _speed*/;
+        _translationZ = Input.GetAxis("Vertical") /** _speed*/;
 
         // apply the inputs to the character and move them
-        _rb.MovePosition(transform.position + (transform.right * _translationX) + (transform.forward * _translationZ));
-
-        // push the rigidbody directly up the y axis by multiplying it by the jumpForce
-        if (Input.GetKeyDown("space") && isGrounded)
-        {
-            isGrounded = false;
-            _rb.AddForce(transform.up * jumpForce);
-        }
-
-        // are we crouching or not?
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            if (_crouching)
-                _crouching = false;
-            else
-                _crouching = true;
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (_crouching)
-                _sprintCrouching = true;
-            _sprinting = true;
-            _crouching = false;
-        }
-        else
-        {
-            //_crouching = !_crouching;
-            if (_sprintCrouching)
-            {
-                _sprintCrouching = false;
-                _crouching = true;
-            }
-
-            _sprinting = false;
-        }
+        //_rb.MovePosition(transform.position + (transform.right * _translationX) + (transform.forward * _translationZ));
+        _rb.MovePosition(
+            transform.position + Vector3.ClampMagnitude(
+                (transform.right * _translationX) + (transform.forward * _translationZ), 1f) * _speed);
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -386,6 +354,34 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.C))
+        {
+            if (_crouching)
+                _crouching = false;
+            else
+                _crouching = true;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (_crouching)
+                _sprintCrouching = true;
+            _sprinting = true;
+            _crouching = false;
+        }
+        else
+        {
+            //_crouching = !_crouching;
+            if (_sprintCrouching)
+            {
+                _sprintCrouching = false;
+                _crouching = true;
+            }
+
+            _sprinting = false;
+        }
+
         // Is the player currently moving?
         if (_translationX != 0 || _translationZ != 0)
         {
