@@ -12,6 +12,8 @@ public class Pressure_Plate : MonoBehaviour
     public AudioClip impactClip;
     public AudioSource impactAudio;
 
+    public bool firstContact = false;
+
     // Start is called before the first frame update
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +21,7 @@ public class Pressure_Plate : MonoBehaviour
         Debug.Log("Collide");
         if (other.gameObject.tag == "Player")
         {
+            firstContact = true;
             player = other.gameObject.GetComponent<Player>();
 
             if (player.Speed >= player.walkSpeed)
@@ -30,8 +33,7 @@ public class Pressure_Plate : MonoBehaviour
                 }
                 if (alertGuard.PlayerTarget == null)
                     alertGuard.PlayerTarget = other.gameObject;
-
-                alertGuard.NewTarget(player.transform.position);
+                    alertGuard.NewTarget(player.transform.position);
             }
         }
     }

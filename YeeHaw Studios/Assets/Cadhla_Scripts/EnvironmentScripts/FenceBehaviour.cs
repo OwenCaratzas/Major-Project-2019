@@ -7,11 +7,12 @@ public class FenceBehaviour : MonoBehaviour
     public GameObject[] Fences;
     public GameObject Lever;
 
-
-    private bool fenceActive = true;
+    public bool fenceActive = true;
 
     public AudioClip leverClip;
     public AudioSource leverAudio;
+
+    private bool firstContact = false;
 
 
     void Update()
@@ -28,11 +29,18 @@ public class FenceBehaviour : MonoBehaviour
     void PullTheLever()
     {
         Debug.Log("Pull The Lever");
-        Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
 
-        leverAudio.Play();
-        leverAudio.clip = leverClip;
+        if (fenceActive == true)
+        {
+            if (firstContact == false)
+            {
+                firstContact = true;
+                Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
 
+                leverAudio.Play();
+                leverAudio.clip = leverClip;
+            }
+        }
         fenceActive = false;
     }
 }

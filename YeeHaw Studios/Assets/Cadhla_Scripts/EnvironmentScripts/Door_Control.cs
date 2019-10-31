@@ -29,6 +29,8 @@ public class Door_Control : MonoBehaviour
     public AudioSource doorOpen;
     public AudioClip doorOpenClip;
 
+    public bool firstContact = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class Door_Control : MonoBehaviour
         //check when to move door
         if (numberOfTrueBooleans == maxTrueBooleansNeeded)
         {
+            firstContact = true;
             // Set our position as a fraction of the distance between the markers.
            speed = (speed) + speedTime * Time.deltaTime;
            doorMesh.transform.position = Vector3.MoveTowards(startMarker.position, endMarker.position, speed);

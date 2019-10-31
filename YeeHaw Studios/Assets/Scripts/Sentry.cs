@@ -55,17 +55,25 @@ public class Sentry : MonoBehaviour
     [Space]
     public GameObject captureScreen;
 
-    [Header("Serialized Private variables")]
-    #endregion
-
-    #region Private Variables
-
     /// <summary>
     /// Current awareness of the AI
     /// </summary>
     [SerializeField]
     [Tooltip("How aware the AI is")]
-    private float _detectionAmount = 0.0f;
+    public float _detectionAmount = 0.0f;
+
+
+    [Header("Serialized Private variables")]
+    #endregion
+
+    #region Private Variables
+
+    ///// <summary>
+    ///// Current awareness of the AI
+    ///// </summary>
+    //[SerializeField]
+    //[Tooltip("How aware the AI is")]
+    //private float _detectionAmount = 0.0f;
 
     /// <summary>
     /// Whatever the AI is currently navigating towards
@@ -190,9 +198,9 @@ public class Sentry : MonoBehaviour
             }
 
             // decrease detection if the player is not being detected
-            if (!increaseDetection && _curBehaviour != _BEHAVIOURS.Chase)
+            if (!increaseDetection) //&& _curBehaviour != _BEHAVIOURS.Chase)
             {
-                _detectionAmount -= MaxDetectionAmount * 0.0005f;
+                _detectionAmount -= MaxDetectionAmount * 0.001f;
                 if (_detectionAmount < 0)
                     _detectionAmount = 0;
             }
@@ -304,7 +312,7 @@ public class Sentry : MonoBehaviour
         //Debug.Log("Patrol Behaviour");
         //"Main" for everything patrol related
         _spotlight.color = Color.yellow;
-        _agent.speed = 1.0f;
+        _agent.speed = 1.5f;
         Patrol();
     }
 
@@ -319,7 +327,7 @@ public class Sentry : MonoBehaviour
 
         //"Main" for everything search related
         //_spotlight.color = new Color(1, 0.64f, 0, 1);
-        _spotlight.color = Color.blue;
+        _spotlight.color = Color.magenta;
         _agent.speed = 0.0f;
         // rotate for a few seconds then go back to patrol
         StartCoroutine(SearchRotation());
@@ -366,7 +374,7 @@ public class Sentry : MonoBehaviour
         _spotlight.color = Color.red;
         m_robotAnimController.SetBool("Detected", false);
         m_robotAnimController.SetBool("Chase", true);
-        _agent.speed = 3.0f;
+        _agent.speed = 3.5f;
         //_lastKnownPlayerPos = _player.transform.position;
         //Chase(_player.transform);
         //_startSearch = true;
@@ -417,6 +425,10 @@ public class Sentry : MonoBehaviour
                     suspicionRate *= 2;
                     //start increasing by the modifier dependant on what pose the player is in
                     _detectionAmount += suspicionRate;
+
+
+                    //here we set up parameters dependant on behaviour state
+
 
                     // make sure the detection amount can't be higher than the max
                     if (_detectionAmount > MaxDetectionAmount)

@@ -10,6 +10,7 @@ public class TutorialBeatTwo : MonoBehaviour
     public GameObject GuardOne;
     public Player player;
 
+    private bool tutTrigger = false;
 
     private void Start()
     {
@@ -21,18 +22,24 @@ public class TutorialBeatTwo : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
-            displayBeat = obj.GetComponent<Tutorial_Text>();
-            displayBeat.TutorialBeatTwo();
+            if (tutTrigger == false)
+            {
+                GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
+                displayBeat = obj.GetComponent<Tutorial_Text>();
+                //displayBeat.TutorialBeatTwo();
 
-            StartCoroutine(EndTutorial());
+                tutTrigger = true;
+
+                StartCoroutine(EndTutorial());
+
+            }
         }
     }
 
 
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(6);
 
         Time.timeScale = 1f;
 

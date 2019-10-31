@@ -41,10 +41,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.78845626, b: 0, a: 1}
   m_Intensity: 50000
-  m_Range: 7
-  m_SpotAngle: 27.70006
+  m_Range: 5
+  m_SpotAngle: 60
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -165,8 +165,8 @@ MonoBehaviour:
   vertices: []
   vertList: []
   triangles: 
-  size: 1.5
-  distance: 4
+  size: 3
+  distance: 5
 --- !u!64 &866066648326772805
 MeshCollider:
   m_ObjectHideFlags: 0

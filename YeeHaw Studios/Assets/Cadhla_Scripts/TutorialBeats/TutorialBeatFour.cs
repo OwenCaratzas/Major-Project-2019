@@ -5,26 +5,32 @@ using UnityEngine;
 public class TutorialBeatFour : MonoBehaviour
 {
     Tutorial_Text displayBeat;
+
     public Player player;
+
+    private bool tutTrigger = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
-            displayBeat = obj.GetComponent<Tutorial_Text>();
+            if (tutTrigger == false)
+            {
+                GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
+                displayBeat = obj.GetComponent<Tutorial_Text>();
 
-            displayBeat.TutorialBeatFour();
-            StartCoroutine(EndTutorial());
+                displayBeat.TutorialBeatFour();
+
+                tutTrigger = true;
+
+                StartCoroutine(EndTutorial());
+            }
         }
     }
 
     IEnumerator EndTutorial()
     {
         yield return new WaitForSecondsRealtime(6);
-
-        Time.timeScale = 1f;
-
         Destroy(gameObject);
     }
 }

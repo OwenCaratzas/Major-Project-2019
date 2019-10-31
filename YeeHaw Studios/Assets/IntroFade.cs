@@ -18,6 +18,8 @@ public class IntroFade : MonoBehaviour
     public GameObject gameUI;
     public GameObject TutorialOne;
 
+    public GameObject skipPrompt;
+
     public Text BeatOne;
 
     public TypeWriterEffect stringRef;
@@ -97,6 +99,10 @@ public class IntroFade : MonoBehaviour
     {
         cam1.SetActive(false);
         cam2.SetActive(true);
+
+        skipPrompt.SetActive(false);
+
+        blackout.color = new Color(blackout.color.r, blackout.color.g, blackout.color.b, 0f);
 
         TutorialOne.SetActive(true);
         gameUI.SetActive(true);

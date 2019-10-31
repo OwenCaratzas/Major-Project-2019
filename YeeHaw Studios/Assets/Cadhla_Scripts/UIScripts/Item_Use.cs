@@ -9,11 +9,13 @@ public class Item_Use : MonoBehaviour
     public GameObject image;
     //public static float equipmentLimit;
 
+    public Player player;
+
     private bool itemInactive = true;
     public bool itemReady = false;
 
     public GameObject lightningBolt;
-    public GameObject boltSpawn;
+    public Transform boltSpawn;
 
     public PowerBar powerBar;
     private float power = 1f;
@@ -142,6 +144,8 @@ public class Item_Use : MonoBehaviour
     {
         if (itemReady == true)
         {
+            boltSpawn = player.particleTarget;
+
             Debug.Log("Shocking!");
             itemInactive = true;
             itemReady = false;

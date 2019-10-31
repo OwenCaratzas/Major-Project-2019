@@ -14,7 +14,7 @@ public class TutorialBeatEight : MonoBehaviour
             GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
             displayBeat = obj.GetComponent<Tutorial_Text>();
 
-            displayBeat.TutorialBeatEight();
+            //displayBeat.TutorialBeatEight();
             StartCoroutine(EndTutorial());
         }
     }

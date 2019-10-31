@@ -6,14 +6,22 @@ public class TutorialBeatFive : MonoBehaviour
 {
     Tutorial_Text displayBeat;
 
+    private bool tutTrigger = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
-            displayBeat = obj.GetComponent<Tutorial_Text>();
-            displayBeat.TutorialBeatFive();
-            StartCoroutine(EndTutorial());
+            if (tutTrigger == false)
+            {
+                GameObject obj = GameObject.FindGameObjectWithTag("TutorialDisplay");
+                displayBeat = obj.GetComponent<Tutorial_Text>();
+                displayBeat.TutorialBeatFive();
+
+                tutTrigger = true;
+
+                StartCoroutine(EndTutorial());
+            }
         }
     }
 

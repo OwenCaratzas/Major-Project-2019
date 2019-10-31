@@ -17,7 +17,7 @@ public class TutorialBeatSeven : MonoBehaviour
             Time.timeScale = 0.0f;
             player.TurnOffMouse();
 
-            displayBeat.TutorialBeatSeven();
+            //displayBeat.TutorialBeatSeven();
             StartCoroutine(EndTutorial());
         }
     }

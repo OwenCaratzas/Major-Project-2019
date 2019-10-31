@@ -109,6 +109,19 @@ public class Player : MonoBehaviour
     [Tooltip("Animator Controller reference")]
     public Animator HandsAnim;
 
+
+    /// <summary>
+    /// set slope and interval for audio value clamp
+    /// </summary>
+    float slope = 0.1f;
+    float interval = 1;
+    private float smooth = 0.1f;
+    private float nTime = 0f;
+    private float dir = 0.01f;
+
+    public Transform particleTarget;
+
+
     #endregion
 
     #region Private Variables
@@ -228,6 +241,7 @@ public class Player : MonoBehaviour
 
                     if (gameObject.GetComponent<Item_Use>().itemReady)
                     {
+                        particleTarget = hit.transform;
                         gameObject.GetComponent<Item_Use>().Lightning();
                     }
                 }
@@ -253,6 +267,7 @@ public class Player : MonoBehaviour
 
                     if (gameObject.GetComponent<Item_Use>().itemReady)
                     {
+                        particleTarget = hit.transform;
                         gameObject.GetComponent<Item_Use>().Lightning();
                     }
                 }
@@ -280,10 +295,28 @@ public class Player : MonoBehaviour
                 //gameObject.GetComponent<Item_Use>().Lightning();
             }
         }
+        
 
-        crouchSuspicionRate = Random.Range(0.04f, 0.06f);
-        walkSuspicionRate = Random.Range(0.18f, 0.22f);
-        sprintSuspicionRate = Random.Range(0.37f, 0.43f);
+        //setting clamp smooth
+        if (Time.time > nTime)
+        {
+            nTime += interval * (0.5f + Random.value);
+            dir = -dir;
+        }
+
+        smooth += dir * slope * Time.deltaTime;
+        if (smooth > 1 || smooth < 0) dir = -dir;
+        smooth = Mathf.Clamp(smooth, 0.02f, 0.03f);
+
+        //set suspicion rates
+        crouchSuspicionRate = smooth * 2;
+        walkSuspicionRate = smooth * 12;
+        sprintSuspicionRate = smooth * 24;
+
+
+        //crouchSuspicionRate = Mathf.Round(Random.Range(4f, 6f))/100;  0.04, 0.06
+        //walkSuspicionRate = Mathf.Round(Random.Range(18f, 22f))/100; 0.16, 0.24
+        //sprintSuspicionRate = Mathf.Round(Random.Range(37f, 43f))/100; 0.37, 0.43
 
         if (_sprinting)
         {
@@ -471,9 +504,9 @@ public class Player : MonoBehaviour
         //}
 
         if (gameObject.GetComponent<Item_Use>().itemReady)
-            _interactRange = 10;
+            _interactRange = 6;
         else
-            _interactRange = 5;
+            _interactRange = 2;
 
 
         //if (Input.GetKeyDown(KeyCode.Mouse0))
