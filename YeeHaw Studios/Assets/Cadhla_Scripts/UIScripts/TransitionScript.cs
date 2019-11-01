@@ -23,7 +23,7 @@ public class TransitionScript : MonoBehaviour
     public float timer;
 
     private float skipTimer;
-    private float skipFinish = 3f;
+    private float skipFinish = 2f;
 
 
     // Start is called before the first frame update
@@ -41,18 +41,10 @@ public class TransitionScript : MonoBehaviour
     void Update()
     {
 
-
         if (Input.GetKey(KeyCode.E))
         {
-                skipTimer += Time.deltaTime;
+            skipTimer += Time.deltaTime;
         }
-
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            skipTimer = 0f;
-        }
-
-
 
         if (skipTimer >= skipFinish)
         {

@@ -16,7 +16,7 @@ public class DetectionSlider : MonoBehaviour
 
         if (player.isMoving)
         {
-            audioValue = 43 - (0.86f * (player.suspicionRate * 200));
+            audioValue = 43 - (0.86f * (player.suspicionRate * 100));
             needle.rectTransform.rotation = Quaternion.Euler(0f, 0f, audioValue);
         }
         else

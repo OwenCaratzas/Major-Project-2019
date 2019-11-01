@@ -7,10 +7,12 @@ public class Fence_Guard_Detection : MonoBehaviour
 
     public GameObject electricFence;
 
+    public FenceBehaviour leverCheck;
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "FenceDetection")
+        if (other.gameObject.tag == "FenceDetection" && leverCheck.leverPulled == false)
         {
             Debug.Log("Guard");
             electricFence.SetActive(false);
@@ -20,7 +22,7 @@ public class Fence_Guard_Detection : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "FenceDetection")
+        if (other.gameObject.tag == "FenceDetection" && leverCheck.leverPulled == false)
         {
             Debug.Log("Guard");
             electricFence.SetActive(true);

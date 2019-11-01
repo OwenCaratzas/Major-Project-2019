@@ -7,7 +7,7 @@ public class FenceBehaviour : MonoBehaviour
     public GameObject[] Fences;
     public GameObject Lever;
 
-    public bool fenceActive = true;
+    public bool leverPulled = false;
 
     public AudioClip leverClip;
     public AudioSource leverAudio;
@@ -17,7 +17,7 @@ public class FenceBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (fenceActive == false)
+        if (leverPulled == true)
         {
             for (int i = 0; i < Fences.Length; i++ )
             {
@@ -26,21 +26,25 @@ public class FenceBehaviour : MonoBehaviour
         }
     }
 
-    void PullTheLever()
+    public void PullTheLever()
     {
         Debug.Log("Pull The Lever");
 
-        if (fenceActive == true)
+        if (leverPulled == false)
         {
+            Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
+
+            leverAudio.Play();
+            leverAudio.clip = leverClip;
+
+            leverPulled = true;
+
             if (firstContact == false)
             {
                 firstContact = true;
-                Lever.transform.Rotate(0, 0, -70.0f, Space.Self);
-
-                leverAudio.Play();
-                leverAudio.clip = leverClip;
             }
+
         }
-        fenceActive = false;
+        
     }
 }

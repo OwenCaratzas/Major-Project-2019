@@ -16,7 +16,7 @@ public class Escape : MonoBehaviour
             {
                 mouseControl.TurnOnMouse();
                 Time.timeScale = 1f;
-                SceneManager.LoadScene("LevelSelect");
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }

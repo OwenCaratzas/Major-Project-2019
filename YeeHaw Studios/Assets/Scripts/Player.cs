@@ -282,15 +282,15 @@ public class Player : MonoBehaviour
                     hit.transform.gameObject.SendMessage("Search");
                 }
 
-                else if (hit.transform.tag == "Battery")
-                {
-                    Battery = hit.transform.gameObject;
-                    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
-                    {
-                        rechargeUp.RechargeNow();
-                        hit.transform.gameObject.SendMessage("TakeCharge");
-                    }
-                }
+                //else if (hit.transform.tag == "Battery")
+                //{
+                //    Battery = hit.transform.gameObject;
+                //    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
+                //    {
+                //        rechargeUp.RechargeNow();
+                //        hit.transform.gameObject.SendMessage("TakeCharge");
+                //    }
+                //}
 
                 //gameObject.GetComponent<Item_Use>().Lightning();
             }
@@ -309,9 +309,9 @@ public class Player : MonoBehaviour
         smooth = Mathf.Clamp(smooth, 0.02f, 0.03f);
 
         //set suspicion rates
-        crouchSuspicionRate = smooth * 2;
-        walkSuspicionRate = smooth * 12;
-        sprintSuspicionRate = smooth * 24;
+        crouchSuspicionRate = smooth * 3;
+        walkSuspicionRate = smooth * 18;
+        sprintSuspicionRate = smooth * 32;
 
 
         //crouchSuspicionRate = Mathf.Round(Random.Range(4f, 6f))/100;  0.04, 0.06

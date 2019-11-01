@@ -22,11 +22,15 @@ public class Item_Use : MonoBehaviour
 
     private bool powerDrain = false;
 
-    private bool powerRecharging = false;
+    public GameObject equipmentImage;
 
-    public Image equipmentImage;
-    public Sprite equipmentOff;
-    public Sprite equipmentOn;
+    public Image back1;
+    public Image back2;
+    public Image back3;
+
+    public float spinCog;
+    //public Sprite equipmentOff;
+    //public Sprite equipmentOn;
 
     public AudioClip noChargeClip;
     public AudioClip EMP_activate;
@@ -39,7 +43,7 @@ public class Item_Use : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -47,16 +51,20 @@ public class Item_Use : MonoBehaviour
             {
                 if (itemInactive == true && power >= 1f)
                 {
-                    itemReady = true;
+                    equipmentImage.SetActive(false);
+
+                    itemReady = false;
                     itemInactive = false;
-                    equipmentImage.sprite = equipmentOff;
+                    //equipmentImage.sprite = equipmentOff;
                 }
 
-                else if (itemReady == true)
+                else if (itemReady == false)
                 {
+                    equipmentImage.SetActive(true);
+
                     itemInactive = true;
-                    itemReady = false;
-                    equipmentImage.sprite = equipmentOn;
+                    itemReady = true;
+                    //equipmentImage.sprite = equipmentOn;
                 }
             }
 
@@ -70,12 +78,28 @@ public class Item_Use : MonoBehaviour
         //sprite check
         if (itemInactive == true)
         {
-            equipmentImage.sprite = equipmentOff;
+            back1.rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            back2.rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            back3.rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            equipmentImage.SetActive(false);
+
+            //equipmentImage.sprite = equipmentOff;
         }
 
         if (itemReady == true)
         {
-            equipmentImage.sprite = equipmentOn;
+            Debug.Log("Spin Cogs");
+
+            spinCog += Time.deltaTime;
+
+            back1.rectTransform.rotation = Quaternion.Euler(0f, 0f, spinCog*16);
+            back2.rectTransform.rotation = Quaternion.Euler(0f, 0f, -spinCog*20);
+            back3.rectTransform.rotation = Quaternion.Euler(0f, 0f, spinCog*20);
+
+            equipmentImage.SetActive(true);
+
+            //equipmentImage.sprite = equipmentOn;
         }
 
         //power bar check for draining
@@ -106,38 +130,6 @@ public class Item_Use : MonoBehaviour
             powerBar.SetReverseSize(power);
         }
 
-
-
-        ////power bar recharge
-        //if (powerRecharging == true)
-        //{
-        //    if (power <= 1f)
-        //    {
-        //        power += 0.1f;
-        //        powerBar.SetReverseSize(power);
-        //    }
-        //}
-        //if (power >= 1)
-        //{
-        //    powerRecharging = false;
-        //}
-
-
-
-
-        ////testing mechanic
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    if (itemReady == true && power == 1f)
-        //    {
-        //        itemInactive = true;
-        //        itemReady = false;
-        //        GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
-        //        powerDrain = true;
-        //        Lightning();
-        //        //equipmentLimit--;
-        //    }
-        //}
     }
 
     public void Lightning()
@@ -153,16 +145,6 @@ public class Item_Use : MonoBehaviour
             powerDrain = true;
             //equipmentLimit--;
         }
-    }
-
-
-    public void RechargeNow()
-    {
-        if (power <= 0)
-        {
-            powerRecharging = true;
-        }
-
     }
 
 }

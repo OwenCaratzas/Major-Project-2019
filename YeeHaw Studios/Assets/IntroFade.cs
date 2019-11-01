@@ -25,7 +25,9 @@ public class IntroFade : MonoBehaviour
     public TypeWriterEffect stringRef;
 
     private float skipTimer;
-    private float skipFinish = 3f;
+    private float skipFinish = 2f;
+
+    public Transform slider;
 
 
     // Start is called before the first frame update
@@ -52,6 +54,13 @@ public class IntroFade : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             skipTimer += Time.deltaTime;
+            slider.localScale = new Vector3((skipTimer/2), 1f);
+        }
+
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            skipTimer = 0;
+            slider.localScale = new Vector3(skipTimer, 1f);
         }
 
         if (skipTimer >= skipFinish)
@@ -101,6 +110,7 @@ public class IntroFade : MonoBehaviour
         cam2.SetActive(true);
 
         skipPrompt.SetActive(false);
+        slider.localScale = new Vector3(0f, 0f);
 
         blackout.color = new Color(blackout.color.r, blackout.color.g, blackout.color.b, 0f);
 

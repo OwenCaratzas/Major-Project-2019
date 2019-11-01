@@ -290,15 +290,15 @@ public class Cadhla_Player : MonoBehaviour
                     hit.transform.gameObject.SendMessage("Search");
                 }
 
-                else if (hit.transform.tag == "Battery")
-                {
-                    Battery = hit.transform.gameObject;
-                    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
-                    {
-                        rechargeUp.RechargeNow();
-                        hit.transform.gameObject.SendMessage("TakeCharge");
-                    }
-                }
+                //else if (hit.transform.tag == "Battery")
+                //{
+                //    Battery = hit.transform.gameObject;
+                //    if (Battery.GetComponent<Recharge_Station>().chargeAvailable)
+                //    {
+                //        rechargeUp.RechargeNow();
+                //        hit.transform.gameObject.SendMessage("TakeCharge");
+                //    }
+                //}
 
             }
         }

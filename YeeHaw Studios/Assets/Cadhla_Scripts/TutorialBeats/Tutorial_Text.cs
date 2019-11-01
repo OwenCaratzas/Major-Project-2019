@@ -98,14 +98,13 @@ public class Tutorial_Text : MonoBehaviour
             }
         }
 
-        if (leverOne.fenceActive == false)
+        if (leverOne.leverPulled == true)
         {
             if (tutTrigger == false)
             {
                 WaitTime = 3;
                 startTimer = true;
                 tutTrigger = true;
-                leverOne.fenceActive = true;
             }
         }
 
