@@ -548,7 +548,7 @@ public class Sentry : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("MainMenu");
         //Debug.Log("Didn't work");
     }
 }
