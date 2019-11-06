@@ -8,7 +8,7 @@ public class Steam : MonoBehaviour
     public GameObject steamOne;
     public GameObject steamTwo;
 
-    public Animator m_robotAnimController;
+    public Sentry _detectCheck;
 
     public AudioSource whistleAudio;
     public AudioClip whistle;
@@ -16,13 +16,13 @@ public class Steam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_robotAnimController.GetBool("Detected") == true && m_robotAnimController.GetBool("Patrol") == false)
+        if (_detectCheck.detectedCheck == true)
         {
             steamOne.SetActive(true);
             steamTwo.SetActive(true);
@@ -30,7 +30,6 @@ public class Steam : MonoBehaviour
             Debug.Log("PlayWhistle");
 
             whistleAudio.Play();
-            whistleAudio.clip = whistle;
         }
         else
         {

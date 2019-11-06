@@ -1,13 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public GameObject success;
+
+    public void FixedUpdate()
     {
-        SceneManager.LoadScene("LevelOne");
+        if (Escape.objectiveComplete == true)
+        {
+            success.SetActive(true);
+        }
+
+        if (Escape.objectiveComplete == false)
+        {
+            success.SetActive(false);
+        }
     }
 
     public void QuitGame ()

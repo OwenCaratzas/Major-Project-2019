@@ -208,8 +208,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.4
-  MaxDistance: 1
+  MinDistance: 0.2
+  MaxDistance: 0.6
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electricFence: {fileID: 3091177858341564352}
+  leverCheck: {fileID: 0}
 --- !u!54 &209636960068594290
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -418,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electricFence: {fileID: 6097745942069269450}
+  leverCheck: {fileID: 0}
 --- !u!54 &8660894519037597718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -547,8 +549,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.4
-  MaxDistance: 1
+  MinDistance: 0.2
+  MaxDistance: 0.6
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

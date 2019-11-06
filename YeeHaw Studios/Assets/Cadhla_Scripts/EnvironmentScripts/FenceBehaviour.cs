@@ -28,8 +28,6 @@ public class FenceBehaviour : MonoBehaviour
 
     public void PullTheLever()
     {
-        Debug.Log("Pull The Lever");
-
         if (leverPulled == false)
         {
             Lever.transform.Rotate(0, 0, -70.0f, Space.Self);

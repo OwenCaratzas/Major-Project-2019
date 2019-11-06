@@ -18,7 +18,6 @@ public class Pressure_Plate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collide");
         if (other.gameObject.tag == "Player")
         {
             firstContact = true;

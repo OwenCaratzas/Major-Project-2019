@@ -58,7 +58,7 @@ public class Item_Use : MonoBehaviour
                     //equipmentImage.sprite = equipmentOff;
                 }
 
-                else if (itemReady == false)
+                else if (itemReady == false && power >= 1f)
                 {
                     equipmentImage.SetActive(true);
 
@@ -89,8 +89,6 @@ public class Item_Use : MonoBehaviour
 
         if (itemReady == true)
         {
-            Debug.Log("Spin Cogs");
-
             spinCog += Time.deltaTime;
 
             back1.rectTransform.rotation = Quaternion.Euler(0f, 0f, spinCog*16);
@@ -137,8 +135,6 @@ public class Item_Use : MonoBehaviour
         if (itemReady == true)
         {
             boltSpawn = player.particleTarget;
-
-            Debug.Log("Shocking!");
             itemInactive = true;
             itemReady = false;
             GameObject go = Instantiate(lightningBolt, boltSpawn.transform.position, boltSpawn.transform.rotation);

@@ -18,6 +18,8 @@ public class IntroFade : MonoBehaviour
     public GameObject gameUI;
     public GameObject TutorialOne;
 
+    public GameObject _audioManage1;
+
     public GameObject skipPrompt;
 
     public Text BeatOne;
@@ -116,6 +118,8 @@ public class IntroFade : MonoBehaviour
 
         TutorialOne.SetActive(true);
         gameUI.SetActive(true);
+
+        _audioManage1.SetActive(true);
 
         FadeIn();
         BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 0f);

@@ -58,6 +58,5 @@ public class Button_Check : MonoBehaviour
 
         buttonDown = true;
         buttonBool.AddToButtonBool();
-        Debug.Log("IT WORKED");
     }
 }

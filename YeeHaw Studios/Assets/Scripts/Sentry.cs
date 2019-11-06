@@ -63,6 +63,9 @@ public class Sentry : MonoBehaviour
     public float _detectionAmount = 0.0f;
 
 
+    [Space]
+    public bool detectedCheck;
+
     [Header("Serialized Private variables")]
     #endregion
 
@@ -150,6 +153,7 @@ public class Sentry : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoBraking = false;
         _destination = _agent.destination;
+        detectedCheck = false;
 
         _currentTarget = targetList[0];
         _lastTarget = 0;
@@ -313,6 +317,9 @@ public class Sentry : MonoBehaviour
         //"Main" for everything patrol related
         _spotlight.color = Color.yellow;
         _agent.speed = 1.5f;
+
+        detectedCheck = false;
+
         Patrol();
     }
 
@@ -329,6 +336,7 @@ public class Sentry : MonoBehaviour
         //_spotlight.color = new Color(1, 0.64f, 0, 1);
         _spotlight.color = Color.magenta;
         _agent.speed = 0.0f;
+        detectedCheck = false;
         // rotate for a few seconds then go back to patrol
         StartCoroutine(SearchRotation());
         _playerOutOFBounds = false;
@@ -345,6 +353,8 @@ public class Sentry : MonoBehaviour
         _agent.speed = 0.0f;
         m_robotAnimController.SetBool("Detected", true);
         m_robotAnimController.SetBool("Patrol", false);
+
+        detectedCheck = true;
 
         Invoke("ChaseBehaviour", 2);
 
@@ -375,6 +385,7 @@ public class Sentry : MonoBehaviour
         m_robotAnimController.SetBool("Detected", false);
         m_robotAnimController.SetBool("Chase", true);
         _agent.speed = 3.5f;
+        detectedCheck = false;
         //_lastKnownPlayerPos = _player.transform.position;
         //Chase(_player.transform);
         //_startSearch = true;

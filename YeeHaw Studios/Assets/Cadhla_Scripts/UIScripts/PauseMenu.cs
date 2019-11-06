@@ -5,13 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
     public GameObject gameMenuUI;
     public GameObject gameMenuUITwo;
 
     public Player mouseControl;
+    public Player audioCheck;
+
+
+    // audiosource references
+    public AudioSource _player;
+    public List<AudioSource> _sentry;
+    public List<AudioSource> _fence;
 
 
     // Update is called once per frame
@@ -32,6 +39,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume ()
     {
+        _player.Play();
+        for (int i = 0; i < _sentry.Count; i++)
+        {
+            _sentry[i].Play();
+        }
+
+        for (int i = 0; i < _fence.Count; i++)
+        {
+            _fence[i].Play();
+        }
+
         mouseControl.TurnOffMouse();
         gameMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
@@ -41,11 +59,24 @@ public class PauseMenu : MonoBehaviour
 
     void Pause ()
     {
+        _player.Pause();
+        for (int i = 0; i < _sentry.Count; i++)
+        {
+            _sentry[i].Pause();
+        }
+
+        for (int i = 0; i < _fence.Count; i++)
+        {
+            _fence[i].Pause();
+        }
+
+
+        GameIsPaused = true;
         mouseControl.TurnOnMouse();
         gameMenuUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true; 
+
     }
 
     public void RestartLevel()

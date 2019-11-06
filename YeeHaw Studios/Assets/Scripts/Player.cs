@@ -121,7 +121,6 @@ public class Player : MonoBehaviour
 
     public Transform particleTarget;
 
-
     #endregion
 
     #region Private Variables
@@ -169,7 +168,6 @@ public class Player : MonoBehaviour
     /// Should we crouch after sprinting
     /// </summary>
     private bool _sprintCrouching;
-
     
     #endregion
 
@@ -425,6 +423,7 @@ public class Player : MonoBehaviour
                     suspicionRate = sprintSuspicionRate;
                     _col.radius = sprintAudioRadius;
                     _speed = sprintSpeed;
+
                     HandsAnim.SetBool("Running", true);
                     HandsAnim.SetBool("Walking", false);
                     HandsAnim.SetBool("Crouching", false);
@@ -433,7 +432,7 @@ public class Player : MonoBehaviour
                     //setting audio to play
                     if (playerFootstepAudio.clip != RunningFootstepClip)
                     {
-                        playerFootstepAudio.volume = 0.3f;
+                        playerFootstepAudio.volume = 0.6f;
                         playerFootstepAudio.clip = RunningFootstepClip;
                         playerFootstepAudio.Play();
                     }
@@ -443,6 +442,7 @@ public class Player : MonoBehaviour
                     suspicionRate = walkSuspicionRate;
                     _col.radius = walkAudioRadius;
                     _speed = walkSpeed;
+
                     HandsAnim.SetBool("Walking", true);
                     HandsAnim.SetBool("Running", false);
                     HandsAnim.SetBool("Crouching", false);
@@ -451,9 +451,11 @@ public class Player : MonoBehaviour
                     //setting audio to play
                     if (playerFootstepAudio.clip != WalkingFootstepClip)
                     {
-                        playerFootstepAudio.volume = 0.2f;
+                        playerFootstepAudio.volume = 0.4f;
                         playerFootstepAudio.clip = WalkingFootstepClip;
                         playerFootstepAudio.Play();
+
+
                     }
                     break;
 
@@ -470,7 +472,7 @@ public class Player : MonoBehaviour
                     //setting audio to play
                     if (playerFootstepAudio.clip != CrouchingFootstepClip)
                     {
-                        playerFootstepAudio.volume = 0.1f;
+                        playerFootstepAudio.volume = 0.2f;
                         playerFootstepAudio.clip = CrouchingFootstepClip;
                         playerFootstepAudio.Play();
                     }
@@ -484,6 +486,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+
             isMoving = false;
 
             suspicionRate = 0f;

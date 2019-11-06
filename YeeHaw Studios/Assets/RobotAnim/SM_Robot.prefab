@@ -2502,10 +2502,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 2
+  MinDistance: 0.2
+  MaxDistance: 8
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2587,11 +2587,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6838291527217756415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8492809f1b5c00b4a826f3d52bef904a, type: 3}
+  m_Script: {fileID: 11500000, guid: 02a6db7be5026e1488ba675fcfa41f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guardFootstepClip: {fileID: 8300000, guid: 22bc0ad006660f241aef5b4f60a9c71c, type: 3}
-  whistle: {fileID: 8300000, guid: 1950e54fee685864fb8567ff8ebe3315, type: 3}
+  guardFootstep: {fileID: 8300000, guid: 22bc0ad006660f241aef5b4f60a9c71c, type: 3}
+  guard: {fileID: 2459213857277824624}
 --- !u!1 &6838291527217756545
 GameObject:
   m_ObjectHideFlags: 0
