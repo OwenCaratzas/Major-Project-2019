@@ -121,6 +121,11 @@ public class IntroFade : MonoBehaviour
 
         _audioManage1.SetActive(true);
 
+        if (Escape.objectiveComplete == true)
+        {
+            Escape.objectiveComplete = false;
+        }
+
         FadeIn();
         BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 0f);
     }

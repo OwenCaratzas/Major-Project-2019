@@ -7,7 +7,9 @@ public class DetectionMeter : MonoBehaviour
     public Transform bar;
 
     public Sentry[] Guards;
+
     private float currentDetectionValue = 0f;
+    private float maxDetectionValue = 0f;
 
 
     // Start is called before the first frame update
@@ -19,11 +21,20 @@ public class DetectionMeter : MonoBehaviour
 
     void Update()
     {
+        currentDetectionValue = maxDetectionValue;
+
         for (int i = 0; i < Guards.Length; i++)
         {
             if (Guards[i]._detectionAmount > 0f)
             {
-                currentDetectionValue = Guards[i]._detectionAmount;
+                if (maxDetectionValue >= currentDetectionValue)
+                {
+                    maxDetectionValue = Guards[i]._detectionAmount;
+                }
+                else if (currentDetectionValue <= maxDetectionValue)
+                {
+
+                }
             }
         }
 

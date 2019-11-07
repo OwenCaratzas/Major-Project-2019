@@ -44,6 +44,7 @@ public class Tutorial_Text : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         playDisplay.color = new Color(playDisplay.color.r, playDisplay.color.g, playDisplay.color.b, 0f);
 
         FadeInPlay = false;
@@ -56,7 +57,11 @@ public class Tutorial_Text : MonoBehaviour
 
     public void FixedUpdate()
     {
-       
+        if (TutorialSkip.skipTutorial == true)
+        {
+            this.gameObject.SetActive(false);
+        }
+
         if (FadeInPlay == true)
         {
             if (FadeInTime <= 1)

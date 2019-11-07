@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject gameMenuUI;
     public GameObject gameMenuUITwo;
 
+    public GameObject OptionsMenu;
+
     public Player mouseControl;
     public Player audioCheck;
 
@@ -51,6 +53,12 @@ public class PauseMenu : MonoBehaviour
         }
 
         mouseControl.TurnOffMouse();
+
+        if (OptionsMenu.activeSelf == true)
+        {
+            OptionsMenu.SetActive(false);
+        }
+
         gameMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;

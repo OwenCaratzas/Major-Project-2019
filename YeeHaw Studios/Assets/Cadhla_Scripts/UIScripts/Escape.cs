@@ -8,7 +8,9 @@ public class Escape : MonoBehaviour
     public GameObject safe;
     public Player mouseControl;
 
-    public static bool objectiveComplete = true;
+    public static bool objectiveComplete;
+
+    public static bool firstTimeFinish;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -17,6 +19,7 @@ public class Escape : MonoBehaviour
             if (safe.GetComponent<Safe_Script>().objectiveCompleted)
             {
                 objectiveComplete = true;
+                firstTimeFinish = true;
                 mouseControl.TurnOnMouse();
                 Time.timeScale = 1f;
                 SceneManager.LoadScene("MainMenu");
