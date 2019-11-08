@@ -4,34 +4,53 @@ using UnityEngine;
 
 public class TutorialSkip : MonoBehaviour
 {
+    [SerializeField]
     public static bool skipTutorial;
 
     // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
-        if (Escape.firstTimeFinish == true)
+        if (!PlayerPrefs.HasKey("Tutorial"))
         {
-            skipTutorial = true;
+            PlayerPrefs.SetInt("Tutorial", 1);
+            skipTutorial = false;
+            PlayerPrefs.Save();
         }
-
-        else skipTutorial = false;
+        else
+        {
+            if (PlayerPrefs.GetInt("Tutorial") == 0)
+            {
+                skipTutorial = true;
+            }
+            else
+            {
+                skipTutorial = false;
+            }
+        }
     }
 
     public void Update()
     {
-        Debug.Log(skipTutorial.ToString());
+        if (Escape.firstTimeFinish == true)
+        {
+            PlayerPrefs.SetInt("Tutorial", 0);
+            skipTutorial = true;
+        }
     }
 
     public void changeTutState()
     {
         if (skipTutorial == true)
         {
+            PlayerPrefs.SetInt("Tutorial", 1);
             skipTutorial = false;
         }
 
         else if (skipTutorial == false)
         {
+            PlayerPrefs.SetInt("Tutorial", 0);
             skipTutorial = true;
         }
     }
 }
+

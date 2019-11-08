@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Options_Audio_Slider : MonoBehaviour
 {
+    [SerializeField]
     public static Slider _volValue;
 
 

@@ -8,9 +8,27 @@ public class Options_Menu_Toggle : MonoBehaviour
     public Text toggleButton;
     private bool tutActive;
 
-    private void Start()
+    public void Awake()
     {
-        tutActive = true;
+        if(!PlayerPrefs.HasKey("Tutorial"))
+        {
+            PlayerPrefs.SetInt("Tutorial", 1);
+            tutActive = true;
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt ("Tutorial")  == 0)
+            {
+                tutActive = false;
+            }
+            else
+            {
+                tutActive = true;
+            }
+        }
+
+
     }
 
     public void Update()
