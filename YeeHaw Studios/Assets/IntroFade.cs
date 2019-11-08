@@ -31,11 +31,14 @@ public class IntroFade : MonoBehaviour
 
     public Transform slider;
 
+    public static bool introPlaying;
+
 
     // Start is called before the first frame update
     void Start()
     {
         blackIn = 1;
+        introPlaying = true;
     }
 
     // Update is called once per frame
@@ -126,6 +129,7 @@ public class IntroFade : MonoBehaviour
             Escape.objectiveComplete = false;
         }
 
+        introPlaying = false;
         FadeIn();
         BeatOne.color = new Color(BeatOne.color.r, BeatOne.color.g, BeatOne.color.b, 0f);
     }
