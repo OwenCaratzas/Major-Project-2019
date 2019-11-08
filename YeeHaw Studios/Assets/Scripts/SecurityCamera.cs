@@ -12,7 +12,7 @@ public class SecurityCamera : MonoBehaviour
     private float _interpolationValue = 0.0f;
 
     public List<GameObject> guardList;
-    public GameObject[] guardArr;
+    //public GameObject[] guardArr;
     private Sentry _guardScript;
     private Light _spotlight;
     private bool _alert;
