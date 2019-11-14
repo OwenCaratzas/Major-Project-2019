@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
 
     public void FixedUpdate()
     {
+        Debug.Log(Time.timeScale);
+
         if (Escape.objectiveComplete == true)
         {
             success.SetActive(true);
