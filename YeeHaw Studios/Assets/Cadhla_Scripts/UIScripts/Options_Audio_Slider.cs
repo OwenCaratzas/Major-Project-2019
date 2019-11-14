@@ -11,6 +11,6 @@ public class Options_Audio_Slider : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        AudioListener.volume = _volValue.value*2;
+        //AudioListener.volume = _volValue.value*2;
     }
 }
