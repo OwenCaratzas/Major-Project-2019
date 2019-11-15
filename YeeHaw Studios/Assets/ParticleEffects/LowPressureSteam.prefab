@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.078932986
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -660,7 +660,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 10
+    angle: 13.686977
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -918,7 +918,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 16
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -971,7 +971,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -981,23 +981,32 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
+          time: 0.025318146
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: -0.059191126
+          outSlope: -0.059191126
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0.3332963
+        - serializedVersion: 3
+          time: 0.5063739
+          value: 0.46221083
+          inSlope: -0.06428219
+          outSlope: -0.06428219
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.43340263
+          outWeight: 0.30708754
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0.659338
+          inSlope: 0.049140334
+          outSlope: 0.049140334
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.50483245
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -4675,7 +4684,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 5
@@ -4693,7 +4702,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

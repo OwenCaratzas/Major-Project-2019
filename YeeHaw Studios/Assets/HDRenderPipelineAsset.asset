@@ -31,7 +31,7 @@ MonoBehaviour:
     diffuseGlobalDimmer: 1
     specularGlobalDimmer: 1
     shaderLitMode: 1
-    enableDepthPrepassWithDeferredRendering: 0
+    enableDepthPrepassWithDeferredRendering: 1
     enableTransparentPrepass: 1
     enableMotionVectors: 1
     enableObjectMotionVectors: 1

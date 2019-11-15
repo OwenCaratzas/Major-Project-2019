@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ViewCone : MonoBehaviour
 {
+
     //private Vector3 _noAngle;
     private BuildMesh _meshScript;
     private Vector3 forwardDistance;

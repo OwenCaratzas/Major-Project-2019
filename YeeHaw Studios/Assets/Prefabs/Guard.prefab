@@ -130,7 +130,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3ef8dc2d1f7f26c4cbf41587d34d548c, type: 2}
+  - {fileID: 2100000, guid: 1a9ffa1c879f1324eb7c8c1471b81477, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -301,6 +301,7 @@ MonoBehaviour:
   skipDetection: 0
   captureScreen: {fileID: 0}
   _detectionAmount: 0
+  viewCone: {fileID: 866066648326772858}
   detectedCheck: 0
   _lastKnownPlayerPos: {x: 0, y: 0, z: 0}
   _startSearch: 0

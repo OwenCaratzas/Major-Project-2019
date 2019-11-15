@@ -62,6 +62,7 @@ public class Sentry : MonoBehaviour
     [Tooltip("How aware the AI is")]
     public float _detectionAmount = 0.0f;
 
+    public GameObject viewCone;
 
     [Space]
     public bool detectedCheck;
@@ -123,6 +124,8 @@ public class Sentry : MonoBehaviour
 
     private Light _spotlight;
 
+    private Renderer _viewConeRenderer;
+
     bool _playerNotFound;
     #endregion
 
@@ -148,6 +151,7 @@ public class Sentry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //viewCone = GetComponentInChildren<ViewCone>();
         _spotlight = GetComponentInChildren<Light>();
         _meshScript = GetComponentInChildren<BuildMesh>();
         _agent = GetComponent<NavMeshAgent>();
@@ -201,14 +205,6 @@ public class Sentry : MonoBehaviour
                     break;
             }
 
-            // decrease detection if the player is not being detected
-            if (!increaseDetection) //&& _curBehaviour != _BEHAVIOURS.Chase)
-            {
-                _detectionAmount -= MaxDetectionAmount * 0.001f;
-                if (_detectionAmount < 0)
-                    _detectionAmount = 0;
-            }
-
             //Debug.Log("detection amount: " + _detectionAmount);
             if (_detectionAmount >= MaxDetectionAmount)
             {
@@ -233,6 +229,14 @@ public class Sentry : MonoBehaviour
                 //_curBehaviour = _BEHAVIOURS.Patrol;
                 _curBehaviour = _BEHAVIOURS.Search;
                 //_agent.speed = 1.0f;
+            }
+
+            // decrease detection if the player is not being detected
+            if (!increaseDetection) //&& _curBehaviour != _BEHAVIOURS.Chase)
+            {
+                _detectionAmount -= MaxDetectionAmount * 0.001f;
+                if (_detectionAmount < 0)
+                    _detectionAmount = 0;
             }
         }
     }
@@ -316,6 +320,8 @@ public class Sentry : MonoBehaviour
         //Debug.Log("Patrol Behaviour");
         //"Main" for everything patrol related
         _spotlight.color = Color.yellow;
+        _viewConeRenderer = viewCone.GetComponent<Renderer>();
+        _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.yellow);
         _agent.speed = 1.5f;
 
         detectedCheck = false;
@@ -335,6 +341,7 @@ public class Sentry : MonoBehaviour
         //"Main" for everything search related
         //_spotlight.color = new Color(1, 0.64f, 0, 1);
         _spotlight.color = Color.magenta;
+        _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.magenta);
         _agent.speed = 0.0f;
         detectedCheck = false;
         // rotate for a few seconds then go back to patrol
@@ -350,6 +357,7 @@ public class Sentry : MonoBehaviour
         //Debug.Log("Detected Behaviour");
         // set the detection animation and freeze the guard in place for a short period of time
         _spotlight.color = Color.red;
+        _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.red);
         _agent.speed = 0.0f;
         m_robotAnimController.SetBool("Detected", true);
         m_robotAnimController.SetBool("Patrol", false);
@@ -382,6 +390,7 @@ public class Sentry : MonoBehaviour
         //Debug.Log("Chase Behaviour");
         //"Main" for everything chase related
         _spotlight.color = Color.red;
+        _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.red);
         m_robotAnimController.SetBool("Detected", false);
         m_robotAnimController.SetBool("Chase", true);
         _agent.speed = 3.5f;
@@ -437,12 +446,11 @@ public class Sentry : MonoBehaviour
                     //start increasing by the modifier dependant on what pose the player is in
                     _detectionAmount += suspicionRate;
 
-
                     //here we set up parameters dependant on behaviour state
 
 
                     // make sure the detection amount can't be higher than the max
-                    if (_detectionAmount > MaxDetectionAmount)
+                    if (_detectionAmount >= MaxDetectionAmount)
                         _detectionAmount = MaxDetectionAmount;
 
                     if (_detectionAmount >= MaxDetectionAmount)
