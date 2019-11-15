@@ -60,7 +60,7 @@ Shader "Standard (Outlined)" {
 
 			SubShader
 		{
-			Tags { "RenderType" = "Opaque" "RenderPipeline" = "HDRP" "PerformanceChecks" = "False" }
+			Tags { "RenderType" = "Opaque" "PerformanceChecks" = "False" }
 			LOD 300
 
 			// ----------------------

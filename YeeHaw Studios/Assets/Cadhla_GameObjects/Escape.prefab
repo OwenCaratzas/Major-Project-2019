@@ -80,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e87c0faa0394334cb36ac53bd6f105b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorTimer: 0
   doorMesh: {fileID: 4842557461401744252}
   startMarker: {fileID: 8937869863955594053}
   endMarker: {fileID: 4404438544876247448}
@@ -93,6 +92,9 @@ MonoBehaviour:
   buttonDownCheck: []
   numberOfTrueBooleans: 0
   maxTrueBooleansNeeded: 0
+  doorOpen: {fileID: 0}
+  doorOpenClip: {fileID: 0}
+  firstContact: 0
 --- !u!1 &3586166047041943093
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   safe: {fileID: 0}
+  mouseControl: {fileID: 0}
 --- !u!1 &8020266170427715123
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,20 +343,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2623754731603885099}
     m_Modifications:
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.302
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
@@ -400,6 +398,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: buttonDown
@@ -436,11 +439,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4400406659828876918}
     m_Modifications:
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -495,6 +493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}

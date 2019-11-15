@@ -528,14 +528,15 @@ MonoBehaviour:
   speed: 0.005
   numButtons: 2
   buttonArr:
-  - {fileID: 5437722933788516545}
-  - {fileID: 3832324098313369050}
+  - {fileID: 0}
+  - {fileID: 0}
   button: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
   buttonDownCheck: []
   numberOfTrueBooleans: 0
   maxTrueBooleansNeeded: 0
   doorOpen: {fileID: 718607948796923307}
   doorOpenClip: {fileID: 8300000, guid: f9099790f566c0041b024d47de57754a, type: 3}
+  firstContact: 0
 --- !u!1 &6156305890637979700
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,11 +574,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6465596870747115639}
     m_Modifications:
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,6 +628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
@@ -666,12 +667,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3176457121564064001}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3832324098313369050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1817814442339388635, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-    type: 3}
-  m_PrefabInstance: {fileID: 3176457121564064001}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5930256268521597978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -679,11 +674,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4666428043879819818}
     m_Modifications:
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -739,6 +729,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: buttonBool
@@ -759,17 +754,26 @@ PrefabInstance:
       propertyPath: buttonAudio
       value: 
       objectReference: {fileID: 4292795455844690282}
+    - target: {fileID: 9082916684262845472, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082916684262845472, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082916684262845472, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
 --- !u!4 &5437722934012330387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-    type: 3}
-  m_PrefabInstance: {fileID: 5930256268521597978}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5437722933788516545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1817814442339388635, guid: 0aa59b04d4c233b4bb45b30fb229e267,
     type: 3}
   m_PrefabInstance: {fileID: 5930256268521597978}
   m_PrefabAsset: {fileID: 0}
