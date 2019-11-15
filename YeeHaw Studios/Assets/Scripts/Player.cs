@@ -295,6 +295,37 @@ public class Player : MonoBehaviour
         }
         
 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, _interactRange + 5))
+            {
+                //if it was a button, activate it's script
+                if (hit.transform.tag == "Button")
+                {
+                    if (gameObject.GetComponent<Item_Use>().itemReady)
+                    {
+                        hit.transform.gameObject.SendMessage("ClickedOn");
+                        particleTarget = hit.transform;
+                        gameObject.GetComponent<Item_Use>().Lightning();
+                    }
+                }
+
+
+                else if (hit.transform.tag == "Lever")
+                {
+                    if (gameObject.GetComponent<Item_Use>().itemReady)
+                    {
+                        hit.transform.gameObject.SendMessage("PullTheLever");
+                        particleTarget = hit.transform;
+                        gameObject.GetComponent<Item_Use>().Lightning();
+                    }
+                }
+
+
+            }
+        }
+
         //setting clamp smooth
         if (Time.time > nTime)
         {

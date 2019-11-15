@@ -45,7 +45,28 @@ public class Item_Use : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (power > 0)
+            {
+
+                if (itemReady == false && power >= 1f)
+                {
+                    equipmentImage.SetActive(true);
+                    itemInactive = true;
+                    itemReady = true;
+                    //equipmentImage.sprite = equipmentOn;
+                }
+            }
+
+            else if (power <= 0)
+            {
+                noChargeAudio.Play();
+                noChargeAudio.clip = noChargeClip;
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             if (power > 0)
             {
@@ -58,22 +79,9 @@ public class Item_Use : MonoBehaviour
                     //equipmentImage.sprite = equipmentOff;
                 }
 
-                else if (itemReady == false && power >= 1f)
-                {
-                    equipmentImage.SetActive(true);
-
-                    itemInactive = true;
-                    itemReady = true;
-                    //equipmentImage.sprite = equipmentOn;
-                }
-            }
-
-            else if(power <= 0)
-            {
-                noChargeAudio.Play();
-                noChargeAudio.clip = noChargeClip;
             }
         }
+    
 
         //sprite check
         if (itemInactive == true)

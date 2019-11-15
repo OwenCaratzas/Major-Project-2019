@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject OptionsMenu;
 
+    public Camera_Shake shakeCheck;
     public Player mouseControl;
     public Player audioCheck;
 
@@ -62,6 +63,7 @@ public class PauseMenu : MonoBehaviour
             OptionsMenu.SetActive(false);
         }
 
+        shakeCheck.shakeAmount = 1f;
         gameMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -81,7 +83,7 @@ public class PauseMenu : MonoBehaviour
             _fence[i].Pause();
         }
 
-
+        shakeCheck.shakeAmount = 0f;
         GameIsPaused = true;
         mouseControl.TurnOnMouse();
         gameMenuUI.SetActive(false);

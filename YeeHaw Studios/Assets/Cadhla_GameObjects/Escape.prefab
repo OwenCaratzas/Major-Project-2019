@@ -86,8 +86,8 @@ MonoBehaviour:
   speed: 0.005
   numButtons: 2
   buttonArr:
-  - {fileID: 3449093902524151488}
-  - {fileID: 5873871377089192923}
+  - {fileID: 0}
+  - {fileID: 0}
   button: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
   buttonDownCheck: []
   numberOfTrueBooleans: 0
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 1828225718585901214}
   - component: {fileID: 34050773725693831}
   - component: {fileID: 6893744947546101634}
-  - component: {fileID: 4232993646544278972}
+  - component: {fileID: 87725261674602426}
   m_Layer: 0
   m_Name: DoorMesh
   m_TagString: Untagged
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 4842557461401744252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 1.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3035967635538730309}
   m_RootOrder: 4
@@ -165,7 +165,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4842557461401744252}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 205cdcbdaae99144191c3f4846f3cdf7, type: 3}
 --- !u!23 &6893744947546101634
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ed107bc9dc6e5934198b7d2e64be0aae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,7 +203,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4232993646544278972
+--- !u!65 &87725261674602426
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,7 +214,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.20271377, y: 2.1506615, z: 1.1821499}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5878656560306166289
 GameObject:
@@ -343,6 +343,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2623754731603885099}
     m_Modifications:
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,11 +403,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: buttonDown
@@ -426,12 +426,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3956280588945340955}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3449093902524151488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1817814442339388635, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-    type: 3}
-  m_PrefabInstance: {fileID: 3956280588945340955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5241629764288687872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -439,6 +433,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4400406659828876918}
     m_Modifications:
+    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -494,11 +493,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 8162049400516529344, guid: 0aa59b04d4c233b4bb45b30fb229e267,
         type: 3}
       propertyPath: buttonDown
@@ -519,12 +513,6 @@ PrefabInstance:
 --- !u!4 &5873871376758407817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
-    type: 3}
-  m_PrefabInstance: {fileID: 5241629764288687872}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5873871377089192923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1817814442339388635, guid: 0aa59b04d4c233b4bb45b30fb229e267,
     type: 3}
   m_PrefabInstance: {fileID: 5241629764288687872}
   m_PrefabAsset: {fileID: 0}
