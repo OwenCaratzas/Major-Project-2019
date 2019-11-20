@@ -13,29 +13,72 @@ public class ProximityHighlight : MonoBehaviour
     private Renderer _renderer;
     public GameObject player;
     private Player _playerScript;
+
+    [SerializeField]
+    private float _intesity;
+
+    private bool _startBlink;
+    
+    public Light hintLight;
+
+    private bool blink;
     
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        _renderer = GetComponent<Renderer>();
-        _material = _renderer.material;
+        //_renderer = GetComponent<Renderer>();
+        //_material = _renderer.material;
         _playerScript = player.GetComponent<Player>();
         //_material.shader = Shader.Find("Standard");
+        _intesity = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
+        if (!GetComponent<FenceBehaviour>().leverPulled)
         {
-            //_material.shader = outlineShader;
-            //_material.GetFloat("_Outline") = 0.025f;
-            _material.SetFloat("_Outline", outlineWidth);
+            if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
+            {
+                //if (_startBlink == true)
+                //{
+                //    _intesity = 0.0f;
+                //    _startBlink = false;
+                //}
+                //_material.shader = outlineShader;
+                //_material.GetFloat("_Outline") = 0.025f;
+                //_material.SetFloat("_Outline", outlineWidth);
+                LightBlink(true);
+            }
+            else
+            {
+                _startBlink = true;
+                //_material.shader = Shader.Find("Standard");
+                //_material.SetFloat("_Outline", 0);
+                LightBlink(false);
+            }
         }
         else
-            //_material.shader = Shader.Find("Standard");
-            _material.SetFloat("_Outline", 0);
+            hintLight.intensity = 0.0f;
+    }
+
+    void LightBlink(bool on)
+    {
+        if (on)
+        {
+            _intesity += (Time.deltaTime);
+
+            if (_intesity >= 1.25f)
+                _intesity = 0.0f;
+
+        }
+        else if(!on)
+        {
+            _intesity = 0.0f;
+        }
+
+        hintLight.intensity = _intesity;
     }
 }
