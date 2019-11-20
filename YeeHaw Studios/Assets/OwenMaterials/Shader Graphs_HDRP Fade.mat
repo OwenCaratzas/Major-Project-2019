@@ -17,6 +17,7 @@ Material:
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
+  - DistortionVectors
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
@@ -37,12 +38,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortionVectorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissiveColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,6 +66,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _UnlitColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_3A2ECA3A: 0
     - Vector1_43CF38D7: 5
@@ -65,32 +78,64 @@ Material:
     - Vector1_8F0A0350: 1.65
     - Vector1_97A3343C: 0.6
     - Vector1_F3331284: 4
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoffEnable: 0
+    - _BlendMode: 0
     - _BumpScale: 1
+    - _CullMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Distort: 1
+    - _DistortionBlendMode: 0
+    - _DistortionBlurBlendMode: 0
+    - _DistortionBlurDstBlend: 1
+    - _DistortionBlurRemapMax: 1
+    - _DistortionBlurRemapMin: 0
+    - _DistortionBlurScale: 1
+    - _DistortionBlurSrcBlend: 1
+    - _DistortionDepthTest: 1
+    - _DistortionDstBlend: 1
+    - _DistortionEnable: 0
+    - _DistortionOnly: 0
+    - _DistortionScale: 1
+    - _DistortionSrcBlend: 1
+    - _DistortionVectorBias: -1
+    - _DistortionVectorScale: 2
+    - _DoubleSidedEnable: 0
     - _DstBlend: 0
     - _EmissionScaleUI: 0
+    - _EnableFogOnTransparent: 0
     - _Fresnel: 3
     - _FresnelWidth: 3
     - _Glossiness: 0.5
+    - _HdrpVersion: 2
     - _IntersectionThreshold: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0.005
     - _Parallax: 0.02
+    - _PreRefractionPass: 0
     - _ScrollSpeedU: 2
     - _ScrollSpeedV: 0
     - _SrcBlend: 1
+    - _StencilRef: 2
+    - _StencilRefMV: 128
+    - _StencilWriteMask: 7
+    - _StencilWriteMaskMV: 128
+    - _SurfaceType: 0
+    - _TransparentSortPriority: 0
     - _UVSec: 0
+    - _ZTestModeDistortion: 4
     - _ZWrite: 1
     m_Colors:
     - Color_602533D6: {r: 0.8867924, g: 0.7684665, b: 0.09620861, a: 0}
     - Color_7E534AF4: {r: 1, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color_7E534AF4: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 0.58835566, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
