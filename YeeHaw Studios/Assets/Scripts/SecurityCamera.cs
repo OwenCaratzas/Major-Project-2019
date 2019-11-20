@@ -9,8 +9,8 @@ public class SecurityCamera : MonoBehaviour
 
     public float interpolationMultiplier = 0.25f;
 
-    public GameObject viewCone;
-    private Renderer _viewConeRenderer;
+    //public GameObject viewCone;
+    //private Renderer _viewConeRenderer;
 
     private float _interpolationValue = 0.0f;
 
@@ -23,7 +23,7 @@ public class SecurityCamera : MonoBehaviour
 
     private void Start()
     {
-        _viewConeRenderer = viewCone.GetComponent<Renderer>();
+        //_viewConeRenderer = viewCone.GetComponent<Renderer>();
         _spotlight = GetComponentInChildren<Light>();
     }
 
@@ -33,12 +33,12 @@ public class SecurityCamera : MonoBehaviour
         if (_alert)
         {
             _spotlight.color = Color.red;
-            _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.red);
+            //_viewConeRenderer.material.SetColor("Color_7E534AF4", Color.red);
         }
         else
         {
             _spotlight.color = new Color(1, 0.64f, 0, 1);
-            _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.yellow);
+            //_viewConeRenderer.material.SetColor("Color_7E534AF4", Color.yellow);
         }
 
         // Animate the rotation between start to end
