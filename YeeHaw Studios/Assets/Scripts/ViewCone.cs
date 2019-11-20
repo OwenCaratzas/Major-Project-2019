@@ -51,43 +51,51 @@ public class ViewCone : MonoBehaviour
     {
         Vector3 tempVec = new Vector3();
 
-        // middle cast
-        //tempVec = new Vector3(0, 0, distance);
-        tempVec = _meshScript.vertices[9];
-        SetDirectionPoint(tempVec);
-        // outer diamond
-        //tempVec = new Vector3(5, 0, distance);
-        tempVec = _meshScript.vertices[3];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(0, 5, distance);
-        tempVec = _meshScript.vertices[1];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(-5, 0, distance);
-        tempVec = _meshScript.vertices[7];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(0, -5, distance);
-        tempVec = _meshScript.vertices[5];
-        SetDirectionPoint(tempVec);
+        for (int i = 0; i < _meshScript.vertices.Length; i++)
+        {
+            tempVec = _meshScript.vertices[i];
+            SetDirectionPoint(tempVec);
+        }
 
-        // outer box
-        //tempVec = new Vector3(3.75f, -3.75f, distance);
+        //// middle cast
+        ////tempVec = new Vector3(0, 0, distance);
+        //tempVec = _meshScript.vertices[9];
         //SetDirectionPoint(tempVec);
-        tempVec = _meshScript.vertices[2];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(-3.75f, 3.75f, distance);
+        //// outer diamond
+        ////tempVec = new Vector3(5, 0, distance);
+        //tempVec = _meshScript.vertices[3];
         //SetDirectionPoint(tempVec);
-        tempVec = _meshScript.vertices[4];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(3.75f, 3.75f, distance);
+        ////tempVec = new Vector3(0, 5, distance);
+        //tempVec = _meshScript.vertices[1];
         //SetDirectionPoint(tempVec);
-        tempVec = _meshScript.vertices[6];
-        SetDirectionPoint(tempVec);
-        //tempVec = new Vector3(-3.75f, -3.75f, distance);
+        ////tempVec = new Vector3(-5, 0, distance);
+        //tempVec = _meshScript.vertices[7];
         //SetDirectionPoint(tempVec);
-        tempVec = _meshScript.vertices[8];
-        SetDirectionPoint(tempVec);
+        ////tempVec = new Vector3(0, -5, distance);
+        //tempVec = _meshScript.vertices[5];
+        //SetDirectionPoint(tempVec);
+
+        //// outer box
+        ////tempVec = new Vector3(3.75f, -3.75f, distance);
+        ////SetDirectionPoint(tempVec);
+        //tempVec = _meshScript.vertices[2];
+        //SetDirectionPoint(tempVec);
+        ////tempVec = new Vector3(-3.75f, 3.75f, distance);
+        ////SetDirectionPoint(tempVec);
+        //tempVec = _meshScript.vertices[4];
+        //SetDirectionPoint(tempVec);
+        ////tempVec = new Vector3(3.75f, 3.75f, distance);
+        ////SetDirectionPoint(tempVec);
+        //tempVec = _meshScript.vertices[6];
+        //SetDirectionPoint(tempVec);
+        ////tempVec = new Vector3(-3.75f, -3.75f, distance);
+        ////SetDirectionPoint(tempVec);
+        //tempVec = _meshScript.vertices[8];
+        //SetDirectionPoint(tempVec);
 
         
+        /////////////////////////////////////////////////////////////////////////////
+
         //// inner diamond
         //tempVec = new Vector3(2.5f, 0, distance);
         //SetDirectionPoint(tempVec);

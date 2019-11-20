@@ -36,6 +36,7 @@ public class BuildMesh : MonoBehaviour
     {
         mesh.Clear();
 
+        //CreateCone();
         CreateCone2();
 
         mesh.vertices = vertices;
@@ -67,13 +68,13 @@ public class BuildMesh : MonoBehaviour
             // vert 0
             new Vector3(0, 0, 0),
             // vert 1
-            new Vector3(0, 1, 1),
+            new Vector3(0, 0.5f, 1),
             // vert 2
-            new Vector3(1, 0, 1),
+            new Vector3(0.5f, 0, 1),
             // vert 3
-            new Vector3(0, -1, 1),
+            new Vector3(0, -0.5f, 1),
             // vert 4
-            new Vector3(-1, 0, 1),
+            new Vector3(-0.5f, 0, 1),
             // vert 5
             new Vector3(0, 0, 1)
 
@@ -129,7 +130,7 @@ public class BuildMesh : MonoBehaviour
             //// vert 9
             //new Vector3(0, 0, 1 * _zMultiplier)
 
-                // vert 0
+            // point vert
             new Vector3(0, 0, 0),
             // vert 1
             new Vector3(0, 1 * size, 1 * distance),
@@ -147,7 +148,18 @@ public class BuildMesh : MonoBehaviour
             new Vector3(-1 * size, 0, 1 * distance),
             // vert 8
             new Vector3(-0.75f * size, 0.75f * size, 1 * distance),
-            // vert 9
+            // additional inner verts
+            new Vector3(0.5f * size, 0.25f * size, 1 * distance),
+            new Vector3(0.5f * size, -0.25f * size, 1 * distance),
+            new Vector3(-0.5f * size, -0.25f * size, 1 * distance),
+            new Vector3(-0.5f * size, 0.25f * size, 1 * distance),
+
+            new Vector3(0.25f * size, 0.5f * size, 1 * distance),
+            new Vector3(0.25f * size, -0.5f * size, 1 * distance),
+            new Vector3(-0.25f * size, -0.5f * size, 1 * distance),
+            new Vector3(-0.25f * size, 0.5f * size, 1 * distance),
+            // endof additional verts
+            // flat face centre vert
             new Vector3(0, 0, 1 * distance)
 
             };
