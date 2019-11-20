@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 2411875625159062582}
   - component: {fileID: 2411875625159062583}
   - component: {fileID: 7858319212873552577}
+  - component: {fileID: 3415405471188962710}
+  - component: {fileID: 3975633786158449266}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -146,8 +148,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
   m_OcclusionCulling: 1
@@ -305,6 +307,93 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   player: {fileID: 0}
+--- !u!114 &3415405471188962710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8189437982835155335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  clearColorMode: 0
+  backgroundColorHDR: {r: 0.025, g: 0.07, b: 0.19, a: 0}
+  clearDepth: 1
+  renderingPath: 0
+  volumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  volumeAnchorOverride: {fileID: 0}
+  aperture: 8
+  shutterSpeed: 0.005
+  iso: 400
+  m_FrameSettings:
+    overrides: 0
+    enableShadow: 1
+    enableContactShadows: 1
+    enableShadowMask: 1
+    enableSSR: 0
+    enableSSAO: 1
+    enableSubsurfaceScattering: 1
+    enableTransmission: 1
+    enableAtmosphericScattering: 1
+    enableVolumetrics: 1
+    enableReprojectionForVolumetrics: 1
+    enableLightLayers: 1
+    diffuseGlobalDimmer: 1
+    specularGlobalDimmer: 1
+    shaderLitMode: 1
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 1
+    enableMotionVectors: 1
+    enableObjectMotionVectors: 1
+    enableDecals: 1
+    enableRoughRefraction: 1
+    enableTransparentPostpass: 1
+    enableDistortion: 1
+    enablePostprocess: 1
+    enableOpaqueObjects: 1
+    enableTransparentObjects: 1
+    enableRealtimePlanarReflection: 1
+    enableMSAA: 0
+    enableAsyncCompute: 1
+    runLightListAsync: 1
+    runSSRAsync: 1
+    runSSAOAsync: 1
+    runContactShadowsAsync: 1
+    runVolumeVoxelizationAsync: 1
+    lightLoopSettings:
+      overrides: 0
+      enableTileAndCluster: 1
+      enableComputeLightEvaluation: 1
+      enableComputeLightVariants: 1
+      enableComputeMaterialVariants: 1
+      enableFptlForForwardOpaque: 1
+      enableBigTilePrepass: 1
+      isFptlEnabled: 1
+--- !u!114 &3975633786158449266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8189437982835155335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda71411c45d8764f9b0e132ab229f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 8189437982835155338}
+  changeFactor: 0.001
+  shakeDuration: 0
+  shakeAmount: 1
+  decreaseFactor: 1
+  shakeTimer: 10
+  pauseCheck: {fileID: 0}
 --- !u!1 &8189437983402747648
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,14 +524,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   image: {fileID: 0}
+  player: {fileID: 0}
   itemReady: 0
   lightningBolt: {fileID: 5276053430191712397, guid: 38af05a9d1720784faf06d418564f34d,
     type: 3}
   boltSpawn: {fileID: 1937912214997385486}
   powerBar: {fileID: 0}
   equipmentImage: {fileID: 0}
-  equipmentOff: {fileID: 21300000, guid: 61279938caf072f4189bb750cf0fc4ca, type: 3}
-  equipmentOn: {fileID: 21300000, guid: 481fe673afd35d444a7bdc937a461d4c, type: 3}
+  back1: {fileID: 0}
+  back2: {fileID: 0}
+  back3: {fileID: 0}
+  spinCog: 0
   noChargeClip: {fileID: 8300000, guid: ac159691edd5fb3469908900df3991e4, type: 3}
   EMP_activate: {fileID: 8300000, guid: fb02e178a7e75254c96e2760db9689bd, type: 3}
   noChargeAudio: {fileID: 2999033471042967072}
@@ -480,6 +572,7 @@ MonoBehaviour:
   RunningFootstepClip: {fileID: 8300000, guid: aea3f568e708ce642b22d688a45dbc22, type: 3}
   playerFootstepAudio: {fileID: 3194717237514391764}
   HandsAnim: {fileID: 0}
+  particleTarget: {fileID: 0}
   _interactRange: 3
   _col: {fileID: 2411875624346643296}
   _movementType: 
