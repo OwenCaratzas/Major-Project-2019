@@ -166,11 +166,11 @@ MonoBehaviour:
   buttonDown: 0
   startMarker: {fileID: 6114465002903006522}
   endMarker: {fileID: 636898050973240202}
-  buttonLocation: {fileID: 0}
+  buttonLocation: {fileID: 9082916684262845476}
   speed: 0.1
   journeyLength: 0
   buttonBool: {fileID: 0}
-  buttonClip: {fileID: 0}
+  buttonClip: {fileID: 8300000, guid: 1b65e6787023637418c39ce5542684fb, type: 3}
   buttonAudio: {fileID: 0}
 --- !u!114 &7223142834707636568
 MonoBehaviour:
@@ -273,6 +273,12 @@ Transform:
 --- !u!1 &9082916684262748164 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 17c487af8bc8ea44bbdc607531b7a160,
+    type: 3}
+  m_PrefabInstance: {fileID: 9082916684262717092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9082916684262845476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 17c487af8bc8ea44bbdc607531b7a160,
     type: 3}
   m_PrefabInstance: {fileID: 9082916684262717092}
   m_PrefabAsset: {fileID: 0}

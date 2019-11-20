@@ -528,8 +528,8 @@ MonoBehaviour:
   speed: 0.005
   numButtons: 2
   buttonArr:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3188970962614770718}
+  - {fileID: 5915489612455135493}
   button: {fileID: 1817814442563317141, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
   buttonDownCheck: []
   numberOfTrueBooleans: 0
@@ -634,11 +634,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonLocation
+      value: 
+      objectReference: {fileID: 5915489612454778149}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonAudio
+      value: 
+      objectReference: {fileID: 3189395138488411795}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonBool
+      value: 
+      objectReference: {fileID: 5659587572301630296}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
 --- !u!4 &3832324098639942792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+    type: 3}
+  m_PrefabInstance: {fileID: 3176457121564064001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5915489612455135493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9082916684262748164, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+    type: 3}
+  m_PrefabInstance: {fileID: 3176457121564064001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5915489612454778149 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9082916684262845476, guid: 0aa59b04d4c233b4bb45b30fb229e267,
     type: 3}
   m_PrefabInstance: {fileID: 3176457121564064001}
   m_PrefabAsset: {fileID: 0}
@@ -709,11 +736,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonLocation
+      value: 
+      objectReference: {fileID: 3188970962615255102}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonAudio
+      value: 
+      objectReference: {fileID: 4292795455844690282}
+    - target: {fileID: 2971614792840193013, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+        type: 3}
+      propertyPath: buttonBool
+      value: 
+      objectReference: {fileID: 5659587572301630296}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa59b04d4c233b4bb45b30fb229e267, type: 3}
 --- !u!4 &5437722934012330387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1817814442563317129, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+    type: 3}
+  m_PrefabInstance: {fileID: 5930256268521597978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3188970962614770718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9082916684262748164, guid: 0aa59b04d4c233b4bb45b30fb229e267,
+    type: 3}
+  m_PrefabInstance: {fileID: 5930256268521597978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3188970962615255102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9082916684262845476, guid: 0aa59b04d4c233b4bb45b30fb229e267,
     type: 3}
   m_PrefabInstance: {fileID: 5930256268521597978}
   m_PrefabAsset: {fileID: 0}
