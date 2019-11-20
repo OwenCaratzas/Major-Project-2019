@@ -13,9 +13,8 @@ public class ProximityHighlight : MonoBehaviour
     private Renderer _renderer;
     public GameObject player;
     private Player _playerScript;
-
-    [SerializeField]
-    private float _intesity;
+    
+    private float _intensity;
 
     private bool _startBlink;
     
@@ -32,13 +31,13 @@ public class ProximityHighlight : MonoBehaviour
         //_material = _renderer.material;
         _playerScript = player.GetComponent<Player>();
         //_material.shader = Shader.Find("Standard");
-        _intesity = 0.0f;
+        _intensity = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<FenceBehaviour>().leverPulled)
+        if (!GetComponent<FenceBehaviour>().leverPulled || !GetComponent<Button_Check>().buttonDown)
         {
             if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
             {
@@ -68,17 +67,17 @@ public class ProximityHighlight : MonoBehaviour
     {
         if (on)
         {
-            _intesity += (Time.deltaTime);
+            _intensity += (Time.deltaTime);
 
-            if (_intesity >= 1.25f)
-                _intesity = 0.0f;
+            if (_intensity >= 1.25f)
+                _intensity = 0.0f;
 
         }
         else if(!on)
         {
-            _intesity = 0.0f;
+            _intensity = 0.0f;
         }
 
-        hintLight.intensity = _intesity;
+        hintLight.intensity = _intensity;
     }
 }

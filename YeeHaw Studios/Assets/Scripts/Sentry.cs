@@ -340,7 +340,7 @@ public class Sentry : MonoBehaviour
 
         //"Main" for everything search related
         //_spotlight.color = new Color(1, 0.64f, 0, 1);
-        _spotlight.color = Color.magenta;
+        _spotlight.color = new Color(1, 0.5f, 0, 1);
         _viewConeRenderer.material.SetColor("Color_7E534AF4", Color.magenta);
         _agent.speed = 0.0f;
         detectedCheck = false;
