@@ -25,6 +25,8 @@ public class TransitionScript : MonoBehaviour
     private float skipTimer;
     private float skipFinish = 2f;
 
+    public Transform slider;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,13 @@ public class TransitionScript : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             skipTimer += Time.deltaTime;
+            slider.localScale = new Vector3((skipTimer / 2), 1f);
+        }
+
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            skipTimer = 0;
+            slider.localScale = new Vector3(skipTimer, 1f);
         }
 
         if (skipTimer >= skipFinish)
