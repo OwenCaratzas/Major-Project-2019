@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
     // player's sphere collider, for audio range
     public SphereCollider _col;
 
+    [SerializeField]
     private bool _canStand;
 
     // keep track of what time of movement the player is doing
@@ -378,30 +379,6 @@ public class Player : MonoBehaviour
         {
             GetComponent<CapsuleCollider>().height = 0.5f;
 
-
-
-            //may need this
-
-            //Vector3 scale = GetComponent<Collider>().transform.localScale;
-            //scale.y = 0.5f;
-            //GetComponent<Collider>().transform.localScale = scale;
-
-
-
-            //THIS EVENTUALLY NEEDS TO WORK PROPERLY
-            //RaycastHit hit;
-            //if (Physics.Raycast(transform.position, -transform.up, out hit, 3.0f))
-            //{
-            //    scale = hit.point;
-            //    //scale = transform.position;
-            //    scale.x = transform.position.x;
-            //    //if(scale.y )
-            //    scale.y += 0.1f;
-            //    scale.z = transform.position.z;
-            //    transform.position = scale;
-            //}
-
-
             //gameObject.transform.localScale -= new Vector3(0, 0.1f, 0);
             _movementType = "Crouch";
             // crouch movement
@@ -433,9 +410,15 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (_crouching)
+            {
                 _sprintCrouching = true;
-            _sprinting = true;
-            _crouching = false;
+            }
+
+            if(_canStand)
+            {
+                _crouching = false;
+                _sprinting = true;
+            }
         }
         else
         {

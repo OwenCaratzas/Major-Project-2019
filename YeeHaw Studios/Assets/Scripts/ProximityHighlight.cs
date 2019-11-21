@@ -37,30 +37,40 @@ public class ProximityHighlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<FenceBehaviour>().leverPulled || !GetComponent<Button_Check>().buttonDown)
+
+        if(GetComponent<Button_Check>() != null)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
+            if (!GetComponent<Button_Check>().buttonDown)
             {
-                //if (_startBlink == true)
-                //{
-                //    _intesity = 0.0f;
-                //    _startBlink = false;
-                //}
-                //_material.shader = outlineShader;
-                //_material.GetFloat("_Outline") = 0.025f;
-                //_material.SetFloat("_Outline", outlineWidth);
-                LightBlink(true);
+                if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
+                { 
+                    LightBlink(true);
+                }
+                else
+                {
+                    LightBlink(false);
+                }
             }
             else
-            {
-                _startBlink = true;
-                //_material.shader = Shader.Find("Standard");
-                //_material.SetFloat("_Outline", 0);
-                LightBlink(false);
-            }
+                hintLight.intensity = 0.0f;
         }
-        else
-            hintLight.intensity = 0.0f;
+
+        if (GetComponent<FenceBehaviour>() != null)
+        {
+            if(!GetComponent<FenceBehaviour>().leverPulled)
+            {
+                if (Vector3.Distance(transform.position, player.transform.position) < _playerScript.InteractRange)
+                {
+                    LightBlink(true);
+                }
+                else
+                {
+                    LightBlink(false);
+                }
+            }
+            else
+                hintLight.intensity = 0.0f;
+        }
     }
 
     void LightBlink(bool on)
@@ -71,13 +81,11 @@ public class ProximityHighlight : MonoBehaviour
 
             if (_intensity >= 1.25f)
                 _intensity = 0.0f;
-
         }
         else if(!on)
         {
             _intensity = 0.0f;
         }
-
         hintLight.intensity = _intensity;
     }
 }
