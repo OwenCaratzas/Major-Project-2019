@@ -47,8 +47,6 @@ public class Button_Check : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(buttonLocation.position, startMarker.position, speed);
         }
-
-
     }
 
     public void ClickedOn()

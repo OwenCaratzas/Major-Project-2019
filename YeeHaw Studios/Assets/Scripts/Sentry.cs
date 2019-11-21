@@ -279,16 +279,21 @@ public class Sentry : MonoBehaviour
         if (hitList != null)
         {
             _playerNotFound = true;
+            int totalSeen = 0;
 
             for (int i = 0; i < hitList.Count; i++)
             {
                 if (hitList[i].collider.tag == "Player")
                 {
-                    _playerNotFound = false;
-                    increaseDetection = true;
-                    _player = hitList[i].collider.gameObject;
-                    _detectionAmount = MaxDetectionAmount;
-                    _lastKnownPlayerPos = _player.transform.position;
+                    totalSeen++;
+                    if(totalSeen >= 2)
+                    {
+                        _playerNotFound = false;
+                        increaseDetection = true;
+                        _player = hitList[i].collider.gameObject;
+                        _detectionAmount = MaxDetectionAmount;
+                        _lastKnownPlayerPos = _player.transform.position;
+                    }
                 }
                 else if (_playerNotFound)
                     increaseDetection = false;
