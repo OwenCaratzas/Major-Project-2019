@@ -51,7 +51,7 @@ public class Door_Control : MonoBehaviour
     void FixedUpdate()
     {
         //check when to move door
-        if (numberOfTrueBooleans == maxTrueBooleansNeeded)
+        if (numberOfTrueBooleans >= maxTrueBooleansNeeded)
         {
             firstContact = true;
             // Set our position as a fraction of the distance between the markers.
