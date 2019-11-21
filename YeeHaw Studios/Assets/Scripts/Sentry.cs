@@ -61,11 +61,14 @@ public class Sentry : MonoBehaviour
     [SerializeField]
     [Tooltip("How aware the AI is")]
     public float _detectionAmount = 0.0f;
+    //detection enabled check
+    public bool detectionActive;
 
     public GameObject viewCone;
 
     [Space]
     public bool detectedCheck;
+
 
     [Header("Serialized Private variables")]
     #endregion
@@ -437,24 +440,30 @@ public class Sentry : MonoBehaviour
                 // if the player is currently moving
                 if (playerScript.isMoving)
                 {
-                    // set this bool to true so that the detection doesn't yet decrease
-                    increaseDetection = true;
-                    suspicionRate = playerScript.suspicionRate;
-                    //suspicionRate = (distance * 0.1f);
-                    suspicionRate = suspicionRate * 1 / distance;
-                    suspicionRate *= 2;
-                    //start increasing by the modifier dependant on what pose the player is in
-                    _detectionAmount += suspicionRate;
+                    if (detectionActive == true)
+                    {
+                        // set this bool to true so that the detection doesn't yet decrease
+                        increaseDetection = true;
+                        suspicionRate = playerScript.suspicionRate;
+                        //suspicionRate = (distance * 0.1f);
+                        suspicionRate = suspicionRate * 1 / distance;
+                        suspicionRate *= 2;
+                        //start increasing by the modifier dependant on what pose the player is in
+                        _detectionAmount += suspicionRate;
+                    }
+                        //here we set up parameters dependant on behaviour state
 
-                    //here we set up parameters dependant on behaviour state
+                    else if (detectionActive == false)
+                    {
+                        increaseDetection = false;
+                    }
 
+                        // make sure the detection amount can't be higher than the max
+                        if (_detectionAmount >= MaxDetectionAmount)
+                            _detectionAmount = MaxDetectionAmount;
 
-                    // make sure the detection amount can't be higher than the max
-                    if (_detectionAmount >= MaxDetectionAmount)
-                        _detectionAmount = MaxDetectionAmount;
-
-                    if (_detectionAmount >= MaxDetectionAmount)
-                        _lastKnownPlayerPos = _player.transform.position;
+                        if (_detectionAmount >= MaxDetectionAmount)
+                            _lastKnownPlayerPos = _player.transform.position;
                 }
                 // otherwise if the player ISN'T moving
                 else if (!playerScript.isMoving)

@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class C1_Audio : MonoBehaviour
 {
+    //handle audio sources
+    [SerializeField]
     public List<AudioSource> _C1Sentry;
     public List<AudioSource> _C2Sentry;
 
     public List<AudioSource> _C1Fence;
     public List<AudioSource> _C2Fence;
 
+    //handle audio detection
+    [SerializeField]
+    public List<Sentry> _C1Sentry_Check;
+    public List<Sentry> _C2Sentry_Check;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
-        { 
+        {
             for (int i = 0; i < _C1Sentry.Count; i++)
             {
                 _C1Sentry[i].volume = 0.5f;
@@ -23,6 +30,12 @@ public class C1_Audio : MonoBehaviour
             {
                 _C1Fence[i].volume = 0.4f;
             }
+
+            for (int i = 0; i < _C1Sentry_Check.Count; i++)
+            {
+                _C1Sentry_Check[i].detectionActive = true;
+            }
+
 
 
             for (int i = 0; i < _C2Sentry.Count; i++)
@@ -34,6 +47,13 @@ public class C1_Audio : MonoBehaviour
             {
                 _C2Fence[i].volume = 0.1f;
             }
+
+            for (int i =0; i< _C2Sentry_Check.Count; i++)
+            {
+                _C2Sentry_Check[i].detectionActive = false;
+            }
+
+
         }
     }
 }
