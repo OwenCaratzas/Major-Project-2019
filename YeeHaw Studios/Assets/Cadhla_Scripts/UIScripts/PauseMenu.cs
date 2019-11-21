@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject gameMenuUI;
     public GameObject gameMenuUITwo;
+    public GameObject playDisplay;
 
     public GameObject OptionsMenu;
 
@@ -63,6 +64,7 @@ public class PauseMenu : MonoBehaviour
             OptionsMenu.SetActive(false);
         }
 
+        playDisplay.SetActive(true);
         shakeCheck.shakeAmount = 1f;
         gameMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
@@ -83,6 +85,7 @@ public class PauseMenu : MonoBehaviour
             _fence[i].Pause();
         }
 
+        playDisplay.SetActive(false);
         shakeCheck.shakeAmount = 0f;
         GameIsPaused = true;
         mouseControl.TurnOnMouse();
