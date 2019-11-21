@@ -14,6 +14,11 @@ public class Success : MonoBehaviour
 
     void Start()
     {
+        // lock cursor to the middle of the screen
+        Cursor.lockState = CursorLockMode.Confined;
+        // make the cursor visible
+        Cursor.visible = true;
+
         timer = 18f;
         delay = 0.1f;
         StartCoroutine(ShowText());

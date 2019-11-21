@@ -61,6 +61,7 @@ public class SecurityCamera : MonoBehaviour
     void SeePlayer(List<RaycastHit> hitList)
     {
         _playerNotFound = true;
+        int totalSeen = 0;
 
         if (hitList != null)
         {
@@ -70,13 +71,17 @@ public class SecurityCamera : MonoBehaviour
                 //{
                 if (hitList[i].collider.tag == "Player")
                 {
-                    _playerNotFound = false;
-                    _alert = true;
-                    for (int j = 0; j < guardList.Count; j++)
+                    totalSeen++;
+                    if (totalSeen >= 2)
                     {
-                        _guardScript = guardList[j].GetComponent<Sentry>();
-                        _guardScript.SendMessage("SeePlayer", hitList);
-                        //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+                        _playerNotFound = false;
+                        _alert = true;
+                        for (int j = 0; j < guardList.Count; j++)
+                        {
+                            _guardScript = guardList[j].GetComponent<Sentry>();
+                            _guardScript.SendMessage("SeePlayer", hitList);
+                            //_guardScript.DetectionAmount = _guardScript.MaxDetectionAmount;
+                        }
                     }
                 }
                 else if (_playerNotFound)

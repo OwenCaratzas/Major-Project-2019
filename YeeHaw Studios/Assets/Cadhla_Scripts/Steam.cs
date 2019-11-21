@@ -28,8 +28,11 @@ public class Steam : MonoBehaviour
             steamTwo.SetActive(true);
 
             Debug.Log("PlayWhistle");
-
-            whistleAudio.Play();
+            
+            if(!whistleAudio.isPlaying)
+            {
+                whistleAudio.Play();
+            }
         }
         else
         {
