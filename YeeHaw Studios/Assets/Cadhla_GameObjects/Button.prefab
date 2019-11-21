@@ -314,8 +314,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13020702, y: 0.49009365, z: 0.49009365}
-  m_Center: {x: -0.2987654, y: 0.5428959, z: -0.5428959}
+  m_Size: {x: 0.130207, y: 1.09726, z: 1.0806613}
+  m_Center: {x: -0.2987654, y: 0.5437238, z: -0.540501}
 --- !u!114 &2971614792840193013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineWidth: 0.025
   player: {fileID: 0}
-  hintLight: {fileID: 0}
+  hintLight: {fileID: 7047883596011750483}
 --- !u!65 &3621079514933463471
 BoxCollider:
   m_ObjectHideFlags: 0

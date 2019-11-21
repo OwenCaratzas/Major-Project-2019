@@ -142,8 +142,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35533118, y: 0.35455328, z: 0.10527754}
-  m_Center: {x: 0.00048338622, y: 0.18292883, z: 0.053164005}
+  m_Size: {x: 0.5803833, y: 0.38678688, z: 0.3203988}
+  m_Center: {x: 0.012652397, y: 0.19904563, z: 0.047595263}
 --- !u!114 &5490847176036838981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Lever: {fileID: 9176533371699258692}
+  leverPulled: 0
   leverClip: {fileID: 8300000, guid: 246d0efccb66cc54f9a17614c35e3f2e, type: 3}
   leverAudio: {fileID: 7427512653912011600}
 --- !u!1 &9176533371699258692
