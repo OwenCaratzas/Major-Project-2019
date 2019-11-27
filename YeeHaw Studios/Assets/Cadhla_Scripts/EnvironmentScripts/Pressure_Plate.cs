@@ -32,7 +32,7 @@ public class Pressure_Plate : MonoBehaviour
                 }
                 if (alertGuard.PlayerTarget == null)
                     alertGuard.PlayerTarget = other.gameObject;
-                    alertGuard.NewTarget(player.transform.position);
+                    alertGuard.NewTarget(other.transform.position);
             }
         }
     }
