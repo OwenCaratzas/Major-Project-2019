@@ -99,7 +99,7 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Restarting Level...");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("LevelOne");
     }
 
     public void QuitGame()

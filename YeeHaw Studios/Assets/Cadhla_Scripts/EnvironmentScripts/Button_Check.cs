@@ -51,10 +51,13 @@ public class Button_Check : MonoBehaviour
 
     public void ClickedOn()
     {
-        buttonAudio.Play();
-        buttonAudio.clip = buttonClip;
+        if (buttonDown == false)
+        {
+            buttonAudio.Play();
+            buttonAudio.clip = buttonClip;
 
-        buttonDown = true;
-        buttonBool.AddToButtonBool();
+            buttonDown = true;
+            buttonBool.AddToButtonBool();
+        }
     }
 }

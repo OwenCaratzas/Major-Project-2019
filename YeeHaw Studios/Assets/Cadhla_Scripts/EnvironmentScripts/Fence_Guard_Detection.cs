@@ -14,7 +14,6 @@ public class Fence_Guard_Detection : MonoBehaviour
     {
         if (other.gameObject.tag == "FenceDetection" && leverCheck.leverPulled == false)
         {
-            Debug.Log("Guard");
             electricFence.SetActive(false);
         }
 
@@ -24,7 +23,6 @@ public class Fence_Guard_Detection : MonoBehaviour
     {
         if (other.gameObject.tag == "FenceDetection" && leverCheck.leverPulled == false)
         {
-            Debug.Log("Guard");
             electricFence.SetActive(true);
         }
     }

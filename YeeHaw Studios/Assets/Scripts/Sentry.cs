@@ -172,7 +172,7 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_agent.pathStatus);
+        //Debug.Log(_agent.pathStatus);
         /*
         chase->search->patrol
         chase will always follow this progression
